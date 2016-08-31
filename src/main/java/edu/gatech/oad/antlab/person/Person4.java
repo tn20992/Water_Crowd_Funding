@@ -1,4 +1,4 @@
-//package edu.gatech.oad.antlab.person;
+package edu.gatech.oad.antlab.person;
 
 import java.util.Arrays;
 
@@ -32,7 +32,7 @@ public class Person4 {
 	 * @param input the string to be modified
 	 * @return the modified string
 	 */
-	public String calc(String input) {
+	private String calc(String input) {
 		//Person 4 put your implementation here
 		char[] inArray = input.toCharArray();
 		String[] temp = new String[inArray.length];

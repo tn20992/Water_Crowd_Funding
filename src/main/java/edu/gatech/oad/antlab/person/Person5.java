@@ -1,11 +1,12 @@
 package edu.gatech.oad.antlab.person;
+import java.util.Stack;
 
 /**
  *  A simple class for person 5
  *  returns their name and a
  *  modified string 
  *  
- *  @author Bob
+ *  @author Eugene Chu
  *  @version 1.1
  */
 public class Person5 {
@@ -30,8 +31,9 @@ public class Person5 {
 	 * @return the modified string
 	 */
 	private String calc(String input) {
-	  //Person 5 put your implementation here
-	  return null;
+		String endString = input.substring(0,2);
+		input = input.substring(2);
+		return input + endString;
 	}
 	
 	/**
@@ -47,3 +49,4 @@ public class Person5 {
 	}
 
 }
+

@@ -32,7 +32,7 @@ public class Person2 {
 	 * @return the modified string
 	 */
 	private String calc(String input) {
-    ArrayList shuffleArray = new ArrayList<Character>();
+    ArrayList<Character> shuffleArray = new ArrayList<Character>();
     for (int i = 0; i < input.length(); i++) {
       shuffleArray.add(input.charAt(i));
     }

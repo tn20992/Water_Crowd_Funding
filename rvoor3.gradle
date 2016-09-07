@@ -1,4 +1,5 @@
 apply plugin: 'java'
+defaultTasks 'jar'
 
 // maybe use plugin 'checkstyle'?
 // maybe use plugin 'application' so that way you can run the project directly from gradle rather than building a jar every time

@@ -1,0 +1,12 @@
+apply plugin: 'java'
+
+
+dependencies {
+	compile name: 'resources'	
+}
+
+repositories {
+	flatDir {
+		dirs './lib'
+	}
+}

@@ -1,0 +1,21 @@
+apply plugin: 'java'
+
+
+dependencies {
+	compile name: 'resources'	
+}
+
+repositories {
+	flatDir {
+		dirs './lib'
+	}
+}
+
+jar { 
+	manifest {
+		attributes(
+			"Main-Class": "edu.gatech.oad.antlab.pkg1.AntLabMain",
+			"Class-Path": "../../lib/resources.jar"
+		)
+	}
+}

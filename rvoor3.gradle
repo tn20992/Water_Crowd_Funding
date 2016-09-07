@@ -1,0 +1,24 @@
+apply plugin: 'java'
+
+// maybe use plugin 'checkstyle'?
+// maybe use plugin 'application' so that way you can run the project directly from gradle rather than building a jar every time
+
+repositories {
+  flatDir {
+    dirs "./lib"
+  }
+}
+
+dependencies {
+  compile name: "resources"
+}
+
+jar {
+  manifest {
+    attributes(
+      "Main-Class": "edu.gatech.oad.antlab.pkg1.AntLabMain",
+      // This hardcoding is not ideal but I cannot find a good workaround/solution
+      "Class-Path": "../../lib/resources.jar"
+    )
+  }
+}

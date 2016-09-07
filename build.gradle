@@ -1,13 +1,18 @@
-apply plugin: 'java'
-defaultTasks 'jar'
+apply plugin: "java"
+apply plugin: "checkstyle"
+defaultTasks "jar"
 
-// maybe use plugin 'checkstyle'?
 // maybe use plugin 'application' so that way you can run the project directly from gradle rather than building a jar every time
+
+checkstyle {
+  configFile = new File("config/checkstyle/", "cs1331-checkstyle.xml")
+}
 
 repositories {
   flatDir {
     dirs "./lib"
   }
+  mavenCentral()
 }
 
 dependencies {
@@ -18,7 +23,6 @@ jar {
   manifest {
     attributes(
       "Main-Class": "edu.gatech.oad.antlab.pkg1.AntLabMain",
-      // This hardcoding is not ideal but I cannot find a good workaround/solution
       "Class-Path": "../../lib/resources.jar"
     )
   }

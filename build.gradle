@@ -5,25 +5,28 @@ defaultTasks "jar"
 // maybe use plugin 'application' so that way you can run the project directly from gradle rather than building a jar every time
 
 checkstyle {
-  configFile = new File("config/checkstyle/", "cs1331-checkstyle.xml")
+    configFile = new File("config/checkstyle/", "cs1331-checkstyle.xml")
 }
 
 repositories {
-  flatDir {
-    dirs "./lib"
-  }
-  mavenCentral()
+    flatDir {
+        dirs "./lib"
+    }
+    mavenCentral()
 }
 
 dependencies {
-  compile name: "postgresql-9.4.1210.jre6"
+    compile name: "postgresql-9.4.1210.jre6"
 }
 
 jar {
-  manifest {
-    attributes(
-      "Main-Class": "fxapp.MainFXApplication",
-      "Class-Path": "../../lib/postgresql-9.4.1210.jre6.jar"
-    )
-  }
+    from("src/main/java") {
+        include "**/*.fxml"
+    }
+    manifest {
+        attributes(
+            "Main-Class": "fxapp.MainFXApplication",
+            "Class-Path": "../../lib/postgresql-9.4.1210.jre6.jar"
+        )
+    }
 }

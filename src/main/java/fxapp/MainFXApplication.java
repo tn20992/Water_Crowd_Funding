@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import controller.WelcomeScreenController;
+//import model.Facade;
 
 public class MainFXApplication extends Application {
 
@@ -24,6 +25,7 @@ public class MainFXApplication extends Application {
     public void start(Stage primaryStage) {
         mainScreen = primaryStage;
         initRootLayout(mainScreen);
+//        Facade.initialize();
     }
 
     /**
@@ -42,7 +44,7 @@ public class MainFXApplication extends Application {
 
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainFXApplication.class.getResource("../view/WelcomeScreen.fxml"));
+            loader.setLocation(MainFXApplication.class.getResource("/view/WelcomeScreen.fxml"));
             rootLayout = loader.load();
 
             // Give the controller access to the main app.

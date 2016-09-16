@@ -38,8 +38,8 @@ public class MainScreenController {
     @FXML
     private void handleAboutMenu() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("M Project");
-        alert.setHeaderText("About");
+        alert.setTitle("Project");
+        alert.setHeaderText("Information");
         alert.setContentText("The Storm Team");
 
         alert.showAndWait();

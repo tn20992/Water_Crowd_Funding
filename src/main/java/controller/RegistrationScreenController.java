@@ -55,23 +55,7 @@ public class RegistrationScreenController {
      */
     @FXML
     private void regButtonRegPressed() {
-        try {
-            // Load welcome screen.
-            FXMLLoader loader = new FXMLLoader();
-            AnchorPane LogSuccessScreen = loader.load(new FileInputStream("src/main/java/view/RegistrationSuccessScreen.fxml"));
-
-            // Set welcome screen into the center of root layout.
-            _rootLayout.setCenter(LogSuccessScreen);
-
-            // Give the controller access to the main app.
-            RegistrationSuccessController controller = loader.getController();
-            controller.setMainApp(mainApplication);
-
-        } catch (IOException e) {
-            //error on load, so log it
-            e.printStackTrace();
-        }
-
+        mainApplication.initRootLayout(mainApplication.getMainScreen());
         _dialogStage.close();
 
     }

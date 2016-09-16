@@ -53,7 +53,7 @@ public class MainFXApplication extends Application {
      *
      * @param mainScreen the main Stage window of the application
      */
-    private void initRootLayout(Stage mainScreen) {
+    public void initRootLayout(Stage mainScreen) {
         try {
 
             // Load root layout from fxml file.

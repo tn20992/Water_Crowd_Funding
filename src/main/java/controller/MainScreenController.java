@@ -41,9 +41,16 @@ public class MainScreenController {
         alert.setTitle("Project");
         alert.setHeaderText("Information");
         alert.setContentText("The Storm Team");
-
         alert.showAndWait();
 
+    }
+
+    /**
+     * Go back to the welcome screen when logout
+     */
+    @FXML
+    private void logoutActionClicked() {
+        mainApplication.showWelcomeScreen();
     }
 
 }

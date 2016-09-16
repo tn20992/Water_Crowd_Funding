@@ -11,10 +11,11 @@ import javafx.stage.Stage;
  * The controller for the root/main window
  *
  */
-public class RegistrationScreenController {
+public class LoginSuccessController {
 
     /** reference back to mainApplication if needed */
     private MainFXApplication mainApplication;
+
     private Stage _dialogStage;
 
     /**
@@ -38,18 +39,8 @@ public class RegistrationScreenController {
      * Login Button in Login Screen
      */
     @FXML
-    private void regButtonRegPressed() {
+    private void logoutPressed() {
 
-        _dialogStage.close();
-
-    }
-
-    /**
-     * Cancel button in Login Screen
-     */
-    @FXML
-    private void cancelButtonRegPressed() {
-        _dialogStage.close();
 
     }
 

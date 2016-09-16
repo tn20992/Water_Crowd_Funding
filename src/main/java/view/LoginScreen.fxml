@@ -53,7 +53,7 @@
       </GridPane>
       <ButtonBar layoutX="224.0" layoutY="241.0" prefHeight="40.0" prefWidth="190.0" AnchorPane.bottomAnchor="50.0">
         <buttons>
-          <Button fx:id="loginButtonLog" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logButtonLogPressed" style="-fx-background-color: linear-gradient(#4c4c4c,;" text="Login" textFill="#252424" />
+          <Button fx:id="loginButtonLog" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logButtonLogPressed" text="Login" textFill="#252424" />
             <Button fx:id="cancelButtonLog" mnemonicParsing="false" onAction="#cancelButtonLogPressed" text="Cancel" />
         </buttons>
       </ButtonBar>

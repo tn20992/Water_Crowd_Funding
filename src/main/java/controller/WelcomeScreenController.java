@@ -21,7 +21,7 @@ public class WelcomeScreenController {
      */
     @FXML
     private void logButtonWelPressed() {
-
+        mainApplication.showLoginScreen();
 
     }
 
@@ -30,7 +30,7 @@ public class WelcomeScreenController {
      */
     @FXML
     private void regButtonWelPressed() {
-
+        mainApplication.showRegistrationScreen();
 
     }
 }

@@ -16,8 +16,6 @@ public class RegistrationSuccessController {
     /** reference back to mainApplication if needed */
     private MainFXApplication mainApplication;
 
-    private Stage _dialogStage;
-
     /**
      * allow for calling back to the main application code if necessary
      * @param main   the reference to the FX Application instance
@@ -27,21 +25,12 @@ public class RegistrationSuccessController {
     }
 
     /**
-     * Sets the stage of this dialog.
-     *
-     * @param dialogStage the stage for this dialog
-     */
-    public void setDialogStage(Stage dialogStage) {
-        _dialogStage = dialogStage;
-    }
-
-    /**
      * Login Button in Login Screen
      */
     @FXML
     private void goBackPressed() {
 
-        _dialogStage.close();
+        mainApplication.showWelcomeScreen();
     }
 
 }

@@ -37,7 +37,7 @@ public class MainFXApplication extends Application {
     public void start(Stage primaryStage) {
         mainScreen = primaryStage;
         initRootLayout(mainScreen);
-        showWelcomeScreen(mainScreen);
+        showWelcomeScreen();
     }
 
     /**
@@ -85,9 +85,9 @@ public class MainFXApplication extends Application {
      * precondition - the main stage is already initialized and showing (initRootLayout has been called)
      * postcondition - the view is initialized and displayed
      *
-     * @param mainScreen the main stage to show this view in
+     *
      */
-    private void showWelcomeScreen(Stage mainScreen) {
+    public void showWelcomeScreen() {
         try {
             // Load welcome screen.
             FXMLLoader loader = new FXMLLoader();
@@ -125,6 +125,7 @@ public class MainFXApplication extends Application {
 
             controller.setDialogStage(dialogStage);
             controller.setRootLayout(rootLayout);
+            controller.setMainApp(this);
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
@@ -151,6 +152,8 @@ public class MainFXApplication extends Application {
 
             RegistrationScreenController controller = loader.getController();
             controller.setDialogStage(dialogStage);
+            controller.setRootLayout(rootLayout);
+            controller.setMainApp(this);
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();

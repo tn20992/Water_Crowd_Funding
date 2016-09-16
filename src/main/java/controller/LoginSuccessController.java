@@ -16,7 +16,6 @@ public class LoginSuccessController {
     /** reference back to mainApplication if needed */
     private MainFXApplication mainApplication;
 
-    private Stage _dialogStage;
 
     /**
      * allow for calling back to the main application code if necessary
@@ -26,21 +25,14 @@ public class LoginSuccessController {
         mainApplication = main;
     }
 
-    /**
-     * Sets the stage of this dialog.
-     *
-     * @param dialogStage the stage for this dialog
-     */
-    public void setDialogStage(Stage dialogStage) {
-        _dialogStage = dialogStage;
-    }
+
 
     /**
      * Login Button in Login Screen
      */
     @FXML
     private void logoutPressed() {
-
+        mainApplication.showWelcomeScreen();
 
     }
 

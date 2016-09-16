@@ -81,9 +81,8 @@ public class MainFXApplication extends Application {
     /**
      * Setup our default application view that is shown on application startup
      * This is displayed in the startup window
-     * <p>
      * precondition - the main stage is already initialized and showing (initRootLayout has been called)
-     * postcondition - the view is initialized and displayed
+     * preconditions - the view is initialized and displayed
      *
      *
      */

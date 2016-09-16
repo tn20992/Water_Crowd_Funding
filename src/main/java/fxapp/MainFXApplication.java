@@ -30,7 +30,6 @@ public class MainFXApplication extends Application {
     /**
      * the main layout for the main window
      */
-    @FXML
     private BorderPane rootLayout;
 
     @Override

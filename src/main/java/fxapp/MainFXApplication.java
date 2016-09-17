@@ -5,6 +5,8 @@ import controller.MainScreenController;
 import controller.RegistrationScreenController;
 import controller.WelcomeScreenController;
 
+import model.Facade;
+
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +19,9 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+//import java.sql.SQLException;
 
-//import model.Facade;
+import java.io.IOException;
 
 public class MainFXApplication extends Application {
 
@@ -37,6 +40,14 @@ public class MainFXApplication extends Application {
         mainScreen = primaryStage;
         initRootLayout(mainScreen);
         showWelcomeScreen();
+        Facade.initialize();
+        // TODO this will be uncommented when we set up the database on everyone's machines
+        //try {
+        //    Facade.initialize();
+        //} catch (SQLException e) {
+        //    System.out.println("Could not connect to database: " + e.getMessage());
+        //    System.exit(0);
+        //}
     }
 
     /**

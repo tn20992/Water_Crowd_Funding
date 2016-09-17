@@ -1,6 +1,7 @@
 package controller;
 
 import fxapp.MainFXApplication;
+import javafx.fxml.FXML;
 
 public class WelcomeScreenController {
 
@@ -13,5 +14,23 @@ public class WelcomeScreenController {
      * */
     public void setMainApp(MainFXApplication main) {
         mainApplication = main;
+    }
+
+    /**
+     * Login Button in Login Screen
+     */
+    @FXML
+    private void logButtonWelPressed() {
+        mainApplication.showLoginScreen();
+
+    }
+
+    /**
+     * Cancel button in Login Screen
+     */
+    @FXML
+    private void regButtonWelPressed() {
+        mainApplication.showRegistrationScreen();
+
     }
 }

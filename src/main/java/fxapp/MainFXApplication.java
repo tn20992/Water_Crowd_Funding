@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-//import java.sql.SQLException;
+import java.sql.SQLException;
 
 import java.io.IOException;
 
@@ -40,14 +40,14 @@ public class MainFXApplication extends Application {
         mainScreen = primaryStage;
         initRootLayout(mainScreen);
         showWelcomeScreen();
-        Facade.initialize();
+        //Facade.initialize();
         // TODO this will be uncommented when we set up the database on everyone's machines
-        //try {
-        //    Facade.initialize();
-        //} catch (SQLException e) {
-        //    System.out.println("Could not connect to database: " + e.getMessage());
-        //    System.exit(0);
-        //}
+        try {
+            Facade.initialize();
+        } catch (SQLException e) {
+            System.out.println("Could not connect to database: " + e.getMessage());
+            System.exit(0);
+        }
     }
 
     /**

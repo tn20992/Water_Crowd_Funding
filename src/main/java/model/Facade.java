@@ -2,11 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
-//import java.sql.Connection;
-//import java.sql.DriverManager;
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
-//import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import model.exceptions.NonUniqueUsernamesException;
 
@@ -19,7 +19,7 @@ public class Facade {
     /**
      * called once by MainFXApplication. Sets up the Facade class and the model
      */
-    public static void initialize() /*throws SQLException*/ {
+    public static void initialize() throws SQLException {
         // TODO
         // for now this method will just create the Facade instance
         // in the future it may interact with the database and set up
@@ -28,14 +28,14 @@ public class Facade {
         facade = new Facade();
 
         // set up database connection
-        //String url = "jdbc:postgresql://localhost/thestorm";
-        //String user = "postgres";
-        //String password = "password";
+        String url = "jdbc:postgresql://localhost/thestorm";
+        String user = "postgres";
+        String password = "password";
 
-        //connection = DriverManager.getConnection(url, user, password);
+        connection = DriverManager.getConnection(url, user, password);
     }
 
-    //private static Connection connection;
+    private static Connection connection;
 
     /** The single instance of the Facade class that all controllers will use
     to interact with the model */
@@ -70,7 +70,14 @@ public class Facade {
      * @return whether the user was successfully logged in or not
      */
     public boolean logInUser(String username, String password) {
-        User user = getUserByUsername(username);
+        User user = null;
+        try {
+            user = getUserByUsername(username);
+        } catch (NonUniqueUsernamesException e) {
+            // TODO TEMP
+            System.out.println("Oh god what have you done");
+            System.exit(0);
+        }
 
         if (null == user) {
             return false;
@@ -155,7 +162,7 @@ public class Facade {
      * @param password the password of the user to be created
      * @return User the newly created user, null if this user would not be unique
      */
-    public User createUser(String username, String password) {
+    public User createUser(String username, String password) throws NonUniqueUsernamesException {
         // TODO
         // for now this is just going to put the user object into the
         // 'users' variable in this class. Later on it will put an

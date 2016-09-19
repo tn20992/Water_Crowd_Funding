@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import model.exceptions.NonUniqueUsernamesException;
+import model.exceptions.NonUniqueUsernameException;
 
 /**
  * Class that abstracts the models away from the controllers
@@ -19,12 +20,9 @@ public class Facade {
     /**
      * called once by MainFXApplication. Sets up the Facade class and the model
      */
-    public static void initialize() throws SQLException {
-        // TODO
-        // for now this method will just create the Facade instance
-        // in the future it may interact with the database and set up
-        // collections of data objects etc.
+    public static void initialize() {
 
+        // initialize the one facade instance for the application
         facade = new Facade();
 
         // set up database connection
@@ -32,34 +30,45 @@ public class Facade {
         String user = "postgres";
         String password = "password";
 
-        connection = DriverManager.getConnection(url, user, password);
+        try {
+
+            connection = DriverManager.getConnection(url, user, password);
+
+        } catch (SQLException e) {
+
+            System.out.println("Could not connect to the database: "
+                + e.getMessage());
+            System.exit(0);
+
+        }
     }
 
+    /** the single connection to the database that gets set up by
+    initialize and used by every database method in this class */
     private static Connection connection;
 
     /** The single instance of the Facade class that all controllers will use
     to interact with the model */
     private static Facade facade;
 
-    public static Facade getFacade() {
-        return facade;
-    }
-
     /** the users that are currently logged in. If no user is logged in
     then this will be empty */
     private ArrayList<User> loggedInUsers;
-
-    /* all the users in the system. This variable should never be accessed
-    directly, even from within the Facade class. You should always use
-    the getUsers() method to access this variable */
-    // TODO
-    // later we are going to get rid of this variable since we'll just call the database every time
-    private ArrayList<User> users;
 
     /**
      * private no-args constructor for the Facade class
      */
     private Facade() {}
+
+    /**
+     * returns the single instance of facade that gets used by
+     * everything in the application to access data
+     * @return Facade the single instance of facade that will get used
+     * everywhere in the application
+     */
+    public static Facade getFacade() {
+        return facade;
+    }
 
     /**
      * checks if the username and password are valid, if so attemps to log the
@@ -71,13 +80,7 @@ public class Facade {
      */
     public boolean logInUser(String username, String password) {
         User user = null;
-        try {
-            user = getUserByUsername(username);
-        } catch (NonUniqueUsernamesException e) {
-            // TODO TEMP
-            System.out.println("Oh god what have you done");
-            System.exit(0);
-        }
+        user = getUserByUsername(username);
 
         if (null == user) {
             return false;
@@ -106,10 +109,47 @@ public class Facade {
     }
 
     /**
-     * TODO
+     * returns whether the given user is logged in
+     * @param user the user in question
+     * @return whether the given user is logged in
      */
     public boolean isUserLoggedIn(User user) {
         return loggedInUsers.contains(user);
+    }
+
+    /**
+     * retrieves and returns all the users in the system
+     * @return ArrayList<User> all the users in the system
+     */
+    public ArrayList<User> getUsers() {
+        try {
+
+            Statement statement        = connection.createStatement();
+            String query               = "SELECT username, password FROM tb_entity";
+            ResultSet statementResults = statement.executeQuery(query);
+            ArrayList<User> results    = new ArrayList<User>();
+
+            while (statementResults.next()) {
+                results.add(
+                    new User(
+                        statementResults.getString(1),
+                        statementResults.getString(2)
+                    )
+                );
+            }
+
+            return results;
+
+        } catch (SQLException e) {
+
+            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.exit(0);
+
+        }
+
+        // this is needed for compilation
+        // execution should never reach this line
+        return null;
     }
 
     /**
@@ -118,41 +158,43 @@ public class Facade {
      * @param username the username of the User that will be returned
      * @return User the user that matches the given username
      */
-    public User getUserByUsername(String username) throws NonUniqueUsernamesException {
-        ArrayList<User> users = getUsers();
-        ArrayList<User> matchedUsers = new ArrayList<User>();
+    public User getUserByUsername(String username) {
+        try {
 
-        for (User user : users) {
-            if (user.getUsername().equals(username)) {
-                matchedUsers.add(user);
+            String query                        = "SELECT username, password FROM tb_entity WHERE username = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+
+            ResultSet statementResults = preparedStatement.executeQuery();
+            ArrayList<User> results    = new ArrayList<User>();
+
+            while (statementResults.next()) {
+                results.add(
+                    new User(
+                        statementResults.getString(1),
+                        statementResults.getString(2)
+                    )
+                );
             }
+
+            // going to assume that there is only 1 User in the results set
+            // since the username column in the database is unique
+            if (results.size() > 0) {
+                return results.get(0);
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.exit(0);
+
         }
 
-        if (matchedUsers.size() > 1) {
-            // this should hypothetically never happen since we are checking that
-            // users are unique when we create users
-            throw new NonUniqueUsernamesException("There are 2 or more "
-                + "users with the same username");
-        }
-
-        if (matchedUsers.isEmpty()) {
-            return null;
-        }
-
-        return users.get(0);
-    }
-
-    /**
-     * retrieves and returns all the users in the system
-     * @return ArrayList<User> all the users in the system
-     */
-    public ArrayList<User> getUsers() {
-        // TODO
-        // for now this will just return the 'users' variable
-        // from this class. Later on it will get a list from
-        // the database
-
-        return users;
+        // this is needed for compilation
+        // execution should never reach this line
+        return null;
     }
 
     /**
@@ -162,20 +204,24 @@ public class Facade {
      * @param password the password of the user to be created
      * @return User the newly created user, null if this user would not be unique
      */
-    public User createUser(String username, String password) throws NonUniqueUsernamesException {
-        // TODO
-        // for now this is just going to put the user object into the
-        // 'users' variable in this class. Later on it will put an
-        // entry in the database.
+    public void createUser(String username, String password) throws NonUniqueUsernameException {
+        try {
 
-        User user = new User(username, password);
+            String query                        = "INSERT INTO tb_entity (username, password) VALUES (?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            preparedStatement.executeUpdate();
 
-        if (users.contains(user)) {
-            throw new NonUniqueUsernamesException("Attempted to create a user "
-                + "with the same username as an existing user");
-        } else {
-            users.add(user);
-            return user;
+        } catch (SQLException e) {
+
+            if (null != getUserByUsername(username)) {
+                throw new NonUniqueUsernameException("Attempted to create a user with a username that was taken");
+            }
+
+            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.exit(0);
+
         }
     }
 }

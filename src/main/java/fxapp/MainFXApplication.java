@@ -40,14 +40,7 @@ public class MainFXApplication extends Application {
         mainScreen = primaryStage;
         initRootLayout(mainScreen);
         showWelcomeScreen();
-        //Facade.initialize();
-        // TODO this will be uncommented when we set up the database on everyone's machines
-        try {
-            Facade.initialize();
-        } catch (SQLException e) {
-            System.out.println("Could not connect to database: " + e.getMessage());
-            System.exit(0);
-        }
+        Facade.initialize();
     }
 
     /**

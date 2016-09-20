@@ -50,5 +50,8 @@ else
 
     psql -U $database_user -1 -c "ALTER DATABASE $temp_database_name RENAME TO $original_database_name" &> /dev/null
 
+    # repopulate data
+    ./repopulate_data.sh
+
 fi
 

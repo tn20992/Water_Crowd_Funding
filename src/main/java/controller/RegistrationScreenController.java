@@ -89,8 +89,12 @@ public class RegistrationScreenController {
                 } catch (Exception e) {
                     alert("Could not create user.");
                 }
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Registry Successfully");
+                alert.setHeaderText("Your Registration was successful! ");
+                alert.setContentText("Please click OK to go back!");
+                alert.showAndWait();
                 _dialogStage.close();
-                mainApplication.initRootLayout(mainApplication.getMainScreen());
             } else {
                 alert("Passwords do not match up.");
             }

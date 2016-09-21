@@ -69,7 +69,7 @@ public class Facade {
      * @param password the password typed in by the user that's attempting to log in
      * @return whether the user was successfully logged in or not
      */
-    public boolean logInUser(String username, String password) {
+    public boolean logInUser(String username, String password) throws NonUniqueUsernamesException {
         User user = getUserByUsername(username);
 
         if (null == user) {
@@ -155,7 +155,7 @@ public class Facade {
      * @param password the password of the user to be created
      * @return User the newly created user, null if this user would not be unique
      */
-    public User createUser(String username, String password) {
+    public User createUser(String username, String password) throws NonUniqueUsernamesException {
         // TODO
         // for now this is just going to put the user object into the
         // 'users' variable in this class. Later on it will put an

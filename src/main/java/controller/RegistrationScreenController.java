@@ -76,16 +76,17 @@ public class RegistrationScreenController {
      */
     @FXML
     private void regButtonRegPressed() throws NonUniqueUsernameException{
-        mainApplication.initRootLayout(mainApplication.getMainScreen());
         if (passFieldReg.getText().equals(confirmPassFieldReg.getText())) {
             setInfo();
             facade.createUser(userId,pass);
             _dialogStage.close();
+            mainApplication.initRootLayout(mainApplication.getMainScreen());
+
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(_dialogStage);
-            alert.setTitle("Passwords do not match");
+            alert.setTitle("ERROR");
             alert.setContentText("The passwords did not match.");
+            alert.showAndWait();
         }
     }
 

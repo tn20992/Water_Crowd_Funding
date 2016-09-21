@@ -6,10 +6,16 @@ import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Facade;
+import model.User;
+import model.exceptions.NonUniqueUsernameException;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -26,6 +32,12 @@ public class LoginScreenController {
     private Stage _dialogStage;
 
     private BorderPane _rootLayout;
+
+    @FXML
+    private TextField userIdFieldLog;
+
+    @FXML
+    private PasswordField passFieldLog;
 
 
     /**
@@ -58,9 +70,24 @@ public class LoginScreenController {
      * Login Button in Login Screen
      */
     @FXML
-    private void logButtonLogPressed() {
-        mainApplication.initRootLayout(mainApplication.getMainScreen());
-        _dialogStage.close();
+    private void logButtonLogPressed() throws NonUniqueUsernameException{
+        String userInId = userIdFieldLog.getText();
+        String userInPass = passFieldLog.getText();
+
+        Facade temp = Facade.getFacade();
+        Facade.initialize();
+        boolean checkData = temp.logInUser(userInId, userInPass);
+
+        if (checkData) {
+            mainApplication.initRootLayout(mainApplication.getMainScreen());
+            _dialogStage.close();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Username or Password is incorrect");
+            alert.setContentText("Username or Password is not matched"
+                    + " with what we have in the system");
+            alert.showAndWait();
+        }
     }
 
     /**

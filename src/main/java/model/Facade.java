@@ -58,7 +58,12 @@ public class Facade {
     /**
      * private no-args constructor for the Facade class
      */
-    private Facade() {}
+    private Facade() {
+
+        // initialized non-connection instance variables
+        loggedInUsers = new ArrayList<User>();
+
+    }
 
     /**
      * returns the single instance of facade that gets used by

@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Facade;
 import model.User;
+import model.exceptions.NonUniqueUsernamesException;
 
 /**
  * The controller for the root/main window
@@ -74,7 +75,7 @@ public class RegistrationScreenController {
      * Login Button in Login Screen
      */
     @FXML
-    private User regButtonRegPressed() {
+    private User regButtonRegPressed() throws NonUniqueUsernamesException{
         mainApplication.initRootLayout(mainApplication.getMainScreen());
         if (passFieldReg.getText().equals(confirmPassFieldReg.getText())) {
             setInfo();

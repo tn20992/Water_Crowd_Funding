@@ -13,7 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Facade;
 import model.User;
-import model.exceptions.NonUniqueUsernamesException;
+import model.exceptions.NonUniqueUsernameException;
 
 /**
  * The controller for the root/main window
@@ -75,19 +75,17 @@ public class RegistrationScreenController {
      * Login Button in Login Screen
      */
     @FXML
-    private User regButtonRegPressed() throws NonUniqueUsernamesException{
+    private void regButtonRegPressed() throws NonUniqueUsernameException{
         mainApplication.initRootLayout(mainApplication.getMainScreen());
         if (passFieldReg.getText().equals(confirmPassFieldReg.getText())) {
             setInfo();
-            User newUser = facade.createUser(userId,pass);
+            facade.createUser(userId,pass);
             _dialogStage.close();
-            return newUser;
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(_dialogStage);
             alert.setTitle("Passwords do not match");
             alert.setContentText("The passwords did not match.");
-            return null;
         }
     }
 

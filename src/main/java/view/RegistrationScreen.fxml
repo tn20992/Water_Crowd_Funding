@@ -41,12 +41,14 @@
                         <Font size="17.0" />
                     </font>
                 </Label>
+                <TextField fx:id="userIdFieldReg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                           minWidth="-Infinity" prefHeight="30.0" prefWidth="270.0" style="-fx-background-color: #f8edd8;"
+                           GridPane.columnIndex="1" />
                 <PasswordField fx:id="passFieldReg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="270.0" style="-fx-background-color: #f8edd8;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <opaqueInsets>
                         <Insets left="10.0" right="10.0" />
                     </opaqueInsets>
                 </PasswordField>
-                <TextField fx:id="userIdFieldReg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="270.0" style="-fx-background-color: #f8edd8;" GridPane.columnIndex="1" />
             <Label text="Confirm Password:" textFill="#939393" GridPane.rowIndex="2">
                <font>
                   <Font size="17.0" />

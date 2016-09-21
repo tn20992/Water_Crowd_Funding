@@ -27,6 +27,7 @@ public class LoginScreenController {
 
     private BorderPane _rootLayout;
 
+
     /**
      * allow for calling back to the main application code if necessary
      * @param main   the reference to the FX Application instance

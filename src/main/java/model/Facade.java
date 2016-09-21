@@ -78,9 +78,8 @@ public class Facade {
      * @param password the password typed in by the user that's attempting to log in
      * @return whether the user was successfully logged in or not
      */
-    public boolean logInUser(String username, String password) {
-        User user = null;
-        user = getUserByUsername(username);
+    public boolean logInUser(String username, String password) throws NonUniqueUsernamesException {
+        User user = getUserByUsername(username);
 
         if (null == user) {
             return false;

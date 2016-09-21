@@ -68,7 +68,7 @@ public class RegistrationScreenController {
 
     public void setInfo() {
         pass = passFieldReg.getText();
-        userId = userIdFieldReg.getId();
+        userId = userIdFieldReg.getText();
     }
     /**
      * Login Button in Login Screen
@@ -82,10 +82,10 @@ public class RegistrationScreenController {
             _dialogStage.close();
             return newUser;
         } else {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.initOwner(_dialogStage);
-//            alert.setTitle("Passwords do not match");
-//            alert.setContentText("The passwords did not match.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(_dialogStage);
+            alert.setTitle("Passwords do not match");
+            alert.setContentText("The passwords did not match.");
             return null;
         }
     }

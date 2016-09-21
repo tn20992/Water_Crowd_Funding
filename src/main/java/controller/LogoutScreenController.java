@@ -1,14 +1,13 @@
-package main.java.controller;
+package controller;
 
 
 import javafx.fxml.FXML;
-import main.java.fxapp.MainFXApplication;
-
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import main.java.model.Facade;
-import main.java.model.User;
+import fxapp.MainFXApplication;
 
+import model.User;
+import model.Facade;
 
 public class LogoutScreenController {
 
@@ -18,6 +17,7 @@ public class LogoutScreenController {
     private BorderPane _rootLayout;
 
     private User user;
+    private Facade facade = Facade.getFacade();
 
     /**
      * allow for calling back to the main application code if necessary
@@ -47,11 +47,8 @@ public class LogoutScreenController {
 
     @FXML
     public void logoutActionClicked() {
-        Facade.logOutUser(user);
+        facade.logOutUser(user);
         mainApplication.showWelcomeScreen();
-
     }
-
-
 }
 

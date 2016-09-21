@@ -1,8 +1,8 @@
-package main.java.controller;
+package controller;
 
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import main.java.fxapp.MainFXApplication;
+import fxapp.MainFXApplication;
 
 import javafx.fxml.FXML;
 
@@ -11,8 +11,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import main.java.model.Facade;
-import main.java.model.User;
+import model.Facade;
+import model.User;
 
 /**
  * The controller for the root/main window
@@ -37,6 +37,8 @@ public class RegistrationScreenController {
     private String pass;
     private String confirmPass;
     private String userId;
+    private Facade facade = Facade.getFacade();
+
 
     /**
      * allow for calling back to the main application code if necessary
@@ -76,14 +78,14 @@ public class RegistrationScreenController {
         mainApplication.initRootLayout(mainApplication.getMainScreen());
         if (passFieldReg.getText().equals(confirmPassFieldReg.getText())) {
             setInfo();
-            User newUser = Facade.createUser(userId,pass);
+            User newUser = facade.createUser(userId,pass);
             _dialogStage.close();
             return newUser;
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(_dialogStage);
-            alert.setTitle("Passwords do not match");
-            alert.setContentText("The passwords did not match.");
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.initOwner(_dialogStage);
+//            alert.setTitle("Passwords do not match");
+//            alert.setContentText("The passwords did not match.");
             return null;
         }
     }

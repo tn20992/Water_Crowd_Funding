@@ -1,22 +1,27 @@
 INSERT INTO tb_entity
 (
     username,
-    password
+    password,
+    account_type
 )
 VALUES
 (
     'user1',
-    'password1'
+    'password1',
+    1
 ),
 (
     'user2',
-    'password2'
+    'password2',
+    2
 ),
 (
     'user3',
-    'password3'
+    'password3',
+    3
 ),
 (
     'user4',
-    'password4'
+    'password4',
+    4
 );

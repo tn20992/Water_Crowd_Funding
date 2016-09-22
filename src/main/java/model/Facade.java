@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import model.exceptions.NonUniqueUsernameException;
+import model.AccountType;
 
 /**
  * Class that abstracts the models away from the controllers
@@ -203,13 +204,15 @@ public class Facade {
      * @param password the password of the user to be created
      * @return User the newly created user, null if this user would not be unique
      */
-    public void createUser(String username, String password) throws NonUniqueUsernameException {
+    public void createUser(String username, String password, String name, AccountType accountType) throws NonUniqueUsernameException {
         try {
 
-            String query                        = "INSERT INTO tb_entity (username, password) VALUES (?, ?)";
+            String query                        = "INSERT INTO tb_entity (username, password, name, accountType) VALUES (?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
+            preparedStatement.setString(3, name);
+            preparedStatement.setString(4, accountType.toString());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

@@ -226,4 +226,54 @@ public class Facade {
 
         }
     }
+
+    /**
+     * updates the user with the given username to have the given email
+     * @param username the username of the user to be updated
+     * @param email the new email to give the user
+     * @return User the user after the update
+     */
+    public User editUserEmailByUsername(String username, String email) {
+        try {
+
+            String query                        = "UPDATE tb_entity SET email = ? WHERE username = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, username);
+            preparedStatement.executeUpdate();
+
+            return getUserByUsername(username);
+
+        } catch (SQLException e) {
+
+            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.exit(0);
+
+        }
+    }
+
+    /**
+     * updates the user with the given username to have the given street address
+     * @param username the username of the user to be updated
+     * @param streetAddress the new street address to give the user
+     * @return User the user after the update
+     */
+    public User editUserStreetAddressByUsername(String username, String streetAddress) {
+        try {
+
+            String query                        = "UPDATE tb_entity SET street_address = ? WHERE username = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, streetAddress);
+            preparedStatement.setString(2, username);
+            preparedStatement.executeUpdate();
+
+            return getUserByUsername(username);
+
+        } catch (SQLException e) {
+
+            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.exit(0);
+
+        }
+    }
 }

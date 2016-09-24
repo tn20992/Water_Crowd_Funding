@@ -9,6 +9,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.Facade;
+import model.User;
 
 /**
  * The controller for the root/main window
@@ -20,6 +22,9 @@ public class MainScreenController {
     private MainFXApplication mainApplication;
 
     private BorderPane _editBorderPane;
+
+    private User user;
+    private Facade facade = Facade.getFacade();
 
     @FXML
     private TextField usernameView;
@@ -67,6 +72,7 @@ public class MainScreenController {
      */
     @FXML
     private void logoutActionClicked() {
+        facade.logOutUser(user);
         mainApplication.showWelcomeScreen();
     }
 

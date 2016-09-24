@@ -67,6 +67,7 @@ public class MainFXApplication extends Application {
             // Give the controller access to the main app.
             MainScreenController controller = loader.getController();
             controller.setMainApp(this);
+            controller.setUserNameView("HungDo");
 
             // Set the Main App title
             mainScreen.setTitle("Clean Water Reporting Program");
@@ -166,6 +167,31 @@ public class MainFXApplication extends Application {
         }
     }
 
+    public void setEditProfileScreen(Stage mainScreen) {
+        try {
+
+            // Load root layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            BorderPane editProfile= loader.load(new FileInputStream("src/main/java/view/EditProfileScreen.fxml"));
+
+            // Give the controller access to the main app.
+            MainScreenController controller = loader.getController();
+            controller.setMainApp(this);
+            controller.setEditBorderPane(editProfile);
+
+            // Set the Main App title
+            mainScreen.setTitle("Clean Water Reporting Program");
+
+
+            // Show the scene containing the root layout.
+            Scene scene = new Scene(editProfile);
+            mainScreen.setScene(scene);
+            mainScreen.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * main method for main application class

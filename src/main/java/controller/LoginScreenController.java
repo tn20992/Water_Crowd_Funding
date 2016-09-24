@@ -39,7 +39,6 @@ public class LoginScreenController {
     @FXML
     private PasswordField passFieldLog;
 
-
     /**
      * allow for calling back to the main application code if necessary
      * @param main   the reference to the FX Application instance
@@ -75,7 +74,6 @@ public class LoginScreenController {
         String userInPass = passFieldLog.getText();
 
         Facade temp = Facade.getFacade();
-        Facade.initialize();
         boolean checkData = temp.logInUser(userInId, userInPass);
 
         if (checkData) {
@@ -83,7 +81,7 @@ public class LoginScreenController {
             _dialogStage.close();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Username or Password is incorrect");
+            alert.setTitle("ERROR");
             alert.setContentText("Username or Password is not matched"
                     + " with what we have in the system");
             alert.showAndWait();

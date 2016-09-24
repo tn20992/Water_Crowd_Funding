@@ -29,7 +29,7 @@
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="82.0" prefWidth="270.0">
                <children>
                   <Label text="Full Name" textFill="#969696" />
-                  <TextField prefHeight="27.0" prefWidth="344.0" promptText="Name of user (cannot change)" />
+                  <TextField prefHeight="27.0" prefWidth="344.0" promptText="Name of user" />
                </children>
                <GridPane.margin>
                   <Insets left="30.0" />

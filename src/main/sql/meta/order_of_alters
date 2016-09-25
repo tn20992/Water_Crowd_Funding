@@ -1,1 +1,2 @@
 create_tb_entity.sql
+alter_entity_profile_info.sql

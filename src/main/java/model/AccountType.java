@@ -20,7 +20,6 @@ public enum AccountType {
      * Returns account types in array form
      * @return the array of AccountType with each account type
      */
-
     public static AccountType[] getValues() {
         return new AccountType[]{AccountType.USR, AccountType.WKR, AccountType.MNG, AccountType.ADM};
     }

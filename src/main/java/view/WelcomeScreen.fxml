@@ -47,7 +47,7 @@
       </Button>
    </center>
    <bottom>
-      <Button fx:id="regButtonWel" mnemonicParsing="false" onAction="#regButtonWelPressed" prefHeight="100.0" prefWidth="300.0" text="REGISTRY" BorderPane.alignment="CENTER">
+      <Button fx:id="regButtonWel" mnemonicParsing="false" onAction="#regButtonWelPressed" prefHeight="100.0" prefWidth="300.0" text="REGISTER" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="50.0" />
          </BorderPane.margin>

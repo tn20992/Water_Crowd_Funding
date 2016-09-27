@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -53,6 +55,18 @@ public class RegistrationScreenController {
         combobox.setPlaceholder(AccountType.User);
     }
 
+    private ObservableList<String> classStandingList = FXCollections
+            .observableArrayList("Regular User", "Student", "Manager", "Admin");
+
+    /**
+     * called automatically after load
+     */
+    @FXML
+    private void initialize() {
+        accountTypeBox.setItems(classStandingList);
+        accountTypeBox.setValue("Regular User");
+    }
+
     /**
      * allow for calling back to the main application code if necessary
      * @param main   the reference to the FX Application instance
@@ -104,8 +118,12 @@ public class RegistrationScreenController {
                 } catch (Exception e) {
                     alert("Could not create user.");
                 }
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Register Successfully");
+                alert.setHeaderText("Your Registration was successful! ");
+                alert.setContentText("Please click OK to go back!");
+                alert.showAndWait();
                 _dialogStage.close();
-                mainApplication.initRootLayout(mainApplication.getMainScreen());
             } else {
                 alert("Passwords do not match up.");
             }

@@ -39,7 +39,6 @@ public class LoginScreenController {
     @FXML
     private PasswordField passFieldLog;
 
-
     /**
      * allow for calling back to the main application code if necessary
      * @param main   the reference to the FX Application instance
@@ -71,14 +70,9 @@ public class LoginScreenController {
      */
     @FXML
     private void logButtonLogPressed() throws NonUniqueUsernameException{
-        String userInId = userIdFieldLog.getText();
-        String userInPass = passFieldLog.getText();
-
         Facade temp = Facade.getFacade();
-        Facade.initialize();
-        boolean checkData = temp.logInUser(userInId, userInPass);
-
-        if (checkData) {
+        boolean match = temp.logInUser(userIdFieldLog.getText(), passFieldLog.getText());
+        if (match) {
             mainApplication.initRootLayout(mainApplication.getMainScreen());
             _dialogStage.close();
         } else {

@@ -1,8 +1,15 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
+import java.util.Arrays;
+
 import fxapp.MainFXApplication;
+import model.AccountType;
 
 import javafx.fxml.FXML;
 
@@ -35,11 +42,24 @@ public class RegistrationScreenController {
     @FXML
     private PasswordField confirmPassFieldReg;
 
+    @FXML
+    private TextField nameFieldReg;
+
+    @FXML
+    private ComboBox<AccountType> combobox;
+
+    private String name;
     private String pass;
-    private String confirmPass;
     private String userId;
     private Facade facade = Facade.getFacade();
 
+    private void initialize() {
+        combobox.setItems(FXCollections.observableList(Arrays.asList(AccountType.getValues())));
+        combobox.getSelectionModel().select(AccountType.USER);
+    }
+
+    private ObservableList<String> classStandingList = FXCollections
+            .observableArrayList("Regular User", "Student", "Manager", "Admin");
 
     /**
      * allow for calling back to the main application code if necessary
@@ -70,24 +90,44 @@ public class RegistrationScreenController {
     public void setInfo() {
         pass = passFieldReg.getText();
         userId = userIdFieldReg.getText();
+        name = nameFieldReg.getText();
     }
     /**
      * Login Button in Login Screen
      */
     @FXML
     private void regButtonRegPressed() throws NonUniqueUsernameException{
-        if (passFieldReg.getText().equals(confirmPassFieldReg.getText())) {
-            setInfo();
-            facade.createUser(userId,pass);
-            _dialogStage.close();
-            mainApplication.initRootLayout(mainApplication.getMainScreen());
 
+        if (userIdFieldReg.getText() == null || userIdFieldReg.getText().trim().isEmpty()) {
+            alert("Invalid User ID.");
+        } else if (passFieldReg.getText() == null || passFieldReg.getText().trim().isEmpty()) {
+            alert("Invalid password.");
+        } else if (nameFieldReg.getText() == null || nameFieldReg.getText().trim().isEmpty()) {
+            alert("Invalid name.");
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERROR");
-            alert.setContentText("The passwords did not match.");
-            alert.showAndWait();
+            if (passFieldReg.getText().equals(confirmPassFieldReg.getText())) {
+                setInfo();
+                try {
+                    facade.createUser(name,userId,pass,combobox.getValue());
+                } catch (Exception e) {
+                    alert("Could not create user.");
+                }
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Register Successfully");
+                alert.setHeaderText("Your Registration was successful! ");
+                alert.setContentText("Please click OK to go back!");
+                alert.showAndWait();
+                _dialogStage.close();
+            } else {
+                alert("Passwords do not match up.");
+            }
         }
+    }
+    private void alert(String msg) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setContentText(msg);
+                alert.showAndWait();
     }
 
     /**

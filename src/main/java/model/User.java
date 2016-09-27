@@ -18,10 +18,24 @@ public class User {
      * Creates a new user
      * @param username the username for the user
      * @param password the password for the user
+     * @param name the name of the user
+     * @param accountType the type of account that this user has
      */
-    public User (String username, String password) {
+    public User (String username, String password, String name, AccountType accountType) {
         this.username = username;
         this.password = password;
+        this.name = name;
+        this.accountType = accountType;
+    }
+
+    /*
+     * Creates a new user
+     * @param username the username for the user
+     * @param password the password for the user
+     * @param name the name of the user
+     */
+    public User (String username, String password, String name) {
+        this(username, password, name, AccountType.USR);
     }
 
     /*

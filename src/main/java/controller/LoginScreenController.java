@@ -77,8 +77,9 @@ public class LoginScreenController {
             _dialogStage.close();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERROR");
-            alert.setContentText("The passwords did not match.");
+            alert.setTitle("Username or Password is incorrect");
+            alert.setContentText("Username or Password is not matched"
+                    + " with what we have in the system");
             alert.showAndWait();
         }
     }

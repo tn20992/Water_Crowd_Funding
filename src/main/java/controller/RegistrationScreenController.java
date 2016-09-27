@@ -6,6 +6,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import fxapp.MainFXApplication;
+import model.AccountType;
 
 import javafx.fxml.FXML;
 
@@ -39,13 +40,20 @@ public class RegistrationScreenController {
     private PasswordField confirmPassFieldReg;
 
     @FXML
-    private ComboBox<String> accountTypeBox;
+    private TextField nameFieldReg;
 
+    @FXML
+    private ComboBox<AccountType> combobox;
+
+    private String name;
     private String pass;
-    private String confirmPass;
     private String userId;
     private Facade facade = Facade.getFacade();
 
+    private void initialize() {
+        combobox.setItems(AccountType.getValues());
+        combobox.setPlaceholder(AccountType.User);
+    }
 
     private ObservableList<String> classStandingList = FXCollections
             .observableArrayList("Regular User", "Student", "Manager", "Admin");
@@ -88,6 +96,7 @@ public class RegistrationScreenController {
     public void setInfo() {
         pass = passFieldReg.getText();
         userId = userIdFieldReg.getText();
+        name = nameFieldReg.getText();
     }
     /**
      * Login Button in Login Screen
@@ -99,11 +108,13 @@ public class RegistrationScreenController {
             alert("Invalid User ID.");
         } else if (passFieldReg.getText() == null || passFieldReg.getText().trim().isEmpty()) {
             alert("Invalid password.");
+        } else if (nameFieldReg.getText() == null || nameFieldReg.getText().trim().isEmpty()) {
+            alert("Invalid name.");
         } else {
             if (passFieldReg.getText().equals(confirmPassFieldReg.getText())) {
                 setInfo();
                 try {
-                    facade.createUser(userId,pass);
+                    facade.createUser(name,userId,pass,combobox.getValue());
                 } catch (Exception e) {
                     alert("Could not create user.");
                 }

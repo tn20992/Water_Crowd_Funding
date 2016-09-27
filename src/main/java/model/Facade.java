@@ -130,17 +130,23 @@ public class Facade {
         try {
 
             Statement statement        = connection.createStatement();
-            String query               = "SELECT username, password FROM tb_entity";
+            String query               = "SELECT username, password, name, account_type, email, street_address FROM tb_entity";
             ResultSet statementResults = statement.executeQuery(query);
             ArrayList<User> results    = new ArrayList<User>();
 
             while (statementResults.next()) {
-                results.add(
-                    new User(
-                        statementResults.getString(1),
-                        statementResults.getString(2)
-                    )
+
+                User user = makeUserObject(
+                    statementResults.getString(1),
+                    statementResults.getString(2),
+                    statementResults.getString(3),
+                    statementResults.getInt(4),
+                    statementResults.getString(5),
+                    statementResults.getString(6)
                 );
+
+                results.add(user);
+
             }
 
             return results;
@@ -166,7 +172,7 @@ public class Facade {
     public User getUserByUsername(String username) {
         try {
 
-            String query                        = "SELECT username, password FROM tb_entity WHERE username = ?";
+            String query                        = "SELECT username, password, name, account_type, email, street_address FROM tb_entity WHERE username = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
 
@@ -174,12 +180,17 @@ public class Facade {
             ArrayList<User> results    = new ArrayList<User>();
 
             while (statementResults.next()) {
-                results.add(
-                    new User(
-                        statementResults.getString(1),
-                        statementResults.getString(2)
-                    )
+
+                User user = makeUserObject(
+                    statementResults.getString(1),
+                    statementResults.getString(2),
+                    statementResults.getString(3),
+                    statementResults.getInt(4),
+                    statementResults.getString(5),
+                    statementResults.getString(6)
                 );
+                results.add(user);
+
             }
 
             // going to assume that there is only 1 User in the results set
@@ -203,11 +214,75 @@ public class Facade {
     }
 
     /**
+     * takes in information for a user and returns a User object with all that information
+     * @param username the username to be put into a User object
+     * @param password the password to be put into a User object
+     * @param name the name to be put into a User object
+     * @param accountTypeInt the account type to be put into a User object in integer form not AccountType form
+     * @param email the email to be put into a User object
+     * @param streetAddress the street address to be put into a User object
+     * @return User a user with all the parameter information in it
+     */
+    private User makeUserObject(String username, String password, String name, int accountTypeInt, String email, String streetAddress) {
+        User user;
+        switch (accountTypeInt) {
+            case 1 :
+                user = new User(
+                    username,
+                    password,
+                    name,
+                    AccountType.USR
+                );
+                break;
+
+            case 2 :
+                user = new User(
+                    username,
+                    password,
+                    name,
+                    AccountType.WKR
+                );
+                break;
+
+            case 3 :
+                user = new User(
+                    username,
+                    password,
+                    name,
+                    AccountType.MNG
+                );
+                break;
+
+            case 4 :
+                user = new User(
+                    username,
+                    password,
+                    name,
+                    AccountType.ADM
+                );
+                break;
+
+            default :
+                user = new User(
+                    username,
+                    password,
+                    name
+                );
+                break;
+
+        }
+
+        user.setEmail(email);
+        user.setStreetAddress(streetAddress);
+        return user;
+
+    }
+
+    /**
      * creates a new user in the system with the given username and password
      * if the newly created user will be unique
      * @param username the username of the user to be created
      * @param password the password of the user to be created
-     * @return User the newly created user, null if this user would not be unique
      */
     public void createUser(String username, String password, String name, AccountType accountType) throws NonUniqueUsernameException {
         try {
@@ -255,6 +330,10 @@ public class Facade {
             System.exit(0);
 
         }
+
+        // this is needed for compilation
+        // execution should never reach this line
+        return null;
     }
 
     /**
@@ -280,5 +359,9 @@ public class Facade {
             System.exit(0);
 
         }
+
+        // this is needed for compilation
+        // execution should never reach this line
+        return null;
     }
 }

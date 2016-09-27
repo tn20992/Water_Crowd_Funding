@@ -292,7 +292,7 @@ public class Facade {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
             preparedStatement.setString(3, name);
-            preparedStatement.setString(4, accountType.toString());
+            preparedStatement.setString(4, accountType.ordinal() + "");
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

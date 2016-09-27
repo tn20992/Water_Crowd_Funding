@@ -231,7 +231,7 @@ public class Facade {
                     username,
                     password,
                     name,
-                    AccountType.USR
+                    AccountType.USER
                 );
                 break;
 
@@ -240,7 +240,7 @@ public class Facade {
                     username,
                     password,
                     name,
-                    AccountType.WKR
+                    AccountType.WORKER
                 );
                 break;
 
@@ -249,7 +249,7 @@ public class Facade {
                     username,
                     password,
                     name,
-                    AccountType.MNG
+                    AccountType.MANAGER
                 );
                 break;
 
@@ -258,7 +258,7 @@ public class Facade {
                     username,
                     password,
                     name,
-                    AccountType.ADM
+                    AccountType.ADMIN
                 );
                 break;
 

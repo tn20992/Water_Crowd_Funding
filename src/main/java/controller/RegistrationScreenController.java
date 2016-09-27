@@ -5,6 +5,9 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
+import java.util.Arrays;
+
 import fxapp.MainFXApplication;
 import model.AccountType;
 
@@ -51,21 +54,12 @@ public class RegistrationScreenController {
     private Facade facade = Facade.getFacade();
 
     private void initialize() {
-        combobox.setItems(AccountType.getValues());
-        combobox.setPlaceholder(AccountType.User);
+        combobox.setItems(FXCollections.observableList(Arrays.asList(AccountType.getValues())));
+        combobox.getSelectionModel().select(AccountType.USER);
     }
 
     private ObservableList<String> classStandingList = FXCollections
             .observableArrayList("Regular User", "Student", "Manager", "Admin");
-
-    /**
-     * called automatically after load
-     */
-    @FXML
-    private void initialize() {
-        accountTypeBox.setItems(classStandingList);
-        accountTypeBox.setValue("Regular User");
-    }
 
     /**
      * allow for calling back to the main application code if necessary

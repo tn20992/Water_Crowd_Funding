@@ -5,10 +5,10 @@ package model;
  * Stores Types User, Worker, Manager, Admin
  */
 public enum AccountType {
-    USR ("User"),
-    WKR ("Worker"),
-    MNG ("Manager"),
-    ADM ("Admin");
+    USER ("User"),
+    WORKER ("Worker"),
+    MANAGER ("Manager"),
+    ADMIN ("Admin");
 
     private final String workerType;
 
@@ -21,7 +21,7 @@ public enum AccountType {
      * @return the array of AccountType with each account type
      */
     public static AccountType[] getValues() {
-        return new AccountType[]{AccountType.USR, AccountType.WKR, AccountType.MNG, AccountType.ADM};
+        return new AccountType[]{AccountType.USER, AccountType.WORKER, AccountType.MANAGER, AccountType.ADMIN};
     }
 
     public String toString() {

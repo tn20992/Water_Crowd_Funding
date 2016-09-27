@@ -35,7 +35,7 @@ public class User {
      * @param name the name of the user
      */
     public User (String username, String password, String name) {
-        this(username, password, name, AccountType.USR);
+        this(username, password, name, AccountType.USER);
     }
 
     /*

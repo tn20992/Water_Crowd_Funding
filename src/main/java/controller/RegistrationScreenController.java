@@ -1,5 +1,8 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import fxapp.MainFXApplication;
@@ -35,11 +38,26 @@ public class RegistrationScreenController {
     @FXML
     private PasswordField confirmPassFieldReg;
 
+    @FXML
+    private ComboBox<String> accountTypeBox;
+
     private String pass;
     private String confirmPass;
     private String userId;
     private Facade facade = Facade.getFacade();
 
+
+    private ObservableList<String> classStandingList = FXCollections
+            .observableArrayList("Regular User", "Student", "Manager", "Admin");
+
+    /**
+     * called automatically after load
+     */
+    @FXML
+    private void initialize() {
+        accountTypeBox.setItems(classStandingList);
+        accountTypeBox.setValue("Regular User");
+    }
 
     /**
      * allow for calling back to the main application code if necessary
@@ -76,17 +94,35 @@ public class RegistrationScreenController {
      */
     @FXML
     private void regButtonRegPressed() throws NonUniqueUsernameException{
-        mainApplication.initRootLayout(mainApplication.getMainScreen());
-        if (passFieldReg.getText().equals(confirmPassFieldReg.getText())) {
-            setInfo();
-            facade.createUser(userId,pass);
-            _dialogStage.close();
+
+        if (userIdFieldReg.getText() == null || userIdFieldReg.getText().trim().isEmpty()) {
+            alert("Invalid User ID.");
+        } else if (passFieldReg.getText() == null || passFieldReg.getText().trim().isEmpty()) {
+            alert("Invalid password.");
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initOwner(_dialogStage);
-            alert.setTitle("Passwords do not match");
-            alert.setContentText("The passwords did not match.");
+            if (passFieldReg.getText().equals(confirmPassFieldReg.getText())) {
+                setInfo();
+                try {
+                    facade.createUser(userId,pass);
+                } catch (Exception e) {
+                    alert("Could not create user.");
+                }
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Register Successfully");
+                alert.setHeaderText("Your Registration was successful! ");
+                alert.setContentText("Please click OK to go back!");
+                alert.showAndWait();
+                _dialogStage.close();
+            } else {
+                alert("Passwords do not match up.");
+            }
         }
+    }
+    private void alert(String msg) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setContentText(msg);
+                alert.showAndWait();
     }
 
     /**

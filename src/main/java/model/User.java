@@ -9,6 +9,10 @@ public class User {
     //attributes of User
     private String username;
     private String password;
+    private String name;
+    private String email;
+    private String streetAddress;
+    private AccountType accountType;
 
     /*
      * Creates a new user
@@ -21,12 +25,20 @@ public class User {
     }
 
     /*
-     * Getters + Setters for user's username and password
+     * Getters + Setters for user fields
      */
     public String getUsername () { return username; }
     public String getPassword () { return password; }
+    public String getName () { return name; }
+    public String getEmail () { return email; }
+    public String getStreetAddress () { return streetAddress; }
+    public AccountType getAccountType () { return accountType; }
     public void setUsername (String newUsername) { username = newUsername; }
     public void setPassword (String newPassword) { password = newPassword; }
+    public void setName(String newName) { name = newName; }
+    public void setEmail (String newEmail) { email = newEmail; }
+    public void setStreetAddress (String newStreetAddress) { streetAddress = newStreetAddress; }
+    public void setAccountType (AccountType newAccountType) { accountType = newAccountType; }
 
     /*
      * Set equals to compare usernames.

@@ -6,6 +6,7 @@ import controller.RegistrationScreenController;
 import controller.WelcomeScreenController;
 
 import model.Facade;
+import model.AccountType;
 
 import javafx.application.Application;
 import javafx.fxml.FXML;

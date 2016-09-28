@@ -131,6 +131,10 @@ public class MainScreenController {
                 .getUsername(), emailEdit.getText()));
         mainApplication.setUser(facade.editUserStreetAddressByUsername(mainApplication.getUser()
                 .getUsername(), addressEdit.getText()));
+        mainApplication.setUser(facade.editUserNameByUsername(mainApplication.getUser()
+                .getUsername(), nameEdit.getText()));
+        mainApplication.setUser(facade.editUserPasswordByUsername(mainApplication.getUser()
+                .getUsername(), passwordEdit.getText()));
     }
 
     @FXML

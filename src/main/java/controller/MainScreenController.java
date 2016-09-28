@@ -111,16 +111,30 @@ public class MainScreenController {
     }
 
     /**
+     * Set information into edit screen
+     * @param user user contains information
+     */
+    public void setEditProfileView(User user) {
+        nameEdit.setText(user.getName());
+        passwordEdit.setText(user.getPassword());
+        emailEdit.setText(user.getEmail());
+        addressEdit.setText(user.getStreetAddress());
+    }
+
+    /**
      * Comeback to the main screen with updated information
      */
     @FXML
     private void updatePressed() {
-        /**
-         * TODO:
-         * Make new change here for update information
-         */
-        updateUserInfo();
-        mainApplication.initRootLayout(mainApplication.getMainScreen());
+        if (passwordEdit.getText().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText("Password is empty!!!");
+            alert.showAndWait();
+        } else {
+            updateUserInfo();
+            mainApplication.initRootLayout(mainApplication.getMainScreen());
+        }
     }
 
     /**

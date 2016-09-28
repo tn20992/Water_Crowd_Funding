@@ -88,11 +88,16 @@ public class MainScreenController {
      * Comeback to the main screen with updated information
      */
     @FXML
-    private void UpdatePressed() {
+    private void updatePressed() {
         /**
          * TODO:
          * Make new change here for update information
          */
+        mainApplication.initRootLayout(mainApplication.getMainScreen());
+    }
+
+    @FXML
+    private void cancelUpdatePressed() {
         mainApplication.initRootLayout(mainApplication.getMainScreen());
     }
 

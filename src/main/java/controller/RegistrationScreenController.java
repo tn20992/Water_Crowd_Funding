@@ -46,7 +46,7 @@ public class RegistrationScreenController {
     private TextField nameFieldReg;
 
     @FXML
-    private ComboBox combobox;
+    private ComboBox accountTypeBox;
 
     private String name;
     private String pass;
@@ -56,9 +56,10 @@ public class RegistrationScreenController {
     private ObservableList accountTypeList = FXCollections
             .observableArrayList(AccountType.values());
 
+    @FXML
     private void initialize() {
-        combobox.setItems(accountTypeList);
-        combobox.getSelectionModel().select(AccountType.USER);
+        accountTypeBox.setItems(accountTypeList);
+        accountTypeBox.getSelectionModel().select(AccountType.USER);
     }
 
 
@@ -109,7 +110,7 @@ public class RegistrationScreenController {
             if (passFieldReg.getText().equals(confirmPassFieldReg.getText())) {
                 setInfo();
                 try {
-                    facade.createUser(userId,pass,name,AccountType.values()[combobox.getSelectionModel().getSelectedIndex()]);
+                    facade.createUser(userId,pass,name,AccountType.values()[accountTypeBox.getSelectionModel().getSelectedIndex()]);
                 } catch (Exception e) {
                     alert("Could not create user.");
                 }

@@ -46,14 +46,14 @@ public class RegistrationScreenController {
     private TextField nameFieldReg;
 
     @FXML
-    private ComboBox accountTypeBox;
+    private ComboBox<AccountType> accountTypeBox;
 
     private String name;
     private String pass;
     private String userId;
     private Facade facade = Facade.getFacade();
 
-    private ObservableList accountTypeList = FXCollections
+    private ObservableList<AccountType> accountTypeList = FXCollections
             .observableArrayList(AccountType.values());
 
     @FXML

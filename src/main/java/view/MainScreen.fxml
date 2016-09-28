@@ -60,7 +60,7 @@
                   <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="82.0" prefWidth="270.0" GridPane.rowIndex="1">
                      <children>
                         <Label text="Email" textFill="#969696" />
-                        <TextField disable="true" editable="false" opacity="0.62" prefHeight="27.0" prefWidth="344.0" promptText="Email of user" />
+                        <TextField fx:id="emailView" disable="true" editable="false" opacity="0.62" prefHeight="27.0" prefWidth="344.0" promptText="Email of user" />
                      </children>
                      <GridPane.margin>
                         <Insets left="30.0" />
@@ -69,7 +69,7 @@
                   <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="82.0" prefWidth="270.0" GridPane.rowIndex="2">
                      <children>
                         <Label text="Home Address" textFill="#969696" />
-                        <TextArea disable="true" editable="false" opacity="0.62" prefHeight="200.0" prefWidth="200.0" promptText="Address of user" />
+                        <TextArea fx:id="addressView" disable="true" editable="false" opacity="0.62" prefHeight="200.0" prefWidth="200.0" promptText="Address of user" />
                      </children>
                      <GridPane.margin>
                         <Insets left="30.0" />
@@ -78,7 +78,7 @@
                   <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="82.0" prefWidth="270.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <Label text="Password" textFill="#969696" />
-                        <TextField disable="true" editable="false" opacity="0.62" prefHeight="27.0" prefWidth="344.0" promptText="Password use to login" />
+                        <TextField fx:id="passwordView" disable="true" editable="false" opacity="0.62" prefHeight="27.0" prefWidth="344.0" promptText="Password use to login" />
                      </children>
                      <GridPane.margin>
                         <Insets left="30.0" />
@@ -87,7 +87,7 @@
                   <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="82.0" prefWidth="270.0" GridPane.columnIndex="1">
                      <children>
                         <Label text="Account Type" textFill="#969696" />
-                        <TextField disable="true" editable="false" opacity="0.62" prefHeight="27.0" prefWidth="344.0" promptText="User/Worker/Manager/Admin" />
+                        <TextField fx:id="accountTypeView" disable="true" editable="false" opacity="0.62" prefHeight="27.0" prefWidth="344.0" promptText="User/Worker/Manager/Admin" />
                      </children>
                      <GridPane.margin>
                         <Insets left="30.0" />

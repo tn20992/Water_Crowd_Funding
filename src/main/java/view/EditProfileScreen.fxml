@@ -28,7 +28,7 @@
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="82.0" prefWidth="270.0">
                <children>
                   <Label text="Full Name" textFill="#969696" />
-                  <TextField prefHeight="27.0" prefWidth="344.0" promptText="Name of user" />
+                  <TextField fx:id="nameEdit" prefHeight="27.0" prefWidth="344.0" promptText="Name of user" />
                </children>
                <GridPane.margin>
                   <Insets left="30.0" />
@@ -37,7 +37,7 @@
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="82.0" prefWidth="270.0" GridPane.rowIndex="1">
                <children>
                   <Label text="Email" textFill="#969696" />
-                  <TextField prefHeight="27.0" prefWidth="344.0" promptText="Email of user" />
+                  <TextField fx:id="emailEdit" prefHeight="27.0" prefWidth="344.0" promptText="Email of user" />
                </children>
                <GridPane.margin>
                   <Insets left="30.0" />
@@ -46,7 +46,7 @@
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="82.0" prefWidth="270.0" GridPane.rowIndex="2">
                <children>
                   <Label text="Home Address" textFill="#969696" />
-                  <TextArea prefHeight="200.0" prefWidth="200.0" promptText="Address of user" />
+                  <TextArea fx:id="addressEdit" prefHeight="200.0" prefWidth="200.0" promptText="Address of user" />
                </children>
                <GridPane.margin>
                   <Insets left="30.0" />
@@ -58,7 +58,7 @@
                </GridPane.margin>
                <children>
                   <Label text="Password" textFill="#969696" />
-                  <TextField prefHeight="27.0" prefWidth="344.0" promptText="Password use to login" />
+                  <TextField fx:id="passwordEdit" prefHeight="27.0" prefWidth="344.0" promptText="Password use to login" />
                </children>
             </VBox>
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="82.0" prefWidth="270.0" GridPane.columnIndex="1" GridPane.rowIndex="1">

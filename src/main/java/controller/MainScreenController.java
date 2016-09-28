@@ -6,6 +6,7 @@ import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -28,6 +29,12 @@ public class MainScreenController {
 
     @FXML
     private TextField usernameView;
+
+    @FXML
+    private TextField passwordView;
+
+    @FXML
+    private TextField accountTypeView;
 
     /**
      * allow for calling back to the main application code if necessary
@@ -107,5 +114,17 @@ public class MainScreenController {
      */
     public void setUserNameView(String username) {
         usernameView.setText(username);
+    }
+
+    /**
+     * Set pass of user in profile view
+     * @param password the password of user
+     */
+    public void setUserPassView(String password) { passwordView.setText(password);
+
+    }
+
+    public void setAccountTypeView(String accountView) { accountTypeView.setText(accountView);
+
     }
 }

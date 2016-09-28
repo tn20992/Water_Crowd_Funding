@@ -73,6 +73,7 @@ public class LoginScreenController {
         Facade temp = Facade.getFacade();
         boolean match = temp.logInUser(userIdFieldLog.getText(), passFieldLog.getText());
         if (match) {
+            mainApplication.setUser(temp.getUserByUsername(userIdFieldLog.getText()));
             mainApplication.initRootLayout(mainApplication.getMainScreen());
             _dialogStage.close();
         } else {

@@ -71,11 +71,9 @@ public class MainFXApplication extends Application {
             // Give the controller access to the main app.
             MainScreenController controller = loader.getController();
             controller.setMainApp(this);
-            if (user != null) {
-                controller.setUserNameView(user.getName());
-                controller.setAccountTypeView(user.getAccountType().toString());
-                controller.setUserPassView(user.getPassword());
-            }
+
+            setViewProfile(controller);
+
 
             // Set the Main App title
             mainScreen.setTitle("Clean Water Reporting Program");
@@ -216,6 +214,20 @@ public class MainFXApplication extends Application {
      */
     public User getUser() {
         return user;
+    }
+
+    /**
+     * Set infomation into profile screen
+     * @param controller mains screen controller
+     */
+    private void setViewProfile(MainScreenController controller) {
+        if (user != null) {
+            controller.setUserNameView(user.getName());
+            controller.setAccountTypeView(user.getAccountType().toString());
+            controller.setUserPassView(user.getPassword());
+            controller.setEmailView(user.getEmail());
+            controller.setAddressView(user.getStreetAddress());
+        }
     }
 
     /**

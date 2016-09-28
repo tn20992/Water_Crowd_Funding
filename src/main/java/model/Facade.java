@@ -287,12 +287,12 @@ public class Facade {
     public void createUser(String username, String password, String name, AccountType accountType) throws NonUniqueUsernameException {
         try {
 
-            String query                        = "INSERT INTO tb_entity (username, password, name, accountType) VALUES (?, ?, ?, ?)";
+            String query                        = "INSERT INTO tb_entity (username, password, name, account_type) VALUES (?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
             preparedStatement.setString(3, name);
-            preparedStatement.setString(4, accountType.ordinal() + "");
+            preparedStatement.setInt(4, accountType.ordinal());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -35,6 +36,24 @@ public class MainScreenController {
 
     @FXML
     private TextField accountTypeView;
+
+    @FXML
+    private TextField emailView;
+
+    @FXML
+    private TextArea addressView;
+
+    @FXML
+    private TextArea addressEdit;
+
+    @FXML
+    private TextField nameEdit;
+
+    @FXML
+    private TextField passwordEdit;
+
+    @FXML
+    private TextField emailEdit;
 
     /**
      * allow for calling back to the main application code if necessary
@@ -100,7 +119,18 @@ public class MainScreenController {
          * TODO:
          * Make new change here for update information
          */
+        updateUserInfo();
         mainApplication.initRootLayout(mainApplication.getMainScreen());
+    }
+
+    /**
+     * Update information of user
+     */
+    private void updateUserInfo() {
+        mainApplication.setUser(facade.editUserEmailByUsername(mainApplication.getUser()
+                .getUsername(), emailEdit.getText()));
+        mainApplication.setUser(facade.editUserStreetAddressByUsername(mainApplication.getUser()
+                .getUsername(), addressEdit.getText()));
     }
 
     @FXML
@@ -126,5 +156,21 @@ public class MainScreenController {
 
     public void setAccountTypeView(String accountView) { accountTypeView.setText(accountView);
 
+    }
+
+    /**
+     * Set email in profile view
+     * @param email email of user
+     */
+    public void setEmailView(String email) {
+        emailView.setText(email);
+    }
+
+    /**
+     * Set address in profile view
+     * @param address address of user
+     */
+    public void setAddressView(String address) {
+        addressView.setText(address);
     }
 }

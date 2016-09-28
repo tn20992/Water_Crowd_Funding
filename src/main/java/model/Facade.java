@@ -287,12 +287,12 @@ public class Facade {
     public void createUser(String username, String password, String name, AccountType accountType) throws NonUniqueUsernameException {
         try {
 
-            String query                        = "INSERT INTO tb_entity (username, password, name, accountType) VALUES (?, ?, ?, ?)";
+            String query                        = "INSERT INTO tb_entity (username, password, name, account_type) VALUES (?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
             preparedStatement.setString(3, name);
-            preparedStatement.setString(4, accountType.ordinal() + "");
+            preparedStatement.setInt(4, accountType.ordinal());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -348,6 +348,64 @@ public class Facade {
             String query                        = "UPDATE tb_entity SET street_address = ? WHERE username = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, streetAddress);
+            preparedStatement.setString(2, username);
+            preparedStatement.executeUpdate();
+
+            return getUserByUsername(username);
+
+        } catch (SQLException e) {
+
+            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.exit(0);
+
+        }
+
+        // this is needed for compilation
+        // execution should never reach this line
+        return null;
+    }
+
+    /**
+     * updates the user with the given username to have the given name
+     * @param username the username of the user to be updated
+     * @param name the new name to give the user
+     * @return User the user after the update
+     */
+    public User editUserNameByUsername(String username, String name) {
+        try {
+
+            String query                        = "UPDATE tb_entity SET name = ? WHERE username = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, username);
+            preparedStatement.executeUpdate();
+
+            return getUserByUsername(username);
+
+        } catch (SQLException e) {
+
+            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.exit(0);
+
+        }
+
+        // this is needed for compilation
+        // execution should never reach this line
+        return null;
+    }
+
+    /**
+     * updates the user with the given username to have the given password
+     * @param username the username of the user to be updated
+     * @param password the new password to give the user
+     * @return User the user after the update
+     */
+    public User editUserPasswordByUsername(String username, String password) {
+        try {
+
+            String query                        = "UPDATE tb_entity SET password = ? WHERE username = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, password);
             preparedStatement.setString(2, username);
             preparedStatement.executeUpdate();
 

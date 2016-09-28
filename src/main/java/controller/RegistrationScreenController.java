@@ -111,15 +111,15 @@ public class RegistrationScreenController {
                 setInfo();
                 try {
                     facade.createUser(userId,pass,name,AccountType.values()[accountTypeBox.getSelectionModel().getSelectedIndex()]);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Register Successfully");
+                    alert.setHeaderText("Your Registration was successful! ");
+                    alert.setContentText("Please click OK to go back!");
+                    alert.showAndWait();
+                    _dialogStage.close();
                 } catch (Exception e) {
                     alert("Could not create user.");
                 }
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Register Successfully");
-                alert.setHeaderText("Your Registration was successful! ");
-                alert.setContentText("Please click OK to go back!");
-                alert.showAndWait();
-                _dialogStage.close();
             } else {
                 alert("Passwords do not match up.");
             }

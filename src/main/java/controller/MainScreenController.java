@@ -6,6 +6,8 @@ import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -28,6 +30,30 @@ public class MainScreenController {
 
     @FXML
     private TextField usernameView;
+
+    @FXML
+    private TextField passwordView;
+
+    @FXML
+    private TextField accountTypeView;
+
+    @FXML
+    private TextField emailView;
+
+    @FXML
+    private TextArea addressView;
+
+    @FXML
+    private TextArea addressEdit;
+
+    @FXML
+    private TextField nameEdit;
+
+    @FXML
+    private TextField passwordEdit;
+
+    @FXML
+    private TextField emailEdit;
 
     /**
      * allow for calling back to the main application code if necessary
@@ -93,7 +119,22 @@ public class MainScreenController {
          * TODO:
          * Make new change here for update information
          */
+        updateUserInfo();
         mainApplication.initRootLayout(mainApplication.getMainScreen());
+    }
+
+    /**
+     * Update information of user
+     */
+    private void updateUserInfo() {
+        mainApplication.setUser(facade.editUserEmailByUsername(mainApplication.getUser()
+                .getUsername(), emailEdit.getText()));
+        mainApplication.setUser(facade.editUserStreetAddressByUsername(mainApplication.getUser()
+                .getUsername(), addressEdit.getText()));
+        mainApplication.setUser(facade.editUserNameByUsername(mainApplication.getUser()
+                .getUsername(), nameEdit.getText()));
+        mainApplication.setUser(facade.editUserPasswordByUsername(mainApplication.getUser()
+                .getUsername(), passwordEdit.getText()));
     }
 
     @FXML
@@ -107,5 +148,33 @@ public class MainScreenController {
      */
     public void setUserNameView(String username) {
         usernameView.setText(username);
+    }
+
+    /**
+     * Set pass of user in profile view
+     * @param password the password of user
+     */
+    public void setUserPassView(String password) { passwordView.setText(password);
+
+    }
+
+    public void setAccountTypeView(String accountView) { accountTypeView.setText(accountView);
+
+    }
+
+    /**
+     * Set email in profile view
+     * @param email email of user
+     */
+    public void setEmailView(String email) {
+        emailView.setText(email);
+    }
+
+    /**
+     * Set address in profile view
+     * @param address address of user
+     */
+    public void setAddressView(String address) {
+        addressView.setText(address);
     }
 }

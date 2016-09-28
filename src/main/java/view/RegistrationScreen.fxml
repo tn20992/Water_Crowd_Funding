@@ -15,19 +15,29 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: linear-gradient(#474040,  #242323);" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegistrationScreenController">
     <children>
-        <GridPane prefHeight="181.0" prefWidth="500.0" AnchorPane.topAnchor="15.0">
+        <GridPane prefHeight="232.0" prefWidth="500.0" AnchorPane.topAnchor="15.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="175.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="450.0" minWidth="10.0" prefWidth="259.0" />
             </columnConstraints>
             <rowConstraints>
+            <RowConstraints maxHeight="151.0" minHeight="10.0" prefHeight="149.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="151.0" minHeight="10.0" prefHeight="149.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="147.0" minHeight="10.0" prefHeight="146.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="147.0" minHeight="10.0" prefHeight="146.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="147.0" minHeight="10.0" prefHeight="146.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label prefHeight="17.0" prefWidth="111.0" text="User ID:" textFill="#939393">
+            <Label prefHeight="17.0" prefWidth="111.0" text="Name:" textFill="#939393">
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="nameFieldReg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="270.0" style="-fx-background-color: #f8edd8;" GridPane.columnIndex="1" />
+                <Label prefHeight="17.0" prefWidth="111.0" text="User ID:" textFill="#939393" GridPane.rowIndex="1">
                     <font>
                         <Font size="17.0" />
                     </font>
@@ -35,7 +45,7 @@
                         <Insets left="15.0" />
                     </GridPane.margin>
                 </Label>
-                <Label text="Password:" textFill="#939393" GridPane.rowIndex="1">
+                <Label text="Password:" textFill="#939393" GridPane.rowIndex="2">
                     <GridPane.margin>
                         <Insets left="15.0" />
                     </GridPane.margin>
@@ -43,13 +53,13 @@
                         <Font size="17.0" />
                     </font>
                 </Label>
-                <TextField fx:id="userIdFieldReg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="270.0" style="-fx-background-color: #f8edd8;" GridPane.columnIndex="1" />
-                <PasswordField fx:id="passFieldReg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="270.0" style="-fx-background-color: #f8edd8;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <TextField fx:id="userIdFieldReg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="270.0" style="-fx-background-color: #f8edd8;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <PasswordField fx:id="passFieldReg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="270.0" style="-fx-background-color: #f8edd8;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <opaqueInsets>
                         <Insets left="10.0" right="10.0" />
                     </opaqueInsets>
                 </PasswordField>
-            <Label text="Confirm Password:" textFill="#939393" GridPane.rowIndex="2">
+            <Label text="Confirm Password:" textFill="#939393" GridPane.rowIndex="3">
                <font>
                   <Font size="17.0" />
                </font>
@@ -57,12 +67,12 @@
                   <Insets left="15.0" />
                </GridPane.margin>
             </Label>
-            <PasswordField fx:id="confirmPassFieldReg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="270.0" style="-fx-background-color: #f8edd8;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <PasswordField fx:id="confirmPassFieldReg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="270.0" style="-fx-background-color: #f8edd8;" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <opaqueInsets>
                   <Insets left="10.0" right="10.0" />
                </opaqueInsets>
             </PasswordField>
-            <Label text="Account Type:" textFill="#939393" GridPane.rowIndex="3">
+            <Label text="Account Type:" textFill="#939393" GridPane.rowIndex="4">
                <font>
                   <Font size="17.0" />
                </font>
@@ -70,10 +80,10 @@
                   <Insets left="15.0" />
                </GridPane.margin>
             </Label>
-            <ComboBox fx:id="accountTypeBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ComboBox fx:id="accountTypeBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             </children>
         </GridPane>
-        <ButtonBar layoutX="224.0" layoutY="241.0" prefHeight="40.0" prefWidth="190.0" AnchorPane.bottomAnchor="50.0">
+        <ButtonBar layoutX="266.0" layoutY="247.0" prefHeight="40.0" prefWidth="190.0" AnchorPane.bottomAnchor="13.0">
             <buttons>
                 <Button fx:id="regButtonReg" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#regButtonRegPressed" text="Create" />
                 <Button fx:id="cancelButtonReg" mnemonicParsing="false" onAction="#cancelButtonRegPressed" text="Cancel" />

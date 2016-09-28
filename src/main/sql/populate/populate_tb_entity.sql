@@ -14,7 +14,7 @@ VALUES
     'U1',
     'u1@gmail.com',
     '123 U1 Road',
-    1
+    0
 ),
 (
     'user2',
@@ -22,7 +22,7 @@ VALUES
     'U2',
     'u2@gmail.com',
     '143 U2 Road',
-    2
+    1
 ),
 (
     'user3',
@@ -30,7 +30,7 @@ VALUES
     'U3',
     'u3@gmail.com',
     '163 U3 Road',
-    3
+    2
 ),
 (
     'user4',
@@ -38,5 +38,5 @@ VALUES
     'U4',
     'u4@gmail.com',
     '183 U4 Road',
-    4
+    3
 );

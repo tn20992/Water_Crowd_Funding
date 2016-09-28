@@ -70,18 +70,14 @@ public class LoginScreenController {
      */
     @FXML
     private void logButtonLogPressed() throws NonUniqueUsernameException{
-        String userInId = userIdFieldLog.getText();
-        String userInPass = passFieldLog.getText();
-
         Facade temp = Facade.getFacade();
-        boolean checkData = temp.logInUser(userInId, userInPass);
-
-        if (checkData) {
+        boolean match = temp.logInUser(userIdFieldLog.getText(), passFieldLog.getText());
+        if (match) {
             mainApplication.initRootLayout(mainApplication.getMainScreen());
             _dialogStage.close();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERROR");
+            alert.setTitle("Username or Password is incorrect");
             alert.setContentText("Username or Password is not matched"
                     + " with what we have in the system");
             alert.showAndWait();

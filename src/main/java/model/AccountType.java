@@ -10,21 +10,13 @@ public enum AccountType {
     MANAGER ("Manager"),
     ADMIN ("Admin");
 
-    private final String workerType;
+    private final String value;
 
-    AccountType(String workerType) {
-        this.workerType = workerType;
-    }
-
-    /*
-     * Returns account types in array form
-     * @return the array of AccountType with each account type
-     */
-    public static AccountType[] getValues() {
-        return new AccountType[]{AccountType.USER, AccountType.WORKER, AccountType.MANAGER, AccountType.ADMIN};
+    AccountType(String value) {
+        this.value = value;
     }
 
     public String toString() {
-        return workerType;
+        return value;
     }
 }

@@ -10,19 +10,19 @@ INSERT INTO tb_account_type
 )
 VALUES
 (
-    1,
+    0,
     'User'
 ),
 (
-    2,
+    1,
     'Worker'
 ),
 (
-    3,
+    2,
     'Manager'
 ),
 (
-    4,
+    3,
     'Admin'
 );
 

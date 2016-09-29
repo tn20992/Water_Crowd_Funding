@@ -111,16 +111,30 @@ public class MainScreenController {
     }
 
     /**
+     * Set information into edit screen
+     * @param user user contains information
+     */
+    public void setEditProfileView(User user) {
+        nameEdit.setText(user.getName());
+        passwordEdit.setText(user.getPassword());
+        emailEdit.setText(user.getEmail());
+        addressEdit.setText(user.getStreetAddress());
+    }
+
+    /**
      * Comeback to the main screen with updated information
      */
     @FXML
     private void updatePressed() {
-        /**
-         * TODO:
-         * Make new change here for update information
-         */
-        updateUserInfo();
-        mainApplication.initRootLayout(mainApplication.getMainScreen());
+        if (passwordEdit.getText().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText("Password is empty!!!");
+            alert.showAndWait();
+        } else {
+            updateUserInfo();
+            mainApplication.initRootLayout(mainApplication.getMainScreen());
+        }
     }
 
     /**
@@ -147,15 +161,23 @@ public class MainScreenController {
      * @param username the name of user
      */
     public void setUserNameView(String username) {
-        usernameView.setText(username);
+        if (username == null || username.equals("")) {
+            usernameView.setText("Not Yet Entered");
+        } else {
+            usernameView.setText(username);
+        }
     }
 
     /**
      * Set pass of user in profile view
      * @param password the password of user
      */
-    public void setUserPassView(String password) { passwordView.setText(password);
-
+    public void setUserPassView(String password) {
+        if (password == null || password.equals("")) {
+            passwordView.setText("Not Yet Entered");
+        } else {
+            passwordView.setText(password);
+        }
     }
 
     public void setAccountTypeView(String accountView) { accountTypeView.setText(accountView);
@@ -167,7 +189,11 @@ public class MainScreenController {
      * @param email email of user
      */
     public void setEmailView(String email) {
-        emailView.setText(email);
+        if (email == null || email.equals("")) {
+            emailView.setText("Not Yet Entered");
+        } else {
+            emailView.setText(email);
+        }
     }
 
     /**
@@ -175,6 +201,10 @@ public class MainScreenController {
      * @param address address of user
      */
     public void setAddressView(String address) {
-        addressView.setText(address);
+        if (address == null || address.equals("")) {
+            addressView.setText("Not Yet Entered");
+        } else {
+            addressView.setText(address);
+        }
     }
 }

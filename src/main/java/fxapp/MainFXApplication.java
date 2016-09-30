@@ -184,6 +184,7 @@ public class MainFXApplication extends Application {
             MainScreenController controller = loader.getController();
             controller.setMainApp(this);
             controller.setEditBorderPane(editProfile);
+            controller.setEditProfileView(user);
 
             // Set the Main App title
             mainScreen.setTitle("Clean Water Reporting Program");

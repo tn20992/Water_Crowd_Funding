@@ -118,7 +118,7 @@ public class RegistrationScreenController {
                     alert.showAndWait();
                     _dialogStage.close();
                 } catch (Exception e) {
-                    alert("Could not create user.");
+                    alert("Username is already taken! Try another one.");
                 }
             } else {
                 alert("Passwords do not match up.");

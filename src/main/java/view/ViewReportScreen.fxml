@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -50,16 +51,30 @@
                         </Label>
                      </children>
                   </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <HBox prefWidth="321.0">
                      <children>
-                        <Label text="Longtitude:" />
-                        <Label fx:id="longtitude" text="37.12341124" textFill="#00359e">
-                           <font>
-                              <Font name="System Bold" size="25.0" />
-                           </font>
-                        </Label>
+                        <VBox prefHeight="47.0" prefWidth="132.0">
+                           <children>
+                              <Label text="Longtitude:" />
+                              <Label fx:id="longtitude" prefHeight="19.0" prefWidth="130.0" text="37.12341124" textFill="#00359e">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="166.0">
+                           <children>
+                              <Label text="Latitude:" />
+                              <Label fx:id="latitude" prefWidth="121.0" text="-122.3214444" textFill="#00359e">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
                      </children>
-                  </VBox>
+                  </HBox>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label text="Water Type:" />
@@ -72,15 +87,15 @@
                   </VBox>
                </children>
                <GridPane.margin>
-                  <Insets left="70.0" />
+                  <Insets left="50.0" />
                </GridPane.margin>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label text="Time:" />
-                        <Label fx:id="timestamp" text="00:00 am" textFill="#00359e">
+                        <Label text="No:" />
+                        <Label text="10047218" textFill="#00359e">
                            <font>
                               <Font name="System Bold" size="25.0" />
                            </font>
@@ -89,8 +104,8 @@
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label text="Latitude:" />
-                        <Label fx:id="latitude" text="-122.3214444" textFill="#00359e">
+                        <Label text="Time:" />
+                        <Label fx:id="timestamp" text="00:00 am" textFill="#00359e">
                            <font>
                               <Font name="System Bold" size="25.0" />
                            </font>

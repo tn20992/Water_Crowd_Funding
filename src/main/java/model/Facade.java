@@ -477,6 +477,43 @@ public class Facade {
     /**
      * TODO
      */
+    public void createSourceReport(String username, Location location, TypeOfWater typeOfWater, ConditionOfWater conditionOfWater) {
+        try {
+
+            String query                        = "SELECT entity FROM tb_entity WHERE username = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            ResultSet statementResults = preparedStatement.executeQuery();
+
+            int userID = -1; // this should cause an error if this every is the actual value passed to the database
+            while (statementResults.next()) {
+
+                // this loop should only ever happen once since
+                // username on tb_entity has a unique constraint
+                userID = statementResults.getInt(1);
+
+            }
+
+            query             = "INSERT INTO tb_source_report (reporter, longitude, latitude, type_of_water, condition_of_water) VALUES (?, ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, userID);
+            preparedStatement.setDouble(2, location.getLongitude());
+            preparedStatement.setDouble(3, location.getLatitude());
+            preparedStatement.setInt(4, typeOfWater.ordinal());
+            preparedStatement.setInt(5, conditionOfWater.ordinal());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+
+            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.exit(0);
+
+        }
+    }
+
+    /**
+     * TODO
+     */
     private SourceReport makeSourceReportObject(int sourceReportNumber, String reporterUsername,
         Timestamp created, double longitude, double latitude,
             int typeOfWaterInt, int conditionOfWaterInt) {

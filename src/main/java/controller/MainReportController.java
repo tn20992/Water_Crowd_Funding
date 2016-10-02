@@ -4,11 +4,11 @@ import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
 
 /**
- * Controller for welcome screen
+ * Controller for main report screen
+ *
  */
-public class WelcomeScreenController {
+public class MainReportController {
 
-    /** reference back to mainApplication if needed */
     private MainFXApplication mainApplication;
 
     /**
@@ -19,20 +19,18 @@ public class WelcomeScreenController {
         mainApplication = main;
     }
 
-    /**
-     * Login Button in Login Screen
-     */
     @FXML
-    private void logButtonWelPressed() {
-        mainApplication.showLoginScreen();
-
+    public void mainReportCancelPressed() {
+        mainApplication.initRootLayout(mainApplication.getMainScreen());
     }
 
-    /**
-     * Cancel button in Login Screen
-     */
     @FXML
-    private void regButtonWelPressed() {
-        mainApplication.showRegistrationScreen();
+    public void mainReportSubmitPressed() {
+        mainApplication.showSubmitReportScreen();
+    }
+
+    @FXML
+    public void mainReportViewPressed() {
+        mainApplication.showViewReportScreen();
     }
 }

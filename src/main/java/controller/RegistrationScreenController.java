@@ -23,7 +23,7 @@ import model.User;
 import model.exceptions.NonUniqueUsernameException;
 
 /**
- * The controller for the root/main window
+ * Controller for registration screen
  *
  */
 public class RegistrationScreenController {
@@ -31,7 +31,6 @@ public class RegistrationScreenController {
     /** reference back to mainApplication if needed */
     private MainFXApplication mainApplication;
     private Stage _dialogStage;
-    private BorderPane _rootLayout;
 
     @FXML
     private PasswordField passFieldReg;
@@ -69,15 +68,6 @@ public class RegistrationScreenController {
      * */
     public void setMainApp(MainFXApplication main) {
         mainApplication = main;
-    }
-
-    /**
-     * Sets the rootLayout of MainScreen.
-     *
-     * @param rootLayout the BorderPane of the MainScreen
-     */
-    public void setRootLayout(BorderPane rootLayout) {
-        _rootLayout = rootLayout;
     }
 
     /**

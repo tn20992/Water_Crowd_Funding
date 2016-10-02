@@ -15,15 +15,13 @@ import model.Facade;
 import model.User;
 
 /**
- * The controller for the root/main window
+ * Controller for the root/main window
  *
  */
 public class MainScreenController {
 
     /** reference back to mainApplication if needed */
     private MainFXApplication mainApplication;
-
-    private BorderPane _editBorderPane;
 
     private User user;
     private Facade facade = Facade.getFacade();
@@ -64,15 +62,6 @@ public class MainScreenController {
     }
 
     /**
-     * Sets the BorderPane of edit dialog.
-     *
-     * @param editBorderPane the BorderPane for edit dialog
-     */
-    public void setEditBorderPane(BorderPane editBorderPane) {
-        _editBorderPane = editBorderPane;
-    }
-
-    /**
      * Close menu item event handler
      */
     @FXML
@@ -99,7 +88,7 @@ public class MainScreenController {
     @FXML
     private void logoutActionClicked() {
         facade.logOutUser(user);
-        mainApplication.showWelcomeScreen();
+        mainApplication.showWelcomeScreen(mainApplication.getMainScreen());
     }
 
     /**
@@ -107,7 +96,18 @@ public class MainScreenController {
      */
     @FXML
     private void EditPressed() {
-        mainApplication.setEditProfileScreen(mainApplication.getMainScreen());
+        mainApplication.showEditProfileScreen();
+    }
+
+    /**
+     * Set information into edit screen
+     * @param user user contains information
+     */
+    public void setEditProfileView(User user) {
+        nameEdit.setText(user.getName());
+        passwordEdit.setText(user.getPassword());
+        emailEdit.setText(user.getEmail());
+        addressEdit.setText(user.getStreetAddress());
     }
 
     /**
@@ -115,12 +115,15 @@ public class MainScreenController {
      */
     @FXML
     private void updatePressed() {
-        /**
-         * TODO:
-         * Make new change here for update information
-         */
-        updateUserInfo();
-        mainApplication.initRootLayout(mainApplication.getMainScreen());
+        if (passwordEdit.getText().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText("Password is empty!!!");
+            alert.showAndWait();
+        } else {
+            updateUserInfo();
+            mainApplication.initRootLayout(mainApplication.getMainScreen());
+        }
     }
 
     /**
@@ -147,15 +150,23 @@ public class MainScreenController {
      * @param username the name of user
      */
     public void setUserNameView(String username) {
-        usernameView.setText(username);
+        if (username == null || username.equals("")) {
+            usernameView.setText("Not Yet Entered");
+        } else {
+            usernameView.setText(username);
+        }
     }
 
     /**
      * Set pass of user in profile view
      * @param password the password of user
      */
-    public void setUserPassView(String password) { passwordView.setText(password);
-
+    public void setUserPassView(String password) {
+        if (password == null || password.equals("")) {
+            passwordView.setText("Not Yet Entered");
+        } else {
+            passwordView.setText(password);
+        }
     }
 
     public void setAccountTypeView(String accountView) { accountTypeView.setText(accountView);
@@ -167,7 +178,11 @@ public class MainScreenController {
      * @param email email of user
      */
     public void setEmailView(String email) {
-        emailView.setText(email);
+        if (email == null || email.equals("")) {
+            emailView.setText("Not Yet Entered");
+        } else {
+            emailView.setText(email);
+        }
     }
 
     /**
@@ -175,6 +190,15 @@ public class MainScreenController {
      * @param address address of user
      */
     public void setAddressView(String address) {
-        addressView.setText(address);
+        if (address == null || address.equals("")) {
+            addressView.setText("Not Yet Entered");
+        } else {
+            addressView.setText(address);
+        }
+    }
+
+    @FXML
+    private void viewReportPressed() {
+        mainApplication.showMainReportScreen();
     }
 }

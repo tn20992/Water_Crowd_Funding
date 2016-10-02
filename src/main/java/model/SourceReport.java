@@ -48,13 +48,27 @@ public class SourceReport {
     public void setLocation(Location location) { this.location = location; }
     public void setTypeOfWater(TypeOfWater typeOfWater) { this.typeOfWater = typeOfWater; }
 
+    /**
+     * @return the report's report number
+     */
+    @Override
     public String toString() { return ("Report: " + sourceReportNumber); }
 
+    /*
+     * Set hash code equal to the sourceReportNumber.
+     * @return the source report's hashcode
+     */
+    @Override
+    public int hashCode () {
+        return sourceReportNumber;
+    }
 
     /**
-     * Returns name of the reporter of the water source
+     * @return name of the reporter of the water source
      */
     public String getReporterName() {
         return reporter.getName();
     }
+
+
 }

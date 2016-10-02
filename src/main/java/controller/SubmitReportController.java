@@ -19,9 +19,6 @@ public class SubmitReportController {
     private MainFXApplication mainApplication;
 
     @FXML
-    private TextField nameOfReporterField;
-
-    @FXML
     private TextField longtitudeFiled;
 
     @FXML
@@ -33,8 +30,6 @@ public class SubmitReportController {
     @FXML
     private ComboBox<ConditionOfWater> waterConditionBox;
 
-    @FXML
-    private TextArea commentBox;
 
     private ObservableList<TypeOfWater> typeOfWatersList = FXCollections
             .observableArrayList(TypeOfWater.values());

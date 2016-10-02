@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 
 import model.exceptions.NonUniqueUsernameException;
 import model.AccountType;
@@ -421,5 +422,115 @@ public class Facade {
         // this is needed for compilation
         // execution should never reach this line
         return null;
+    }
+
+    /**
+     * TODO
+     */
+    public ArrayList<SourceReport> getSourceReports() {
+        try {
+
+            Statement statement             = connection.createStatement();
+            String query                    = "SELECT sr.source_report, "
+                                                   + "e.username, "
+                                                   + "sr.created, "
+                                                   + "sr.longitude, "
+                                                   + "sr.latitude, "
+                                                   + "sr.type_of_water, "
+                                                   + "sr.condition_of_water "
+                                               +" FROM tb_source_report sr "
+                                         + "INNER JOIN tb_entity e "
+                                                 + "ON sr.reporter = e.entity";
+            ResultSet statementResults      = statement.executeQuery(query);
+            ArrayList<SourceReport> results = new ArrayList<SourceReport>();
+
+            while (statementResults.next()) {
+
+                SourceReport sourceReport = makeSourceReportObject(
+                    statementResults.getInt(1),
+                    statementResults.getString(2),
+                    statementResults.getTimestamp(3),
+                    statementResults.getDouble(4),
+                    statementResults.getDouble(5),
+                    statementResults.getInt(6),
+                    statementResults.getInt(7)
+                );
+
+                results.add(sourceReport);
+
+            }
+
+            return results;
+
+        } catch (SQLException e) {
+
+            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.exit(0);
+
+        }
+
+        // this is needed for compilation
+        // execution should never reach this line
+        return null;
+    }
+
+    /**
+     * TODO
+     */
+    private SourceReport makeSourceReportObject(int sourceReportNumber, String reporterUsername,
+        Timestamp created, double longitude, double latitude,
+            int typeOfWaterInt, int conditionOfWaterInt) {
+        TypeOfWater typeOfWater;
+        switch (typeOfWaterInt) {
+            case 0:
+                typeOfWater = TypeOfWater.BOTTLED;
+                break;
+            case 1:
+                typeOfWater = TypeOfWater.WELL;
+                break;
+            case 2:
+                typeOfWater = TypeOfWater.STREAM;
+                break;
+            case 3:
+                typeOfWater = TypeOfWater.LAKE;
+                break;
+            case 4:
+                typeOfWater = TypeOfWater.SPRING;
+                break;
+            case 5:
+                typeOfWater = TypeOfWater.OTHER;
+                break;
+            default:
+                typeOfWater = TypeOfWater.OTHER;
+                break;
+        }
+
+        ConditionOfWater conditionOfWater;
+        switch (conditionOfWaterInt) {
+            case 0:
+                conditionOfWater = ConditionOfWater.WASTE;
+                break;
+            case 1:
+                conditionOfWater = ConditionOfWater.TREATABLECLEAR;
+                break;
+            case 2:
+                conditionOfWater = ConditionOfWater.TREATABLEMUDDY;
+                break;
+            case 3:
+                conditionOfWater = ConditionOfWater.POTABLE;
+                break;
+            default:
+                conditionOfWater = ConditionOfWater.POTABLE;
+                break;
+        }
+
+        return new SourceReport(
+            sourceReportNumber,
+            getUserByUsername(reporterUsername),
+            created,
+            new Location(longitude, latitude),
+            typeOfWater,
+            conditionOfWater
+        );
     }
 }

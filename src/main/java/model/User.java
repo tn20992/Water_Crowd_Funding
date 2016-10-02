@@ -47,6 +47,7 @@ public class User {
     public String getEmail () { return email; }
     public String getStreetAddress () { return streetAddress; }
     public AccountType getAccountType () { return accountType; }
+
     public void setUsername (String newUsername) { username = newUsername; }
     public void setPassword (String newPassword) { password = newPassword; }
     public void setName(String newName) { name = newName; }

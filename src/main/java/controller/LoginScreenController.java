@@ -21,7 +21,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
- * The controller for the root/main window
+ * Controller for login screen
  *
  */
 public class LoginScreenController {

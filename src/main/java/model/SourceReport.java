@@ -1,8 +1,5 @@
 package model;
 
-import sun.nio.cs.US_ASCII;
-
-import java.sql.Time;
 import java.sql.Timestamp;
 
 /**
@@ -20,7 +17,7 @@ public class SourceReport {
      * Creates a new source report
      * @param sourceReportNumber unique identifier of a source report
      * @param reporter user who reports new source
-     * @param created time report was created
+     * @param created created timestamp
      * @param location location of the source
      * @param typeOfWater type of source water
      * @param conditionOfWater condition of source water
@@ -50,6 +47,9 @@ public class SourceReport {
     public void setCreated(Timestamp created) { this.created = created; }
     public void setLocation(Location location) { this.location = location; }
     public void setTypeOfWater(TypeOfWater typeOfWater) { this.typeOfWater = typeOfWater; }
+
+    public String toString() { return ("Report: " + sourceReportNumber); }
+
 
     /**
      * Returns name of the reporter of the water source

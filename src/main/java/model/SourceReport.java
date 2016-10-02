@@ -47,6 +47,9 @@ public class SourceReport {
     public void setLocation(Location location) { this.location = location; }
     public void setTypeOfWater(TypeOfWater typeOfWater) { this.typeOfWater = typeOfWater; }
 
+    public String toString() { return ("Report: " + sourceReportNumber); }
+
+
     /**
      * Returns name of the reporter of the water source
      */

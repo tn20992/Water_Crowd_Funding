@@ -21,11 +21,11 @@ public class SourceReport {
      * @param typeOfWater type of source water
      * @param conditionOfWater condition of source water
      */
-    public SourceReport(int sourceReportNumber, User reporter, Location location,
+    public SourceReport(int sourceReportNumber, User reporter, Location location, Timestamp created,
                             TypeOfWater typeOfWater, ConditionOfWater conditionOfWater) {
         this.sourceReportNumber = sourceReportNumber;
         this.reporter = reporter;
-        this.created = new Timestamp(System.currentTimeMillis());;
+        this.created = created;
         this.location = location;
         this.typeOfWater = typeOfWater;
         this.conditionOfWater = conditionOfWater;

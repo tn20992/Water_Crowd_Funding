@@ -226,7 +226,7 @@ public class Facade {
     private User makeUserObject(String username, String password, String name, int accountTypeInt, String email, String streetAddress) {
         User user;
         switch (accountTypeInt) {
-            case 1 :
+            case 0 :
                 user = new User(
                     username,
                     password,
@@ -235,7 +235,7 @@ public class Facade {
                 );
                 break;
 
-            case 2 :
+            case 1 :
                 user = new User(
                     username,
                     password,
@@ -244,7 +244,7 @@ public class Facade {
                 );
                 break;
 
-            case 3 :
+            case 2 :
                 user = new User(
                     username,
                     password,
@@ -253,7 +253,7 @@ public class Facade {
                 );
                 break;
 
-            case 4 :
+            case 3 :
                 user = new User(
                     username,
                     password,

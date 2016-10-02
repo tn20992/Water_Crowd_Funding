@@ -46,14 +46,14 @@ public class RegistrationScreenController {
     private TextField nameFieldReg;
 
     @FXML
-    private ComboBox accountTypeBox;
+    private ComboBox<AccountType> accountTypeBox;
 
     private String name;
     private String pass;
     private String userId;
     private Facade facade = Facade.getFacade();
 
-    private ObservableList accountTypeList = FXCollections
+    private ObservableList<AccountType> accountTypeList = FXCollections
             .observableArrayList(AccountType.values());
 
     @FXML
@@ -111,15 +111,15 @@ public class RegistrationScreenController {
                 setInfo();
                 try {
                     facade.createUser(userId,pass,name,AccountType.values()[accountTypeBox.getSelectionModel().getSelectedIndex()]);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Register Successfully");
+                    alert.setHeaderText("Your Registration was successful! ");
+                    alert.setContentText("Please click OK to go back!");
+                    alert.showAndWait();
+                    _dialogStage.close();
                 } catch (Exception e) {
-                    alert("Could not create user.");
+                    alert("Username is already taken! Try another one.");
                 }
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Register Successfully");
-                alert.setHeaderText("Your Registration was successful! ");
-                alert.setContentText("Please click OK to go back!");
-                alert.showAndWait();
-                _dialogStage.close();
             } else {
                 alert("Passwords do not match up.");
             }

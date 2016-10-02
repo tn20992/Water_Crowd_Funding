@@ -7,7 +7,7 @@ public class Location {
     private double longitude;
     private double latitude;
 
-    /*
+    /**
      * Creates a new location
      * @param longitude the longitude coordinate
      * @param latitude the latitude coordinate
@@ -17,7 +17,7 @@ public class Location {
         this.latitude = latitude;
     }
 
-    /*
+    /**
      * Getters + Setters for location fields
      */
     public double getLongitude() {return longitude; }

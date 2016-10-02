@@ -4,6 +4,7 @@ import controller.LoginScreenController;
 import controller.MainScreenController;
 import controller.RegistrationScreenController;
 import controller.WelcomeScreenController;
+import model.User;
 
 import model.Facade;
 import model.AccountType;
@@ -30,6 +31,8 @@ public class MainFXApplication extends Application {
      * the main container for the application window
      */
     private Stage mainScreen;
+
+    private User user;
 
     /**
      * the main layout for the main window
@@ -68,7 +71,9 @@ public class MainFXApplication extends Application {
             // Give the controller access to the main app.
             MainScreenController controller = loader.getController();
             controller.setMainApp(this);
-            controller.setUserNameView("HungDo");
+
+            setViewProfile(controller);
+
 
             // Set the Main App title
             mainScreen.setTitle("Clean Water Reporting Program");
@@ -179,6 +184,7 @@ public class MainFXApplication extends Application {
             MainScreenController controller = loader.getController();
             controller.setMainApp(this);
             controller.setEditBorderPane(editProfile);
+            controller.setEditProfileView(user);
 
             // Set the Main App title
             mainScreen.setTitle("Clean Water Reporting Program");
@@ -191,6 +197,37 @@ public class MainFXApplication extends Application {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Get user
+     *
+     * @param user user which use to login
+     */
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    /**
+     * Get user
+     * @return user which use to login
+     */
+    public User getUser() {
+        return user;
+    }
+
+    /**
+     * Set infomation into profile screen
+     * @param controller mains screen controller
+     */
+    private void setViewProfile(MainScreenController controller) {
+        if (user != null) {
+            controller.setUserNameView(user.getName());
+            controller.setAccountTypeView(user.getAccountType().toString());
+            controller.setUserPassView(user.getPassword());
+            controller.setEmailView(user.getEmail());
+            controller.setAddressView(user.getStreetAddress());
         }
     }
 

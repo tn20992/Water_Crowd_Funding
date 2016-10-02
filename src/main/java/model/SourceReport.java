@@ -17,15 +17,16 @@ public class SourceReport {
      * Creates a new source report
      * @param sourceReportNumber unique identifier of a source report
      * @param reporter user who reports new source
+     * @param created created timestamp
      * @param location location of the source
      * @param typeOfWater type of source water
      * @param conditionOfWater condition of source water
      */
-    public SourceReport(int sourceReportNumber, User reporter, Location location,
+    public SourceReport(int sourceReportNumber, User reporter, Timestamp created, Location location,
                             TypeOfWater typeOfWater, ConditionOfWater conditionOfWater) {
         this.sourceReportNumber = sourceReportNumber;
         this.reporter = reporter;
-        this.created = new Timestamp(System.currentTimeMillis());;
+        this.created = created;
         this.location = location;
         this.typeOfWater = typeOfWater;
         this.conditionOfWater = conditionOfWater;

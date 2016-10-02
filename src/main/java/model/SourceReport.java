@@ -1,8 +1,5 @@
 package model;
 
-import sun.nio.cs.US_ASCII;
-
-import java.sql.Time;
 import java.sql.Timestamp;
 
 /**

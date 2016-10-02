@@ -1,6 +1,7 @@
 package fxapp;
 
 import controller.*;
+import model.SourceReport;
 import model.User;
 
 import model.Facade;
@@ -240,7 +241,7 @@ public class MainFXApplication extends Application {
     /**
      * Show the the view report screen
      */
-    public void showViewReportScreen() {
+    public void showViewReportScreen(SourceReport selected) {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();

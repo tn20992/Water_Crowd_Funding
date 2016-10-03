@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="400.0" style="-fx-background-color: #EDE3CE;" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewReportController">
+<BorderPane minHeight="400.0" style="-fx-background-color: #EDE3CE;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewReportController">
    <bottom>
       <Button minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#backViewReportPressed" text="Back" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -107,7 +107,7 @@
                         <Label text="Time:" />
                         <Label fx:id="timestamp" text="00:00 am" textFill="#00359e">
                            <font>
-                              <Font name="System Bold" size="25.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
                      </children>

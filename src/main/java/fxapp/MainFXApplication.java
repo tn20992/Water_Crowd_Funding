@@ -1,13 +1,12 @@
 package fxapp;
 
 import controller.*;
+import model.SourceReport;
 import model.User;
 
 import model.Facade;
-import model.AccountType;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -16,10 +15,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
-import java.io.IOException;
-
-import java.sql.SQLException;
-
 import java.io.IOException;
 
 public class MainFXApplication extends Application {
@@ -240,15 +235,24 @@ public class MainFXApplication extends Application {
     /**
      * Show the the view report screen
      */
-    public void showViewReportScreen() {
+    public void showViewReportScreen(SourceReport listedReport) {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             BorderPane viewReport= loader.load(new FileInputStream("src/main/java/view/ViewReportScreen.fxml"));
 
+
             rootLayout.setCenter(viewReport);
             // Give the controller access to the main app.
             ViewReportController controller = loader.getController();
+            controller.setReporterName(listedReport.getReporter().getName());
+            controller.setLatitude(listedReport.getLocation().getLatitude());
+            controller.setLongitudes(listedReport.getLocation().getLongitude());
+            controller.setWaterType(listedReport.getTypeOfWater());
+            controller.setWaterCondition(listedReport.getConditionOfWater());
+            controller.setReportNumber(listedReport.getSourceReportNumber());
+            controller.setTimestamp(listedReport.getCreated());
+
             controller.setMainApp(mainFX);
 
 

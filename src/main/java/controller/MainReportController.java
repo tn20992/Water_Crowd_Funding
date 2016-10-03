@@ -50,6 +50,7 @@ public class MainReportController {
 
     @FXML
     public void mainReportViewPressed() {
-        mainApplication.showViewReportScreen();
+        mainApplication.showViewReportScreen(listViewReport.
+                getSelectionModel().getSelectedItem());
     }
 }

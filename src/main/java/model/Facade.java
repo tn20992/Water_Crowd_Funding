@@ -438,9 +438,9 @@ public class Facade {
                                                    + "sr.latitude, "
                                                    + "sr.type_of_water, "
                                                    + "sr.condition_of_water "
-                                               +" FROM tb_source_report sr "
-                                         + "INNER JOIN tb_entity e "
-                                                 + "ON sr.reporter = e.entity";
+                                             + " FROM tb_source_report sr "
+                                        + "INNER JOIN tb_entity e "
+                                                + "ON sr.reporter = e.entity";
             ResultSet statementResults      = statement.executeQuery(query);
             ArrayList<SourceReport> results = new ArrayList<SourceReport>();
 
@@ -461,6 +461,64 @@ public class Facade {
             }
 
             return results;
+
+        } catch (SQLException e) {
+
+            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.exit(0);
+
+        }
+
+        // this is needed for compilation
+        // execution should never reach this line
+        return null;
+    }
+
+    /**
+     * TODO
+     */
+    public SourceReport getSourceReportByReportNumber(int sourceReportNumber) {
+        try {
+
+            String query                    = "SELECT sr.source_report, "
+                                                   + "e.username, "
+                                                   + "sr.created, "
+                                                   + "sr.longitude, "
+                                                   + "sr.latitude, "
+                                                   + "sr.type_of_water, "
+                                                   + "sr.condition_of_water "
+                                             + " FROM tb_source_report sr "
+                                        + "INNER JOIN tb_entity e "
+                                                + "ON sr.reporter = e.entity "
+                                             + "WHERE sr.source_report = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, sourceReportNumber);
+
+            ResultSet statementResults = preparedStatement.executeQuery();
+            ArrayList<SourceReport> results    = new ArrayList<SourceReport>();
+
+            while (statementResults.next()) {
+
+                SourceReport sourceReport = makeSourceReportObject(
+                    statementResults.getInt(1),
+                    statementResults.getString(2),
+                    statementResults.getTimestamp(3),
+                    statementResults.getDouble(4),
+                    statementResults.getDouble(5),
+                    statementResults.getInt(6),
+                    statementResults.getInt(7)
+                );
+                results.add(sourceReport);
+
+            }
+
+            // going to assume that there is only 1 SourceReport in the results set
+            // since the report_number column in the database is unique
+            if (results.size() > 0) {
+                return results.get(0);
+            } else {
+                return null;
+            }
 
         } catch (SQLException e) {
 

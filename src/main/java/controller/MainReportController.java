@@ -4,6 +4,7 @@ import fxapp.MainFXApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import model.ConditionOfWater;
 import model.Facade;
@@ -50,7 +51,14 @@ public class MainReportController {
 
     @FXML
     public void mainReportViewPressed() {
-        mainApplication.showViewReportScreen(listViewReport.
-                getSelectionModel().getSelectedItem());
+        SourceReport sourceReport = listViewReport.getSelectionModel().getSelectedItem();
+        if (sourceReport == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText("Please select the report you want to view!!!");
+            alert.showAndWait();
+        } else {
+            mainApplication.showViewReportScreen(sourceReport);
+        }
     }
 }

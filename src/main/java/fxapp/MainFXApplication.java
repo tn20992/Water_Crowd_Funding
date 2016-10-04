@@ -7,10 +7,8 @@ import controller.WelcomeScreenController;
 import model.User;
 
 import model.Facade;
-import model.AccountType;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -19,10 +17,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
-import java.io.IOException;
-
-import java.sql.SQLException;
-
 import java.io.IOException;
 
 public class MainFXApplication extends Application {
@@ -57,7 +51,8 @@ public class MainFXApplication extends Application {
     }
 
     /**
-     * Initialize the main screen for the application.  Most other views will be shown in this screen.
+     * Initialize the main screen for the application.
+     * Most other views will be shown in this screen.
      *
      * @param mainScreen the main Stage window of the application
      */
@@ -66,7 +61,8 @@ public class MainFXApplication extends Application {
 
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            rootLayout = loader.load(new FileInputStream("src/main/java/view/MainScreen.fxml"));
+            rootLayout = loader.load(
+                new FileInputStream("src/main/java/view/MainScreen.fxml"));
 
             // Give the controller access to the main app.
             MainScreenController controller = loader.getController();
@@ -91,7 +87,8 @@ public class MainFXApplication extends Application {
     /**
      * Setup our default application view that is shown on application startup
      * This is displayed in the startup window
-     * precondition - the main stage is already initialized and showing (initRootLayout has been called)
+     * precondition - the main stage is already initialized and
+     * showing (initRootLayout has been called)
      * preconditions - the view is initialized and displayed
      *
      *
@@ -100,10 +97,11 @@ public class MainFXApplication extends Application {
         try {
             // Load welcome screen.
             FXMLLoader loader = new FXMLLoader();
-            BorderPane RegScreen = loader.load(new FileInputStream("src/main/java/view/WelcomeScreen.fxml"));
+            BorderPane regScreen = loader.load(
+                new FileInputStream("src/main/java/view/WelcomeScreen.fxml"));
 
             // Set welcome screen into the center of root layout.
-            rootLayout.setCenter(RegScreen);
+            rootLayout.setCenter(regScreen);
 
             // Give the controller access to the main app.
             WelcomeScreenController controller = loader.getController();
@@ -120,7 +118,8 @@ public class MainFXApplication extends Application {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            AnchorPane page = loader.load(new FileInputStream("src/main/java/view/LoginScreen.fxml"));
+            AnchorPane page = loader.load(
+                new FileInputStream("src/main/java/view/LoginScreen.fxml"));
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
@@ -149,7 +148,9 @@ public class MainFXApplication extends Application {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            AnchorPane page = loader.load(new FileInputStream("src/main/java/view/RegistrationScreen.fxml"));
+            AnchorPane page = loader.load(
+                new FileInputStream(
+                    "src/main/java/view/RegistrationScreen.fxml"));
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
@@ -178,7 +179,9 @@ public class MainFXApplication extends Application {
 
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            BorderPane editProfile= loader.load(new FileInputStream("src/main/java/view/EditProfileScreen.fxml"));
+            BorderPane editProfile = loader.load(
+                new FileInputStream(
+                    "src/main/java/view/EditProfileScreen.fxml"));
 
             // Give the controller access to the main app.
             MainScreenController controller = loader.getController();

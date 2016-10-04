@@ -21,7 +21,8 @@ public class User {
      * @param name the name of the user
      * @param accountType the type of account that this user has
      */
-    public User (String username, String password, String name, AccountType accountType) {
+    public User(String username, String password,
+        String name, AccountType accountType) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -34,25 +35,50 @@ public class User {
      * @param password the password for the user
      * @param name the name of the user
      */
-    public User (String username, String password, String name) {
+    public User(String username, String password, String name) {
         this(username, password, name, AccountType.USER);
     }
 
     /*
      * Getters + Setters for user fields
      */
-    public String getUsername () { return username; }
-    public String getPassword () { return password; }
-    public String getName () { return name; }
-    public String getEmail () { return email; }
-    public String getStreetAddress () { return streetAddress; }
-    public AccountType getAccountType () { return accountType; }
-    public void setUsername (String newUsername) { username = newUsername; }
-    public void setPassword (String newPassword) { password = newPassword; }
-    public void setName(String newName) { name = newName; }
-    public void setEmail (String newEmail) { email = newEmail; }
-    public void setStreetAddress (String newStreetAddress) { streetAddress = newStreetAddress; }
-    public void setAccountType (AccountType newAccountType) { accountType = newAccountType; }
+    public String getUsername() {
+        return username;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public String getStreetAddress() {
+        return streetAddress;
+    }
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setUsername(String newUsername) {
+        username = newUsername;
+    }
+    public void setPassword(String newPassword) {
+        password = newPassword;
+    }
+    public void setName(String newName) {
+        name = newName;
+    }
+    public void setEmail(String newEmail) {
+        email = newEmail;
+    }
+    public void setStreetAddress(String newStreetAddress) {
+        streetAddress = newStreetAddress;
+    }
+    public void setAccountType(AccountType newAccountType) {
+        accountType = newAccountType;
+    }
 
     /*
      * Set equals to compare usernames.
@@ -60,10 +86,16 @@ public class User {
      * @return whether the object is a person and their username matches
      */
     @Override
-    public boolean equals (Object obj) {
-        if (null == obj) { return false; }
-        if (this == obj) { return true; }
-        if (!(obj instanceof User)) { return false; }
+    public boolean equals(Object obj) {
+        if (null == obj) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof User)) {
+            return false;
+        }
         User usr = (User) obj;
         return this.username.equals(usr.username);
     }
@@ -73,7 +105,7 @@ public class User {
      * @return the username's hashcode
      */
     @Override
-    public int hashCode () {
+    public int hashCode() {
         return username.hashCode();
     }
 
@@ -82,7 +114,7 @@ public class User {
      * @return the username's string
      */
     @Override
-    public String toString () {
+    public String toString() {
         return username;
     }
 }

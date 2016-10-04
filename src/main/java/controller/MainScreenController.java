@@ -2,15 +2,12 @@ package controller;
 
 import fxapp.MainFXApplication;
 
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 import model.Facade;
 import model.User;
 
@@ -23,7 +20,7 @@ public class MainScreenController {
     /** reference back to mainApplication if needed */
     private MainFXApplication mainApplication;
 
-    private BorderPane _editBorderPane;
+    private BorderPane editBorderPane;
 
     private User user;
     private Facade facade = Facade.getFacade();
@@ -69,7 +66,7 @@ public class MainScreenController {
      * @param editBorderPane the BorderPane for edit dialog
      */
     public void setEditBorderPane(BorderPane editBorderPane) {
-        _editBorderPane = editBorderPane;
+        this.editBorderPane = editBorderPane;
     }
 
     /**
@@ -106,7 +103,7 @@ public class MainScreenController {
      * Go to the edit screen
      */
     @FXML
-    private void EditPressed() {
+    private void editPressed() {
         mainApplication.setEditProfileScreen(mainApplication.getMainScreen());
     }
 
@@ -141,14 +138,14 @@ public class MainScreenController {
      * Update information of user
      */
     private void updateUserInfo() {
-        mainApplication.setUser(facade.editUserEmailByUsername(mainApplication.getUser()
-                .getUsername(), emailEdit.getText()));
-        mainApplication.setUser(facade.editUserStreetAddressByUsername(mainApplication.getUser()
-                .getUsername(), addressEdit.getText()));
-        mainApplication.setUser(facade.editUserNameByUsername(mainApplication.getUser()
-                .getUsername(), nameEdit.getText()));
-        mainApplication.setUser(facade.editUserPasswordByUsername(mainApplication.getUser()
-                .getUsername(), passwordEdit.getText()));
+        mainApplication.setUser(facade.editUserEmailByUsername(
+            mainApplication.getUser().getUsername(), emailEdit.getText()));
+        mainApplication.setUser(facade.editUserStreetAddressByUsername(
+            mainApplication.getUser().getUsername(), addressEdit.getText()));
+        mainApplication.setUser(facade.editUserNameByUsername(
+            mainApplication.getUser().getUsername(), nameEdit.getText()));
+        mainApplication.setUser(facade.editUserPasswordByUsername(
+            mainApplication.getUser().getUsername(), passwordEdit.getText()));
     }
 
     @FXML
@@ -180,8 +177,12 @@ public class MainScreenController {
         }
     }
 
-    public void setAccountTypeView(String accountView) { accountTypeView.setText(accountView);
-
+    /**
+     * sets the text of the accountTypeView
+     * @param accountView the text to put into the accountTypeView
+     */
+    public void setAccountTypeView(String accountView) {
+        accountTypeView.setText(accountView);
     }
 
     /**

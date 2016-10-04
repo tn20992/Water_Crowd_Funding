@@ -51,7 +51,8 @@ public class MainFXApplication extends Application {
     }
 
     /**
-     * Initialize the main screen for the application.  Most other views will be shown in this screen.
+     * Initialize the main screen for the application.
+     * Most other views will be shown in this screen.
      *
      * @param mainScreen the main Stage window of the application
      */
@@ -60,7 +61,8 @@ public class MainFXApplication extends Application {
 
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            rootLayout = loader.load(new FileInputStream("src/main/java/view/MainScreen.fxml"));
+            rootLayout = loader.load(
+                new FileInputStream("src/main/java/view/MainScreen.fxml"));
 
             // Give the controller access to the main app.
             MainScreenController controller = loader.getController();
@@ -85,7 +87,8 @@ public class MainFXApplication extends Application {
     /**
      * Setup our default application view that is shown on application startup
      * This is displayed in the startup window
-     * precondition - the main stage is already initialized and showing (initRootLayout has been called)
+     * precondition - the main stage is already initialized and
+     * showing (initRootLayout has been called)
      * preconditions - the view is initialized and displayed
      *
      *
@@ -94,7 +97,8 @@ public class MainFXApplication extends Application {
         try {
             // Load welcome screen.
             FXMLLoader loader = new FXMLLoader();
-            BorderPane WelScreen = loader.load(new FileInputStream("src/main/java/view/WelcomeScreen.fxml"));
+            BorderPane WelScreen = loader.load(
+                new FileInputStream("src/main/java/view/WelcomeScreen.fxml"));
 
             // Give the controller access to the main app.
             WelcomeScreenController controller = loader.getController();
@@ -118,7 +122,8 @@ public class MainFXApplication extends Application {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            AnchorPane page = loader.load(new FileInputStream("src/main/java/view/LoginScreen.fxml"));
+            AnchorPane page = loader.load(
+                new FileInputStream("src/main/java/view/LoginScreen.fxml"));
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
@@ -147,7 +152,9 @@ public class MainFXApplication extends Application {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            AnchorPane page = loader.load(new FileInputStream("src/main/java/view/RegistrationScreen.fxml"));
+            AnchorPane page = loader.load(
+                new FileInputStream(
+                    "src/main/java/view/RegistrationScreen.fxml"));
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
@@ -178,7 +185,9 @@ public class MainFXApplication extends Application {
 
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            BorderPane editProfile= loader.load(new FileInputStream("src/main/java/view/EditProfileScreen.fxml"));
+            BorderPane editProfile = loader.load(
+                new FileInputStream(
+                    "src/main/java/view/EditProfileScreen.fxml"));
 
             rootLayout.setCenter(editProfile);
             // Give the controller access to the main app.

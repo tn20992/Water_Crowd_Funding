@@ -20,8 +20,16 @@ public class Location {
     /**
      * Getters + Setters for location fields
      */
-    public double getLongitude() {return longitude; }
-    public void setLongitude(double newLongitude) {longitude = newLongitude; }
-    public double getLatitude() {return latitude; }
-    public void setLatitude(double newLatitude) {longitude = newLatitude; }
+    public double getLongitude() {
+        return longitude;
+    }
+    public void setLongitude(double newLongitude) {
+        longitude = newLongitude;
+    }
+    public double getLatitude() {
+        return latitude;
+    }
+    public void setLatitude(double newLatitude) {
+        longitude = newLatitude;
+    }
 }

@@ -95,7 +95,7 @@
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label text="No:" />
-                        <Label text="10047218" textFill="#00359e">
+                        <Label fx:id="reportNumber" text="10047218" textFill="#00359e">
                            <font>
                               <Font name="System Bold" size="25.0" />
                            </font>
@@ -107,7 +107,7 @@
                         <Label text="Time:" />
                         <Label fx:id="timestamp" text="00:00 am" textFill="#00359e">
                            <font>
-                              <Font name="System Bold" size="25.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
                      </children>

@@ -1,6 +1,13 @@
 package fxapp;
 
-import controller.*;
+import controller.LoginScreenController;
+import controller.MainScreenController;
+import controller.MainReportController;
+import controller.RegistrationScreenController;
+import controller.SubmitReportController;
+import controller.ViewReportController;
+import controller.WelcomeScreenController;
+
 import model.SourceReport;
 import model.User;
 
@@ -97,7 +104,7 @@ public class MainFXApplication extends Application {
         try {
             // Load welcome screen.
             FXMLLoader loader = new FXMLLoader();
-            BorderPane WelScreen = loader.load(
+            BorderPane welScreen = loader.load(
                 new FileInputStream("src/main/java/view/WelcomeScreen.fxml"));
 
             // Give the controller access to the main app.
@@ -107,7 +114,7 @@ public class MainFXApplication extends Application {
             mainScreen.setTitle("Clean Water Reporting Program");
 
             // Show the scene containing the root layout.
-            Scene scene = new Scene(WelScreen);
+            Scene scene = new Scene(welScreen);
             mainScreen.setScene(scene);
             mainScreen.show();
 
@@ -208,7 +215,9 @@ public class MainFXApplication extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            BorderPane mainReport= loader.load(new FileInputStream("src/main/java/view/MainReportScreen.fxml"));
+            BorderPane mainReport = loader.load(
+                new FileInputStream(
+                    "src/main/java/view/MainReportScreen.fxml"));
 
             rootLayout.setCenter(mainReport);
             // Give the controller access to the main app.
@@ -228,7 +237,9 @@ public class MainFXApplication extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            BorderPane submitReport= loader.load(new FileInputStream("src/main/java/view/SubmitReportScreen.fxml"));
+            BorderPane submitReport = loader.load(
+                new FileInputStream(
+                    "src/main/java/view/SubmitReportScreen.fxml"));
 
             rootLayout.setCenter(submitReport);
             // Give the controller access to the main app.
@@ -248,7 +259,9 @@ public class MainFXApplication extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            BorderPane viewReport= loader.load(new FileInputStream("src/main/java/view/ViewReportScreen.fxml"));
+            BorderPane viewReport = loader.load(
+                new FileInputStream(
+                    "src/main/java/view/ViewReportScreen.fxml"));
 
 
             rootLayout.setCenter(viewReport);

@@ -77,7 +77,6 @@ public class SourceReport {
         return ("Report: " + sourceReportNumber);
     }
 
-
     /**
      * Returns name of the reporter of the water source
      */

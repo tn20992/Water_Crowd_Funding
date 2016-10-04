@@ -1,9 +1,7 @@
 package fxapp;
 
-import controller.LoginScreenController;
-import controller.MainScreenController;
-import controller.RegistrationScreenController;
-import controller.WelcomeScreenController;
+import controller.*;
+import model.SourceReport;
 import model.User;
 
 import model.Facade;
@@ -28,6 +26,8 @@ public class MainFXApplication extends Application {
 
     private User user;
 
+    private MainFXApplication mainFX;
+
     /**
      * the main layout for the main window
      */
@@ -35,9 +35,9 @@ public class MainFXApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        mainFX = this;
         mainScreen = primaryStage;
-        initRootLayout(mainScreen);
-        showWelcomeScreen();
+        showWelcomeScreen(mainScreen);
         Facade.initialize();
     }
 
@@ -66,7 +66,7 @@ public class MainFXApplication extends Application {
 
             // Give the controller access to the main app.
             MainScreenController controller = loader.getController();
-            controller.setMainApp(this);
+            controller.setMainApp(mainFX);
 
             setViewProfile(controller);
 
@@ -93,19 +93,23 @@ public class MainFXApplication extends Application {
      *
      *
      */
-    public void showWelcomeScreen() {
+    public void showWelcomeScreen(Stage mainScreen) {
         try {
             // Load welcome screen.
             FXMLLoader loader = new FXMLLoader();
-            BorderPane regScreen = loader.load(
+            BorderPane WelScreen = loader.load(
                 new FileInputStream("src/main/java/view/WelcomeScreen.fxml"));
-
-            // Set welcome screen into the center of root layout.
-            rootLayout.setCenter(regScreen);
 
             // Give the controller access to the main app.
             WelcomeScreenController controller = loader.getController();
-            controller.setMainApp(this);
+            controller.setMainApp(mainFX);
+
+            mainScreen.setTitle("Clean Water Reporting Program");
+
+            // Show the scene containing the root layout.
+            Scene scene = new Scene(WelScreen);
+            mainScreen.setScene(scene);
+            mainScreen.show();
 
         } catch (IOException e) {
             //error on load, so log it
@@ -133,7 +137,7 @@ public class MainFXApplication extends Application {
 
             controller.setDialogStage(dialogStage);
             controller.setRootLayout(rootLayout);
-            controller.setMainApp(this);
+            controller.setMainApp(mainFX);
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
@@ -162,8 +166,7 @@ public class MainFXApplication extends Application {
 
             RegistrationScreenController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setRootLayout(rootLayout);
-            controller.setMainApp(this);
+            controller.setMainApp(mainFX);
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
@@ -174,7 +177,10 @@ public class MainFXApplication extends Application {
         }
     }
 
-    public void setEditProfileScreen(Stage mainScreen) {
+    /**
+     * Show the edit profile screen
+     */
+    public void showEditProfileScreen() {
         try {
 
             // Load root layout from fxml file.
@@ -183,20 +189,81 @@ public class MainFXApplication extends Application {
                 new FileInputStream(
                     "src/main/java/view/EditProfileScreen.fxml"));
 
+            rootLayout.setCenter(editProfile);
             // Give the controller access to the main app.
             MainScreenController controller = loader.getController();
-            controller.setMainApp(this);
-            controller.setEditBorderPane(editProfile);
+            controller.setMainApp(mainFX);
             controller.setEditProfileView(user);
 
-            // Set the Main App title
-            mainScreen.setTitle("Clean Water Reporting Program");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Show the the main report screen
+     */
+    public void showMainReportScreen() {
+        try {
+            // Load root layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            BorderPane mainReport= loader.load(new FileInputStream("src/main/java/view/MainReportScreen.fxml"));
+
+            rootLayout.setCenter(mainReport);
+            // Give the controller access to the main app.
+            MainReportController controller = loader.getController();
+            controller.setMainApp(mainFX);
 
 
-            // Show the scene containing the root layout.
-            Scene scene = new Scene(editProfile);
-            mainScreen.setScene(scene);
-            mainScreen.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Show the the submit report screen
+     */
+    public void showSubmitReportScreen() {
+        try {
+            // Load root layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            BorderPane submitReport= loader.load(new FileInputStream("src/main/java/view/SubmitReportScreen.fxml"));
+
+            rootLayout.setCenter(submitReport);
+            // Give the controller access to the main app.
+            SubmitReportController controller = loader.getController();
+            controller.setMainApp(mainFX);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Show the the view report screen
+     */
+    public void showViewReportScreen(SourceReport listedReport) {
+        try {
+            // Load root layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            BorderPane viewReport= loader.load(new FileInputStream("src/main/java/view/ViewReportScreen.fxml"));
+
+
+            rootLayout.setCenter(viewReport);
+            // Give the controller access to the main app.
+            ViewReportController controller = loader.getController();
+            controller.setReporterName(listedReport.getReporter().getName());
+            controller.setLatitude(listedReport.getLocation().getLatitude());
+            controller.setLongitudes(listedReport.getLocation().getLongitude());
+            controller.setWaterType(listedReport.getTypeOfWater());
+            controller.setWaterCondition(listedReport.getConditionOfWater());
+            controller.setReportNumber(listedReport.getSourceReportNumber());
+            controller.setTimestamp(listedReport.getCreated());
+
+            controller.setMainApp(mainFX);
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -233,6 +300,7 @@ public class MainFXApplication extends Application {
             controller.setAddressView(user.getStreetAddress());
         }
     }
+
 
     /**
      * main method for main application class

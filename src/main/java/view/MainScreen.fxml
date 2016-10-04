@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="rootLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500" prefWidth="700" style="-fx-background-color: linear-gradient(#474040,  #242323);" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainScreenController">
+<BorderPane fx:id="rootLayout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: linear-gradient(#474040,  #242323);" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainScreenController">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
@@ -106,7 +106,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" onAction="#editPressed" prefHeight="27.0" prefWidth="101.0" text="Edit Profile" GridPane.columnIndex="1">
+                  <Button mnemonicParsing="false" onAction="#editPressed" prefHeight="30.0" prefWidth="100.0" text="Edit Profile" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets bottom="30.0" left="200.0" />
                      </GridPane.margin>
@@ -116,6 +116,11 @@
                         <Insets bottom="10.0" left="10.0" />
                      </GridPane.margin>
                   </Hyperlink>
+                  <Button mnemonicParsing="false" onAction="#viewReportPressed" prefHeight="30.0" prefWidth="100.0" text="View Report" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="30.0" left="70.0" />
+                     </GridPane.margin>
+                  </Button>
                </children>
             </GridPane>
          </bottom>

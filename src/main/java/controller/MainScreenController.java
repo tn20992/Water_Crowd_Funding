@@ -12,15 +12,13 @@ import model.Facade;
 import model.User;
 
 /**
- * The controller for the root/main window
+ * Controller for the root/main window
  *
  */
 public class MainScreenController {
 
     /** reference back to mainApplication if needed */
     private MainFXApplication mainApplication;
-
-    private BorderPane editBorderPane;
 
     private User user;
     private Facade facade = Facade.getFacade();
@@ -61,15 +59,6 @@ public class MainScreenController {
     }
 
     /**
-     * Sets the BorderPane of edit dialog.
-     *
-     * @param editBorderPane the BorderPane for edit dialog
-     */
-    public void setEditBorderPane(BorderPane editBorderPane) {
-        this.editBorderPane = editBorderPane;
-    }
-
-    /**
      * Close menu item event handler
      */
     @FXML
@@ -96,7 +85,7 @@ public class MainScreenController {
     @FXML
     private void logoutActionClicked() {
         facade.logOutUser(user);
-        mainApplication.showWelcomeScreen();
+        mainApplication.showWelcomeScreen(mainApplication.getMainScreen());
     }
 
     /**
@@ -104,7 +93,7 @@ public class MainScreenController {
      */
     @FXML
     private void editPressed() {
-        mainApplication.setEditProfileScreen(mainApplication.getMainScreen());
+        mainApplication.showEditProfileScreen();
     }
 
     /**
@@ -207,5 +196,10 @@ public class MainScreenController {
         } else {
             addressView.setText(address);
         }
+    }
+
+    @FXML
+    private void viewReportPressed() {
+        mainApplication.showMainReportScreen();
     }
 }

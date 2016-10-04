@@ -13,7 +13,7 @@ import model.Facade;
 import model.exceptions.NonUniqueUsernameException;
 
 /**
- * The controller for the root/main window
+ * Controller for login screen
  *
  */
 public class LoginScreenController {

@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 
 import model.exceptions.NonUniqueUsernameException;
 
@@ -20,7 +21,7 @@ public class Facade {
     /**
      * called once by MainFXApplication. Sets up the Facade class and the model
      */
-    public static void initialize() {
+    public static Facade initialize() {
 
         // initialize the one facade instance for the application
         facade = new Facade();
@@ -41,6 +42,7 @@ public class Facade {
             System.exit(0);
 
         }
+        return null;
     }
 
     /** the single connection to the database that gets set up by

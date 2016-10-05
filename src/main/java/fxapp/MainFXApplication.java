@@ -24,7 +24,22 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class MainFXApplication extends Application {
+
+// TODO ryan' testing w/ google maps
+import com.lynden.gmapsfx.GoogleMapView;
+import com.lynden.gmapsfx.MapComponentInitializedListener;
+import com.lynden.gmapsfx.javascript.object.GoogleMap;
+import com.lynden.gmapsfx.javascript.object.LatLong;
+import com.lynden.gmapsfx.javascript.object.MapOptions;
+import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
+import com.lynden.gmapsfx.javascript.object.Marker;
+import com.lynden.gmapsfx.javascript.object.MarkerOptions;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class MainFXApplication extends Application implements MapComponentInitializedListener {
 
     /**
      * the main container for the application window
@@ -91,6 +106,11 @@ public class MainFXApplication extends Application {
         }
     }
 
+
+    // TODO ryan's testing w/ google maps
+    GoogleMapView mapView;
+    GoogleMap map;
+
     /**
      * Setup our default application view that is shown on application startup
      * This is displayed in the startup window
@@ -101,29 +121,72 @@ public class MainFXApplication extends Application {
      *
      */
     public void showWelcomeScreen(Stage mainScreen) {
-        try {
-            // Load welcome screen.
-            FXMLLoader loader = new FXMLLoader();
-            BorderPane welScreen = loader.load(
-                new FileInputStream("src/main/java/view/WelcomeScreen.fxml"));
+        //try {
 
-            // Give the controller access to the main app.
-            WelcomeScreenController controller = loader.getController();
-            controller.setMainApp(mainFX);
+            // TODO ryan's testing w/ google maps
+            mapView = new GoogleMapView();
+            mapView.addMapInializedListener(this);
 
-            mainScreen.setTitle("Clean Water Reporting Program");
+            Scene scene = new Scene(mapView);
 
-            // Show the scene containing the root layout.
-            Scene scene = new Scene(welScreen);
+            mainScreen.setTitle("JavaFX and Google Maps");
             mainScreen.setScene(scene);
             mainScreen.show();
 
-        } catch (IOException e) {
-            //error on load, so log it
-            e.printStackTrace();
-        }
+
+            //// Load welcome screen.
+            //FXMLLoader loader = new FXMLLoader();
+            //BorderPane welScreen = loader.load(
+            //    new FileInputStream("src/main/java/view/WelcomeScreen.fxml"));
+
+            //// Give the controller access to the main app.
+            //WelcomeScreenController controller = loader.getController();
+            //controller.setMainApp(mainFX);
+
+            //mainScreen.setTitle("Clean Water Reporting Program");
+
+            //// Show the scene containing the root layout.
+            //Scene scene = new Scene(welScreen);
+            //mainScreen.setScene(scene);
+            //mainScreen.show();
+
+        //} catch (IOException e) {
+        //    //error on load, so log it
+        //    e.printStackTrace();
+        //}
 
     }
+
+    // TODO ryan's testing w/ google maps
+    @Override
+    public void mapInitialized() {
+        //Set the initial properties of the map.
+            MapOptions mapOptions = new MapOptions();
+
+                mapOptions.center(new LatLong(47.6097, -122.3331))
+                            .mapType(MapTypeIdEnum.ROADMAP)
+                                        .overviewMapControl(false)
+                                                    .panControl(false)
+                                                                .rotateControl(false)
+                                                                            .scaleControl(false)
+                                                                                        .streetViewControl(false)
+                                                                                                    .zoomControl(false)
+                                                                                                                .zoom(12);
+
+                                                                                                                    map = mapView.createMap(mapOptions);
+
+                                                                                                                        //Add a marker to the map
+                                                                                                                            MarkerOptions markerOptions = new MarkerOptions();
+
+                                                                                                                                markerOptions.position( new LatLong(47.6, -122.3) )
+                                                                                                                                                .visible(Boolean.TRUE)
+                                                                                                                                                                .title("My Marker");
+
+                                                                                                                                                                    Marker marker = new Marker( markerOptions );
+
+                                                                                                                                                                        map.addMarker(marker);
+
+                                                                                                                                                                        }
 
     public void showLoginScreen() {
         try {

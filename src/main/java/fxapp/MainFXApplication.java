@@ -1,5 +1,7 @@
 package fxapp;
 
+
+import controller.*;
 import controller.LoginScreenController;
 import controller.MainScreenController;
 import controller.MainReportController;
@@ -7,6 +9,7 @@ import controller.RegistrationScreenController;
 import controller.SubmitReportController;
 import controller.ViewReportController;
 import controller.WelcomeScreenController;
+
 
 import model.SourceReport;
 import model.User;
@@ -255,6 +258,7 @@ public class MainFXApplication extends Application {
     /**
      * Show the the view report screen
      */
+
     public void showViewReportScreen(SourceReport listedReport) {
         try {
             // Load root layout from fxml file.

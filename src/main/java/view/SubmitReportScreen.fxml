@@ -23,7 +23,7 @@
             </Label>
             <HBox prefHeight="100.0" prefWidth="700.0">
                <children>
-                  <TextField fx:id="longtitudeFiled" promptText="longtitude" />
+                  <TextField fx:id="longitudeField" promptText="longtitude" />
                   <TextField fx:id="latitudeField" promptText="latitude">
                      <HBox.margin>
                         <Insets left="10.0" />

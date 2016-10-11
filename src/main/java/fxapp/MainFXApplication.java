@@ -1,7 +1,5 @@
 package fxapp;
 
-
-import controller.*;
 import controller.LoginScreenController;
 import controller.MainScreenController;
 import controller.MainReportController;

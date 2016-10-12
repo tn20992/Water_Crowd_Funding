@@ -198,6 +198,11 @@ public class MainScreenController {
     }
 
     @FXML
+    public void viewMapPressed() {
+        
+    }
+
+    @FXML
     private void viewReportPressed() {
         mainApplication.showMainReportScreen();
     }

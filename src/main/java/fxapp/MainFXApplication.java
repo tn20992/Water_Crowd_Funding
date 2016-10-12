@@ -320,6 +320,27 @@ public class MainFXApplication extends Application {
 
 
     /**
+     * Show the the submit report screen
+     */
+    public void showWaterAvailabilityScreen() {
+        try {
+            // Load root layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            BorderPane boder = loader.load(
+                    new FileInputStream(
+                            "src/main/java/view/WaterAvailabilityScreen.fxml"));
+
+            rootLayout.setCenter(boder);
+            // Give the controller access to the main app.
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * main method for main application class
      * @param args command line parameters
      */

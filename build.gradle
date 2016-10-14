@@ -18,7 +18,7 @@ repositories {
 
 dependencies {
     compile name: "postgresql-9.4.1210.jre6"
-    compile name: "GMapsFX-1.1.1"
+    compile name: "GMapsFX-2.0.8-SNAPSHOT"
 }
 
 jar {

@@ -199,7 +199,7 @@ public class MainScreenController {
 
     @FXML
     public void viewMapPressed() {
-        
+        mainApplication.showWaterAvailabilityScreen();
     }
 
     @FXML

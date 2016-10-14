@@ -617,6 +617,10 @@ public class Facade {
 
             }
 
+            if (userID == -1) {
+                throw new SQLException("Username " + username + " was not found in the database.");
+            }
+
             query             = "INSERT INTO tb_source_report "
                 + "(reporter, longitude, latitude, type_of_water, "
                     + "condition_of_water) VALUES (?, ?, ?, ?, ?)";

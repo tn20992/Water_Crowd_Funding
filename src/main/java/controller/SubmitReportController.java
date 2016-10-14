@@ -74,11 +74,15 @@ public class SubmitReportController {
 
     @FXML
     public void submitSubmitReportPressed() {
+
         if (latitudeField.getText() == null
                 || longitudeField.getText() == null
                 || latitudeField.getText().trim().isEmpty()
                 || longitudeField.getText().trim().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
+
+        longitude = Double.parseDouble(longitudeField.getText());
+        latitude = Double.parseDouble(latitudeField.getText());
             alert.setTitle("ERROR");
             alert.setContentText(
                     "Longitude or latitude cannot be null!!!");

@@ -22,8 +22,9 @@ public class SourceReport {
      * @param typeOfWater type of source water
      * @param conditionOfWater condition of source water
      */
-    public SourceReport(int sourceReportNumber, User reporter, Timestamp created, Location location,
-                            TypeOfWater typeOfWater, ConditionOfWater conditionOfWater) {
+    public SourceReport(int sourceReportNumber, User reporter,
+        Timestamp created, Location location, TypeOfWater typeOfWater,
+            ConditionOfWater conditionOfWater) {
         this.sourceReportNumber = sourceReportNumber;
         this.reporter = reporter;
         this.created = created;
@@ -34,25 +35,24 @@ public class SourceReport {
     /**
      * Getters + Setters for location fields
      */
-    public int getSourceReportNumber() { return sourceReportNumber; }
-    public User getReporter() { return  reporter; }
-    public ConditionOfWater getConditionOfWater() { return conditionOfWater; }
-    public Location getLocation() { return location; }
-    public Timestamp getCreated() { return created; }
-    public TypeOfWater getTypeOfWater() { return typeOfWater; }
-
-    public void setSourceReportNumber(int sourceReportNumber) { this.sourceReportNumber = sourceReportNumber; }
-    public void setReporter(User reporter) { this.reporter = reporter; }
-    public void setConditionOfWater(ConditionOfWater conditionOfWater) { this.conditionOfWater = conditionOfWater; }
-    public void setCreated(Timestamp created) { this.created = created; }
-    public void setLocation(Location location) { this.location = location; }
-    public void setTypeOfWater(TypeOfWater typeOfWater) { this.typeOfWater = typeOfWater; }
-
-    /**
-     * @return the report's report number
-     */
-    @Override
-    public String toString() { return ("Report: " + sourceReportNumber); }
+    public int getSourceReportNumber() {
+        return sourceReportNumber;
+    }
+    public User getReporter() {
+        return  reporter;
+    }
+    public ConditionOfWater getConditionOfWater() {
+        return conditionOfWater;
+    }
+    public Location getLocation() {
+        return location;
+    }
+    public Timestamp getCreated() {
+        return created;
+    }
+    public TypeOfWater getTypeOfWater() {
+        return typeOfWater;
+    }
 
     /*
      * Set hash code equal to the sourceReportNumber.
@@ -61,6 +61,28 @@ public class SourceReport {
     @Override
     public int hashCode () {
         return sourceReportNumber;
+    }
+    public void setSourceReportNumber(int sourceReportNumber) {
+        this.sourceReportNumber = sourceReportNumber;
+    }
+    public void setReporter(User reporter) {
+        this.reporter = reporter;
+    }
+    public void setConditionOfWater(ConditionOfWater conditionOfWater) {
+        this.conditionOfWater = conditionOfWater;
+    }
+    public void setCreated(Timestamp created) {
+        this.created = created;
+    }
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+    public void setTypeOfWater(TypeOfWater typeOfWater) {
+        this.typeOfWater = typeOfWater;
+    }
+
+    public String toString() {
+        return ("Report: " + sourceReportNumber);
     }
 
     /**

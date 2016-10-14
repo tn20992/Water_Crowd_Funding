@@ -3,6 +3,9 @@ package controller;
 import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
 
+/**
+ * Controller for welcome screen
+ */
 public class WelcomeScreenController {
 
     /** reference back to mainApplication if needed */
@@ -31,6 +34,5 @@ public class WelcomeScreenController {
     @FXML
     private void regButtonWelPressed() {
         mainApplication.showRegistrationScreen();
-
     }
 }

@@ -5,37 +5,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: linear-gradient(#474040,  #242323);" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WelcomeScreenController">
-   <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label prefHeight="100.0" prefWidth="729.0" text="theSTORM-login">
-               <font>
-                  <Font name="Andale Mono" size="57.0" />
-               </font>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-                     <stops>
-                        <Stop color="#43d0ff" />
-                        <Stop color="#ddddd4" offset="1.0" />
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-         </children>
-      </HBox>
-   </top>
    <center>
       <Button fx:id="logButtonWel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logButtonWelPressed" prefHeight="100.0" prefWidth="300.0" text="LOGIN" BorderPane.alignment="CENTER">
          <font>
@@ -59,4 +34,45 @@
          </effect>
       </Button>
    </bottom>
+   <top>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="100.0" prefWidth="700.0" text="Clean Water Reporting">
+               <font>
+                  <Font name="Andale Mono" size="52.0" />
+               </font>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#439eff" />
+                        <Stop color="#ddddd4" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <Label contentDisplay="CENTER" text="TEAM THESTORM" underline="true">
+               <textFill>
+                  <LinearGradient cycleMethod="REPEAT" endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#724848" />
+                        <Stop color="#ddddd4" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <font>
+                  <Font size="40.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="176.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </top>
 </BorderPane>

@@ -4,24 +4,16 @@ import fxapp.MainFXApplication;
 
 import javafx.fxml.FXML;
 
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Facade;
-import model.User;
 import model.exceptions.NonUniqueUsernameException;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-
 /**
- * The controller for the root/main window
+ * Controller for login screen
  *
  */
 public class LoginScreenController {
@@ -29,9 +21,9 @@ public class LoginScreenController {
     /** reference back to mainApplication if needed */
     private MainFXApplication mainApplication;
 
-    private Stage _dialogStage;
+    private Stage dialogStage;
 
-    private BorderPane _rootLayout;
+    private BorderPane rootLayout;
 
     @FXML
     private TextField userIdFieldLog;
@@ -53,7 +45,7 @@ public class LoginScreenController {
      * @param dialogStage the stage for this dialog
      */
     public void setDialogStage(Stage dialogStage) {
-        _dialogStage = dialogStage;
+        this.dialogStage = dialogStage;
     }
 
     /**
@@ -62,20 +54,22 @@ public class LoginScreenController {
      * @param rootLayout the BorderPane of the MainScreen
      */
     public void setRootLayout(BorderPane rootLayout) {
-        _rootLayout = rootLayout;
+        this.rootLayout = rootLayout;
     }
 
     /**
      * Login Button in Login Screen
      */
     @FXML
-    private void logButtonLogPressed() throws NonUniqueUsernameException{
+    private void logButtonLogPressed() throws NonUniqueUsernameException {
         Facade temp = Facade.getFacade();
-        boolean match = temp.logInUser(userIdFieldLog.getText(), passFieldLog.getText());
+        boolean match = temp.logInUser(userIdFieldLog.getText(),
+            passFieldLog.getText());
         if (match) {
-            mainApplication.setUser(temp.getUserByUsername(userIdFieldLog.getText()));
+            mainApplication.setUser(temp.getUserByUsername(
+                userIdFieldLog.getText()));
             mainApplication.initRootLayout(mainApplication.getMainScreen());
-            _dialogStage.close();
+            dialogStage.close();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Username or Password is incorrect");
@@ -90,7 +84,7 @@ public class LoginScreenController {
      */
     @FXML
     private void cancelButtonLogPressed() {
-        _dialogStage.close();
+        dialogStage.close();
 
     }
 

@@ -198,6 +198,11 @@ public class MainScreenController {
     }
 
     @FXML
+    public void viewMapPressed() {
+        mainApplication.showWaterAvailabilityScreen();
+    }
+
+    @FXML
     private void viewReportPressed() {
         mainApplication.showMainReportScreen();
     }

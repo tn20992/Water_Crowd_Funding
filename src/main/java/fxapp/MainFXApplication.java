@@ -10,7 +10,6 @@ import controller.SubmitReportController;
 import controller.ViewReportController;
 import controller.WelcomeScreenController;
 
-
 import model.SourceReport;
 import model.User;
 
@@ -258,7 +257,6 @@ public class MainFXApplication extends Application {
     /**
      * Show the the view report screen
      */
-
     public void showViewReportScreen(SourceReport listedReport) {
         try {
             // Load root layout from fxml file.
@@ -318,6 +316,20 @@ public class MainFXApplication extends Application {
         }
     }
 
+
+    /**
+     * Show the the water availability screen
+     */
+    public void showWaterAvailabilityScreen() {
+        WaterAvailabilityController controller = new WaterAvailabilityController(mainFX, mainScreen);
+    }
+
+    /**
+     * Get root BorderPane
+     */
+    public BorderPane getRootLayout() {
+        return rootLayout;
+    }
 
     /**
      * main method for main application class

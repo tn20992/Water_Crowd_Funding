@@ -17,7 +17,7 @@ public class SubmitReportController {
     private MainFXApplication mainApplication;
 
     @FXML
-    private TextField longitudeField;
+    private TextField longtitudeField;
 
     @FXML
     private TextField latitudeField;
@@ -69,10 +69,10 @@ public class SubmitReportController {
 
     @FXML
     public void submitSubmitReportPressed() {
-        longitude = Double.parseDouble(longitudeField.getText());
+        longitude = Double.parseDouble(longtitudeField.getText());
         latitude = Double.parseDouble(latitudeField.getText());
 
-        if (latitudeField.getText() == null || longitudeField.getText() == null) {
+        if (latitudeField.getText() == null || longtitudeField.getText() == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("ERROR");
             alert.setContentText(
@@ -83,7 +83,7 @@ public class SubmitReportController {
 
         waterType = waterTypeBox.getValue();
         waterCondition = waterConditionBox.getValue();
-        facade.createSourceReport(user.getName(), location, waterType, waterCondition);
+        facade.createSourceReport(user.getUsername(), location, waterType, waterCondition);
 
         mainApplication.showMainReportScreen();
     }

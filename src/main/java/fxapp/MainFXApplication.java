@@ -1,5 +1,7 @@
 package fxapp;
 
+
+import controller.*;
 import controller.LoginScreenController;
 import controller.MainScreenController;
 import controller.MainReportController;
@@ -314,6 +316,20 @@ public class MainFXApplication extends Application {
         }
     }
 
+
+    /**
+     * Show the the water availability screen
+     */
+    public void showWaterAvailabilityScreen() {
+        WaterAvailabilityController controller = new WaterAvailabilityController(mainFX, mainScreen);
+    }
+
+    /**
+     * Get root BorderPane
+     */
+    public BorderPane getRootLayout() {
+        return rootLayout;
+    }
 
     /**
      * main method for main application class

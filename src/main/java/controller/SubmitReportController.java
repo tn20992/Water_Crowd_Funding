@@ -4,10 +4,10 @@ import fxapp.MainFXApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import model.ConditionOfWater;
-import model.TypeOfWater;
+import model.*;
 
 /**
  * Controller for submit report screen
@@ -17,7 +17,7 @@ public class SubmitReportController {
     private MainFXApplication mainApplication;
 
     @FXML
-    private TextField longtitudeFiled;
+    private TextField longtitudeField;
 
     @FXML
     private TextField latitudeField;
@@ -35,6 +35,15 @@ public class SubmitReportController {
     private ObservableList<ConditionOfWater> condOfWatersList = FXCollections
             .observableArrayList(ConditionOfWater.values());
 
+    private Facade facade = Facade.getFacade();
+    private User user;
+
+    private double longitude;
+    private double latitude;
+    private TypeOfWater waterType;
+    private ConditionOfWater waterCondition;
+
+
     @FXML
     private void initialize() {
         waterTypeBox.setItems(typeOfWatersList);
@@ -50,6 +59,7 @@ public class SubmitReportController {
      * */
     public void setMainApp(MainFXApplication main) {
         mainApplication = main;
+        user = mainApplication.getUser();
     }
 
     @FXML
@@ -59,6 +69,22 @@ public class SubmitReportController {
 
     @FXML
     public void submitSubmitReportPressed() {
+        longitude = Double.parseDouble(longtitudeField.getText());
+        latitude = Double.parseDouble(latitudeField.getText());
+
+        if (latitudeField.getText() == null || longtitudeField.getText() == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("ERROR");
+            alert.setContentText(
+                    "Longitude or Latitude cannot be null!!!");
+            alert.showAndWait();
+        }
+        Location location = new Location(longitude,latitude);
+
+        waterType = waterTypeBox.getValue();
+        waterCondition = waterConditionBox.getValue();
+        facade.createSourceReport(user.getUsername(), location, waterType, waterCondition);
+
         mainApplication.showMainReportScreen();
     }
 }

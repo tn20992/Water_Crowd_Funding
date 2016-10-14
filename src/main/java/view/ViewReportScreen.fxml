@@ -55,8 +55,8 @@
                      <children>
                         <VBox prefHeight="47.0" prefWidth="132.0">
                            <children>
-                              <Label text="Longtitude:" />
-                              <Label fx:id="longtitude" prefHeight="19.0" prefWidth="130.0" text="37.12341124" textFill="#00359e">
+                              <Label text="Latitude:" />
+                              <Label fx:id="latitude" prefHeight="19.0" prefWidth="130.0" text="37.12341124" textFill="#00359e">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -65,8 +65,8 @@
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="166.0">
                            <children>
-                              <Label text="Latitude:" />
-                              <Label fx:id="latitude" prefWidth="121.0" text="-122.3214444" textFill="#00359e">
+                              <Label text="Longtitude:" />
+                              <Label fx:id="longtitude" prefWidth="121.0" text="-122.3214444" textFill="#00359e">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>

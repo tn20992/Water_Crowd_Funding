@@ -54,6 +54,14 @@ public class SourceReport {
         return typeOfWater;
     }
 
+    /*
+     * Set hash code equal to the sourceReportNumber.
+     * @return the source report's hashcode
+     */
+    @Override
+    public int hashCode () {
+        return sourceReportNumber;
+    }
     public void setSourceReportNumber(int sourceReportNumber) {
         this.sourceReportNumber = sourceReportNumber;
     }
@@ -78,9 +86,11 @@ public class SourceReport {
     }
 
     /**
-     * Returns name of the reporter of the water source
+     * @return name of the reporter of the water source
      */
     public String getReporterName() {
         return reporter.getName();
     }
+
+
 }

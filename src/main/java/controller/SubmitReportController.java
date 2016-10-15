@@ -7,17 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-<<<<<<< HEAD
-import model.Facade;
-import model.User;
-import model.TypeOfWater;
-import model.ConditionOfWater;
-import model.Location;
-
-=======
 import java.lang.NumberFormatException;
 import model.*;
->>>>>>> e00f8d88c4992b1b82ff6a9ec45d864030b2bdb9
 
 /**
  * Controller for submit report screen
@@ -27,7 +18,7 @@ public class SubmitReportController {
     private MainFXApplication mainApplication;
 
     @FXML
-    private TextField longitudeField;
+    private TextField longtitudeField;
 
     @FXML
     private TextField latitudeField;
@@ -94,12 +85,8 @@ public class SubmitReportController {
                 waterType = waterTypeBox.getValue();
                 waterCondition = waterConditionBox.getValue();
                 facade.createSourceReport(user.getUsername(), location, waterType, waterCondition);
-                Alert confirm = new Alert(Alert.AlertType.INFORMATION);
-                confirm.setTitle("Success!");
-                confirm.setHeaderText("Success!");
-                confirm.setContentText("Water report successfully created!");
-                mainApplication.showMainReportScreen();
 
+                mainApplication.showMainReportScreen();
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERROR");
@@ -107,7 +94,6 @@ public class SubmitReportController {
                         "Longitude or Latitude cannot include letters!!!");
                 alert.showAndWait();
             }
-
         }
     }
 }

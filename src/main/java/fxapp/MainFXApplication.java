@@ -1,7 +1,7 @@
 package fxapp;
 
 
-import controller.*;
+import controller.WaterAvailabilityController;
 import controller.LoginScreenController;
 import controller.MainScreenController;
 import controller.MainReportController;
@@ -321,7 +321,8 @@ public class MainFXApplication extends Application {
      * Show the the water availability screen
      */
     public void showWaterAvailabilityScreen() {
-        WaterAvailabilityController controller = new WaterAvailabilityController(mainFX, mainScreen);
+        WaterAvailabilityController controller =
+            new WaterAvailabilityController(mainFX, mainScreen);
     }
 
     /**

@@ -18,15 +18,9 @@ import java.util.ResourceBundle;
 
 import netscape.javascript.JSObject;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-
 import fxapp.MainFXApplication;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import javafx.event.EventHandler;

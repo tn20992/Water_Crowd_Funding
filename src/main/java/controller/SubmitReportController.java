@@ -7,12 +7,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+<<<<<<< HEAD
 import model.Facade;
 import model.User;
 import model.TypeOfWater;
 import model.ConditionOfWater;
 import model.Location;
 
+=======
+import java.lang.NumberFormatException;
+import model.*;
+>>>>>>> e00f8d88c4992b1b82ff6a9ec45d864030b2bdb9
 
 /**
  * Controller for submit report screen
@@ -74,34 +79,35 @@ public class SubmitReportController {
 
     @FXML
     public void submitSubmitReportPressed() {
-
-        if (latitudeField.getText() == null
-                || longitudeField.getText() == null
-                || latitudeField.getText().trim().isEmpty()
-                || longitudeField.getText().trim().isEmpty()) {
+        if (latitudeField.getText().equals("")|| longtitudeField.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-
-        longitude = Double.parseDouble(longitudeField.getText());
-        latitude = Double.parseDouble(latitudeField.getText());
             alert.setTitle("ERROR");
             alert.setContentText(
-                    "Longitude or latitude cannot be null!!!");
+                    "Longitude or Latitude cannot be empty!!!");
             alert.showAndWait();
         } else {
-            longitude = Double.parseDouble(longitudeField.getText());
-            latitude = Double.parseDouble(latitudeField.getText());
+            try {
+                longitude = Double.parseDouble(longtitudeField.getText());
+                latitude = Double.parseDouble(latitudeField.getText());
+                Location location = new Location(longitude,latitude);
 
-            Location location = new Location(longitude, latitude);
-            waterType = waterTypeBox.getValue();
-            waterCondition = waterConditionBox.getValue();
-            facade.createSourceReport(
-                    user.getName(), location, waterType, waterCondition);
-            Alert confirm = new Alert(Alert.AlertType.INFORMATION);
-            confirm.setTitle("Success!");
-            confirm.setHeaderText("Success!");
-            confirm.setContentText("Water report successfully created!");
-            confirm.showAndWait();
-            mainApplication.showMainReportScreen();
+                waterType = waterTypeBox.getValue();
+                waterCondition = waterConditionBox.getValue();
+                facade.createSourceReport(user.getUsername(), location, waterType, waterCondition);
+                Alert confirm = new Alert(Alert.AlertType.INFORMATION);
+                confirm.setTitle("Success!");
+                confirm.setHeaderText("Success!");
+                confirm.setContentText("Water report successfully created!");
+                mainApplication.showMainReportScreen();
+
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setContentText(
+                        "Longitude or Latitude cannot include letters!!!");
+                alert.showAndWait();
+            }
+
         }
     }
 }

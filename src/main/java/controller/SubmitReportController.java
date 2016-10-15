@@ -7,8 +7,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import java.lang.NumberFormatException;
-import model.*;
+import model.ConditionOfWater;
+import model.Facade;
+import model.Location;
+import model.TypeOfWater;
+import model.User;
 
 /**
  * Controller for submit report screen
@@ -56,7 +59,7 @@ public class SubmitReportController {
 
     /**
      * allow for calling back to the main application code if necessary
-     * @param main   the reference to the FX Application instance
+     * @param main the reference to the FX Application instance
      * */
     public void setMainApp(MainFXApplication main) {
         mainApplication = main;
@@ -70,7 +73,8 @@ public class SubmitReportController {
 
     @FXML
     public void submitSubmitReportPressed() {
-        if (latitudeField.getText().equals("")|| longtitudeField.getText().equals("")) {
+        if (latitudeField.getText().equals("") || longtitudeField.getText()
+                                                                .equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setContentText(
@@ -80,11 +84,12 @@ public class SubmitReportController {
             try {
                 longitude = Double.parseDouble(longtitudeField.getText());
                 latitude = Double.parseDouble(latitudeField.getText());
-                Location location = new Location(longitude,latitude);
+                Location location = new Location(longitude, latitude);
 
                 waterType = waterTypeBox.getValue();
                 waterCondition = waterConditionBox.getValue();
-                facade.createSourceReport(user.getUsername(), location, waterType, waterCondition);
+                facade.createSourceReport(user.getUsername(), location,
+                                                waterType, waterCondition);
 
                 mainApplication.showMainReportScreen();
             } catch (NumberFormatException e) {

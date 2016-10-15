@@ -59,7 +59,7 @@ public class SourceReport {
      * @return the source report's hashcode
      */
     @Override
-    public int hashCode () {
+    public int hashCode() {
         return sourceReportNumber;
     }
     public void setSourceReportNumber(int sourceReportNumber) {

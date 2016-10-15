@@ -32,7 +32,8 @@ import model.SourceReport;
  * Controller for map screen
  *
  */
-public class WaterAvailabilityController implements Initializable, MapComponentInitializedListener {
+public class WaterAvailabilityController implements Initializable
+        , MapComponentInitializedListener {
 
     private MainFXApplication mainApplication;
     private Stage mainStage;
@@ -103,7 +104,8 @@ public class WaterAvailabilityController implements Initializable, MapComponentI
 
         for (SourceReport s : sourceReports) {
             MarkerOptions markerOptions = new MarkerOptions();
-            LatLong loc = new LatLong(s.getLocation().getLatitude(), s.getLocation().getLongitude());
+            LatLong loc = new LatLong(s.getLocation().getLatitude()
+                    , s.getLocation().getLongitude());
 
             markerOptions.position(loc)
                     .visible(Boolean.TRUE)
@@ -112,20 +114,22 @@ public class WaterAvailabilityController implements Initializable, MapComponentI
             Marker marker = new Marker(markerOptions);
 
             map.addUIEventHandler(marker,
-                    UIEventType.click,
-                    (JSObject obj) -> {
-                        InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
-                        infoWindowOptions.content("<h2>Water " + s.toString() + "</h2>"
-                                + "Reporter: " + s.getReporterName()
-                                + "<br>Condition: " + s.getConditionOfWater().toString()
-                                + "<br>Type: " + s.getTypeOfWater().toString()
-                                + "<br>Location: " + s.getLocation().getLatitude()
-                                + ", " + s.getLocation().getLongitude()
-                                + "<br>Time: " + s.getCreated().toString());
+                UIEventType.click,
+                (JSObject obj) -> {
+                    InfoWindowOptions infoWindowOptions;
+                    infoWindowOptions = new InfoWindowOptions();
+                    infoWindowOptions.content("<h2>Water " + s.toString()
+                        + "</h2>"
+                        + "Reporter: " + s.getReporterName()
+                        + "<br>Condition: " + s.getConditionOfWater().toString()
+                        + "<br>Type: " + s.getTypeOfWater().toString()
+                        + "<br>Location: " + s.getLocation().getLatitude()
+                        + ", " + s.getLocation().getLongitude()
+                        + "<br>Time: " + s.getCreated().toString());
 
-                        InfoWindow window = new InfoWindow(infoWindowOptions);
-                        window.open(map, marker);
-                    });
+                    InfoWindow window = new InfoWindow(infoWindowOptions);
+                    window.open(map, marker);
+                });
             map.addMarker(marker);
         }
     }

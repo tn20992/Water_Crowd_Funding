@@ -25,6 +25,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import model.Facade;
 import model.SourceReport;
 
@@ -132,6 +133,19 @@ public class WaterAvailabilityController implements Initializable
                 });
             map.addMarker(marker);
         }
+        map.addUIEventHandler(UIEventType.click, (JSObject obj) -> {
+            LatLong ll = new LatLong((JSObject) obj.getMember("latLng"));
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Location Information");
+            alert.setHeaderText(null);
+            alert.setContentText("Latitude: " + ll.getLatitude() + "\n" +
+                    "Longtitude: " + ll.getLongitude());
+
+            alert.showAndWait();
+
+
+        });
     }
 
     @Override

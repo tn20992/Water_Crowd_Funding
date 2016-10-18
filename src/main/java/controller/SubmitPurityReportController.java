@@ -27,14 +27,7 @@ public class SubmitPurityReportController {
     private TextField latitudeField;
 
     @FXML
-    private ComboBox<TypeOfWater> waterTypeBox;
-
-    @FXML
     private ComboBox<ConditionOfWater> waterConditionBox;
-
-
-    private ObservableList<TypeOfWater> typeOfWatersList = FXCollections
-            .observableArrayList(TypeOfWater.values());
 
     private ObservableList<ConditionOfWater> condOfWatersList = FXCollections
             .observableArrayList(ConditionOfWater.values());
@@ -44,14 +37,11 @@ public class SubmitPurityReportController {
 
     private double longitude;
     private double latitude;
-    private TypeOfWater waterType;
     private ConditionOfWater waterCondition;
 
 
     @FXML
     private void initialize() {
-        waterTypeBox.setItems(typeOfWatersList);
-        waterTypeBox.getSelectionModel().select(TypeOfWater.BOTTLED);
 
         waterConditionBox.setItems(condOfWatersList);
         waterConditionBox.getSelectionModel().select(ConditionOfWater.POTABLE);
@@ -86,10 +76,7 @@ public class SubmitPurityReportController {
                 latitude = Double.parseDouble(latitudeField.getText());
                 Location location = new Location(longitude, latitude);
 
-                waterType = waterTypeBox.getValue();
                 waterCondition = waterConditionBox.getValue();
-                facade.createSourceReport(user.getUsername(), location,
-                        waterType, waterCondition);
 
                 mainApplication.showMainPurityReportScreen();
             } catch (NumberFormatException e) {

@@ -11,7 +11,6 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 
 import model.exceptions.NonUniqueUsernameException;
-import model.AccountType;
 
 /**
  * Class that abstracts the models away from the controllers
@@ -22,7 +21,7 @@ public class Facade {
     /**
      * called once by MainFXApplication. Sets up the Facade class and the model
      */
-    public static void initialize() {
+    public static Facade initialize() {
 
         // initialize the one facade instance for the application
         facade = new Facade();
@@ -43,6 +42,7 @@ public class Facade {
             System.exit(0);
 
         }
+        return null;
     }
 
     /** the single connection to the database that gets set up by
@@ -81,11 +81,14 @@ public class Facade {
      * checks if the username and password are valid, if so attemps to log the
      * user in and return true, if not valid or cannot log the user in then
      * returns false
-     * @param username the username typed in by the user that's attempting to log in
-     * @param password the password typed in by the user that's attempting to log in
+     * @param username the username typed in by the user that's attempting
+     * to log in
+     * @param password the password typed in by the user that's attempting
+     * to log in
      * @return whether the user was successfully logged in or not
      */
-    public boolean logInUser(String username, String password) throws NonUniqueUsernameException {
+    public boolean logInUser(String username,
+        String password) throws NonUniqueUsernameException {
         User user = getUserByUsername(username);
 
         if (null == user) {
@@ -108,7 +111,8 @@ public class Facade {
 
     /**
      * logs out the user that is currently logged in
-     * @return boolean true if the user was logged out successfully, false otherwise
+     * @return boolean true if the user was logged out
+     * successfully, false otherwise
      */
     public boolean logOutUser(User user) {
         return loggedInUsers.remove(user);
@@ -131,7 +135,13 @@ public class Facade {
         try {
 
             Statement statement        = connection.createStatement();
-            String query               = "SELECT username, password, name, account_type, email, street_address FROM tb_entity";
+            String query               = "SELECT username, "
+                                              + "password, "
+                                              + "name, "
+                                              + "account_type, "
+                                              + "email, "
+                                              + "street_address "
+                                         + "FROM tb_entity";
             ResultSet statementResults = statement.executeQuery(query);
             ArrayList<User> results    = new ArrayList<User>();
 
@@ -154,7 +164,8 @@ public class Facade {
 
         } catch (SQLException e) {
 
-            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.out.println("Could not connect to the database: "
+                + e.getMessage());
             System.exit(0);
 
         }
@@ -173,8 +184,16 @@ public class Facade {
     public User getUserByUsername(String username) {
         try {
 
-            String query                        = "SELECT username, password, name, account_type, email, street_address FROM tb_entity WHERE username = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            String query = "SELECT username, "
+                                + "password, "
+                                + "name, "
+                                + "account_type, "
+                                + "email, "
+                                + "street_address "
+                           + "FROM tb_entity "
+                          + "WHERE username = ?";
+            PreparedStatement preparedStatement
+                = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
 
             ResultSet statementResults = preparedStatement.executeQuery();
@@ -204,7 +223,8 @@ public class Facade {
 
         } catch (SQLException e) {
 
-            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.out.println("Could not connect to the database: "
+                + e.getMessage());
             System.exit(0);
 
         }
@@ -215,61 +235,64 @@ public class Facade {
     }
 
     /**
-     * takes in information for a user and returns a User object with all that information
+     * takes in information for a user and returns a User object with
+     * all that information
      * @param username the username to be put into a User object
      * @param password the password to be put into a User object
      * @param name the name to be put into a User object
-     * @param accountTypeInt the account type to be put into a User object in integer form not AccountType form
+     * @param accountTypeInt the account type to be put into a User object
+     * in integer form not AccountType form
      * @param email the email to be put into a User object
      * @param streetAddress the street address to be put into a User object
      * @return User a user with all the parameter information in it
      */
-    private User makeUserObject(String username, String password, String name, int accountTypeInt, String email, String streetAddress) {
+    private User makeUserObject(String username, String password,
+        String name, int accountTypeInt, String email, String streetAddress) {
         User user;
         switch (accountTypeInt) {
-            case 0 :
-                user = new User(
-                    username,
-                    password,
-                    name,
-                    AccountType.USER
-                );
-                break;
+        case 0 :
+            user = new User(
+                username,
+                password,
+                name,
+                AccountType.USER
+            );
+            break;
 
-            case 1 :
-                user = new User(
-                    username,
-                    password,
-                    name,
-                    AccountType.WORKER
-                );
-                break;
+        case 1 :
+            user = new User(
+                username,
+                password,
+                name,
+                AccountType.WORKER
+            );
+            break;
 
-            case 2 :
-                user = new User(
-                    username,
-                    password,
-                    name,
-                    AccountType.MANAGER
-                );
-                break;
+        case 2 :
+            user = new User(
+                username,
+                password,
+                name,
+                AccountType.MANAGER
+            );
+            break;
 
-            case 3 :
-                user = new User(
-                    username,
-                    password,
-                    name,
-                    AccountType.ADMIN
-                );
-                break;
+        case 3 :
+            user = new User(
+                username,
+                password,
+                name,
+                AccountType.ADMIN
+            );
+            break;
 
-            default :
-                user = new User(
-                    username,
-                    password,
-                    name
-                );
-                break;
+        default :
+            user = new User(
+                username,
+                password,
+                name
+            );
+            break;
 
         }
 
@@ -285,11 +308,17 @@ public class Facade {
      * @param username the username of the user to be created
      * @param password the password of the user to be created
      */
-    public void createUser(String username, String password, String name, AccountType accountType) throws NonUniqueUsernameException {
+    public void createUser(String username, String password,
+        String name, AccountType accountType)
+            throws NonUniqueUsernameException {
         try {
 
-            String query                        = "INSERT INTO tb_entity (username, password, name, account_type) VALUES (?, ?, ?, ?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            String query
+                = "INSERT INTO tb_entity "
+                    + "(username, password, name, account_type) "
+                        + "VALUES (?, ?, ?, ?)";
+            PreparedStatement preparedStatement
+                = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
             preparedStatement.setString(3, name);
@@ -299,10 +328,12 @@ public class Facade {
         } catch (SQLException e) {
 
             if (null != getUserByUsername(username)) {
-                throw new NonUniqueUsernameException("Attempted to create a user with a username that was taken");
+                throw new NonUniqueUsernameException("Attempted to create "
+                    + "a user with a username that was taken");
             }
 
-            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.out.println("Could not connect to the database: "
+                + e.getMessage());
             System.exit(0);
 
         }
@@ -317,8 +348,10 @@ public class Facade {
     public User editUserEmailByUsername(String username, String email) {
         try {
 
-            String query                        = "UPDATE tb_entity SET email = ? WHERE username = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            String query
+                = "UPDATE tb_entity SET email = ? WHERE username = ?";
+            PreparedStatement preparedStatement
+                = connection.prepareStatement(query);
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, username);
             preparedStatement.executeUpdate();
@@ -327,7 +360,8 @@ public class Facade {
 
         } catch (SQLException e) {
 
-            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.out.println("Could not connect to the database: "
+                + e.getMessage());
             System.exit(0);
 
         }
@@ -338,16 +372,20 @@ public class Facade {
     }
 
     /**
-     * updates the user with the given username to have the given street address
+     * updates the user with the given username to have the given
+     * street address
      * @param username the username of the user to be updated
      * @param streetAddress the new street address to give the user
      * @return User the user after the update
      */
-    public User editUserStreetAddressByUsername(String username, String streetAddress) {
+    public User editUserStreetAddressByUsername(String username,
+        String streetAddress) {
         try {
 
-            String query                        = "UPDATE tb_entity SET street_address = ? WHERE username = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            String query
+                = "UPDATE tb_entity SET street_address = ? WHERE username = ?";
+            PreparedStatement preparedStatement
+                = connection.prepareStatement(query);
             preparedStatement.setString(1, streetAddress);
             preparedStatement.setString(2, username);
             preparedStatement.executeUpdate();
@@ -356,7 +394,8 @@ public class Facade {
 
         } catch (SQLException e) {
 
-            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.out.println("Could not connect to the database: "
+                + e.getMessage());
             System.exit(0);
 
         }
@@ -375,8 +414,10 @@ public class Facade {
     public User editUserNameByUsername(String username, String name) {
         try {
 
-            String query                        = "UPDATE tb_entity SET name = ? WHERE username = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            String query
+                = "UPDATE tb_entity SET name = ? WHERE username = ?";
+            PreparedStatement preparedStatement
+                = connection.prepareStatement(query);
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, username);
             preparedStatement.executeUpdate();
@@ -385,7 +426,8 @@ public class Facade {
 
         } catch (SQLException e) {
 
-            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.out.println("Could not connect to the database: "
+                + e.getMessage());
             System.exit(0);
 
         }
@@ -404,8 +446,10 @@ public class Facade {
     public User editUserPasswordByUsername(String username, String password) {
         try {
 
-            String query                        = "UPDATE tb_entity SET password = ? WHERE username = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            String query
+                = "UPDATE tb_entity SET password = ? WHERE username = ?";
+            PreparedStatement preparedStatement
+                = connection.prepareStatement(query);
             preparedStatement.setString(1, password);
             preparedStatement.setString(2, username);
             preparedStatement.executeUpdate();
@@ -414,7 +458,8 @@ public class Facade {
 
         } catch (SQLException e) {
 
-            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.out.println("Could not connect to the database: "
+                + e.getMessage());
             System.exit(0);
 
         }
@@ -425,7 +470,9 @@ public class Facade {
     }
 
     /**
-     * TODO
+     * Returns a list of all the SourceReports in the database
+     * @return ArrayList<SourceReport> a list of all the SourceReports
+     * in the database
      */
     public ArrayList<SourceReport> getSourceReports() {
         try {
@@ -464,7 +511,8 @@ public class Facade {
 
         } catch (SQLException e) {
 
-            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.out.println("Could not connect to the database: "
+                + e.getMessage());
             System.exit(0);
 
         }
@@ -475,23 +523,28 @@ public class Facade {
     }
 
     /**
-     * TODO
+     * returns the SourceReport with the given Report Number, returns
+     * null if no SourceReport with that Report Number exists
+     * @param sourceReportNumber the Report Number of the SourceReport
+     * to return
+     * @return SourceReport the SourceReport with the given Report Number
      */
     public SourceReport getSourceReportByReportNumber(int sourceReportNumber) {
         try {
 
-            String query                    = "SELECT sr.source_report, "
-                                                   + "e.username, "
-                                                   + "sr.created, "
-                                                   + "sr.longitude, "
-                                                   + "sr.latitude, "
-                                                   + "sr.type_of_water, "
-                                                   + "sr.condition_of_water "
-                                             + " FROM tb_source_report sr "
-                                        + "INNER JOIN tb_entity e "
-                                                + "ON sr.reporter = e.entity "
-                                             + "WHERE sr.source_report = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            String query = "SELECT sr.source_report, "
+                                + "e.username, "
+                                + "sr.created, "
+                                + "sr.longitude, "
+                                + "sr.latitude, "
+                                + "sr.type_of_water, "
+                                + "sr.condition_of_water "
+                          + " FROM tb_source_report sr "
+                     + "INNER JOIN tb_entity e "
+                             + "ON sr.reporter = e.entity "
+                          + "WHERE sr.source_report = ?";
+            PreparedStatement preparedStatement
+                = connection.prepareStatement(query);
             preparedStatement.setInt(1, sourceReportNumber);
 
             ResultSet statementResults = preparedStatement.executeQuery();
@@ -512,8 +565,9 @@ public class Facade {
 
             }
 
-            // going to assume that there is only 1 SourceReport in the results set
-            // since the report_number column in the database is unique
+            // going to assume that there is only 1 SourceReport
+            // in the results set since the report_number
+            // column in the database is unique
             if (results.size() > 0) {
                 return results.get(0);
             } else {
@@ -522,7 +576,8 @@ public class Facade {
 
         } catch (SQLException e) {
 
-            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.out.println("Could not connect to the database: "
+                + e.getMessage());
             System.exit(0);
 
         }
@@ -533,17 +588,27 @@ public class Facade {
     }
 
     /**
-     * TODO
+     * uses the paramter data to create a SourceReport in the database
+     * @param username the username of the User that submitted
+     * this SourceReport
+     * @param location the Location of the water source of this
+     * SourceReport
+     * @param typeOfWater the type of the water of this SourceReport
+     * @param conditionOfWater the condition of the water of this SourceReport
      */
-    public void createSourceReport(String username, Location location, TypeOfWater typeOfWater, ConditionOfWater conditionOfWater) {
+    public void createSourceReport(String username, Location location,
+        TypeOfWater typeOfWater, ConditionOfWater conditionOfWater) {
         try {
 
-            String query                        = "SELECT entity FROM tb_entity WHERE username = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            String query
+                = "SELECT entity FROM tb_entity WHERE username = ?";
+            PreparedStatement preparedStatement
+                = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
             ResultSet statementResults = preparedStatement.executeQuery();
 
-            int userID = -1; // this should cause an error if this every is the actual value passed to the database
+            int userID = -1; /* this should cause an error if this every
+                is the actual value passed to the database */
             while (statementResults.next()) {
 
                 // this loop should only ever happen once since
@@ -552,7 +617,14 @@ public class Facade {
 
             }
 
-            query             = "INSERT INTO tb_source_report (reporter, longitude, latitude, type_of_water, condition_of_water) VALUES (?, ?, ?, ?, ?)";
+            if (userID == -1) {
+                throw new SQLException("Username " + username
+                    + " was not found in the database.");
+            }
+
+            query             = "INSERT INTO tb_source_report "
+                + "(reporter, longitude, latitude, type_of_water, "
+                    + "condition_of_water) VALUES (?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, userID);
             preparedStatement.setDouble(2, location.getLongitude());
@@ -563,60 +635,78 @@ public class Facade {
 
         } catch (SQLException e) {
 
-            System.out.println("Could not connect to the database: " + e.getMessage());
+            System.out.println("Could not connect to the database: "
+                + e.getMessage());
             System.exit(0);
 
         }
     }
 
     /**
-     * TODO
+     * takes in a bunch of data for a Source Report and returns a SourceReport
+     * object with all that instance data
+     * @param sourceReportNumber the unique ID number associated with
+     * the SourceReport
+     * @param reporterUsername the username of the User in that submitted
+     * this SourceReport
+     * @param created the time that this SourceReport was created
+     * @param longitude the longitude coordinate of the location of the water
+     * source of this SourceReport
+     * @param latitude the latitude coordinate of the location of th water
+     * source of this SourceReport
+     * @param typeOfWaterInt the integer representation of the TypeOfWater
+     * enum of the type of water of the water source of this SourceReport
+     * @param conditionOfWaterInt the integer representation of the
+     * ConditionOfWater enum of the condition of water of the water source
+     * of this SourceReport
+     * @return SourceReport the SourceReport object with all the parameter data
      */
-    private SourceReport makeSourceReportObject(int sourceReportNumber, String reporterUsername,
-        Timestamp created, double longitude, double latitude,
-            int typeOfWaterInt, int conditionOfWaterInt) {
+    private SourceReport makeSourceReportObject(int sourceReportNumber,
+        String reporterUsername, Timestamp created,
+            double longitude, double latitude, int typeOfWaterInt,
+                int conditionOfWaterInt) {
         TypeOfWater typeOfWater;
         switch (typeOfWaterInt) {
-            case 0:
-                typeOfWater = TypeOfWater.BOTTLED;
-                break;
-            case 1:
-                typeOfWater = TypeOfWater.WELL;
-                break;
-            case 2:
-                typeOfWater = TypeOfWater.STREAM;
-                break;
-            case 3:
-                typeOfWater = TypeOfWater.LAKE;
-                break;
-            case 4:
-                typeOfWater = TypeOfWater.SPRING;
-                break;
-            case 5:
-                typeOfWater = TypeOfWater.OTHER;
-                break;
-            default:
-                typeOfWater = TypeOfWater.OTHER;
-                break;
+        case 0:
+            typeOfWater = TypeOfWater.BOTTLED;
+            break;
+        case 1:
+            typeOfWater = TypeOfWater.WELL;
+            break;
+        case 2:
+            typeOfWater = TypeOfWater.STREAM;
+            break;
+        case 3:
+            typeOfWater = TypeOfWater.LAKE;
+            break;
+        case 4:
+            typeOfWater = TypeOfWater.SPRING;
+            break;
+        case 5:
+            typeOfWater = TypeOfWater.OTHER;
+            break;
+        default:
+            typeOfWater = TypeOfWater.OTHER;
+            break;
         }
 
         ConditionOfWater conditionOfWater;
         switch (conditionOfWaterInt) {
-            case 0:
-                conditionOfWater = ConditionOfWater.WASTE;
-                break;
-            case 1:
-                conditionOfWater = ConditionOfWater.TREATABLECLEAR;
-                break;
-            case 2:
-                conditionOfWater = ConditionOfWater.TREATABLEMUDDY;
-                break;
-            case 3:
-                conditionOfWater = ConditionOfWater.POTABLE;
-                break;
-            default:
-                conditionOfWater = ConditionOfWater.POTABLE;
-                break;
+        case 0:
+            conditionOfWater = ConditionOfWater.WASTE;
+            break;
+        case 1:
+            conditionOfWater = ConditionOfWater.TREATABLECLEAR;
+            break;
+        case 2:
+            conditionOfWater = ConditionOfWater.TREATABLEMUDDY;
+            break;
+        case 3:
+            conditionOfWater = ConditionOfWater.POTABLE;
+            break;
+        default:
+            conditionOfWater = ConditionOfWater.POTABLE;
+            break;
         }
 
         return new SourceReport(

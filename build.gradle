@@ -1,8 +1,9 @@
 apply plugin: "java"
 apply plugin: "checkstyle"
+apply plugin: "application"
 defaultTasks "jar"
 
-// maybe use plugin 'application' so that way you can run the project directly from gradle rather than building a jar every time
+mainClassName = "fxapp.MainFXApplication"
 
 checkstyle {
     configFile = new File("config/checkstyle/", "cs1331-checkstyle.xml")
@@ -17,6 +18,7 @@ repositories {
 
 dependencies {
     compile name: "postgresql-9.4.1210.jre6"
+    compile name: "GMapsFX-2.0.8-SNAPSHOT"
 }
 
 jar {
@@ -26,7 +28,7 @@ jar {
     manifest {
         attributes(
             "Main-Class": "fxapp.MainFXApplication",
-            "Class-Path": "../../lib/postgresql-9.4.1210.jre6.jar"
+            "Class-Path": "../../lib/postgresql-9.4.1210.jre6.jar ../../lib/GMapsFX-1.1.1.jar"
         )
     }
 }

@@ -4,3 +4,5 @@ alter_entity_profile_info.sql
 create_tb_source_report.sql
 create_tb_type_of_water.sql
 create_tb_condition_of_water.sql
+create_tb_purity_report.sql
+create_tb_overall_condition.sql

@@ -5,8 +5,10 @@ import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import model.AccountType;
 import model.Facade;
 import model.User;
 
@@ -49,12 +51,19 @@ public class MainScreenController {
     @FXML
     private TextField emailEdit;
 
+    @FXML
+    private Button btnPurity;
+
     /**
      * allow for calling back to the main application code if necessary
      * @param main   the reference to the FX Application instance
      * */
     public void setMainApp(MainFXApplication main) {
         mainApplication = main;
+    }
+
+    public void setVisiblePurityButton(boolean b) {
+        btnPurity.setVisible(b);
     }
 
     /**
@@ -205,5 +214,10 @@ public class MainScreenController {
     @FXML
     private void viewReportPressed() {
         mainApplication.showMainReportScreen();
+    }
+
+    @FXML
+    private void viewPurityReportsPressed() {
+        mainApplication.showMainPurityReportScreen();
     }
 }

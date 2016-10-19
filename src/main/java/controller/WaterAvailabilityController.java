@@ -177,6 +177,9 @@ public class WaterAvailabilityController implements Initializable
             });
     }
 
+    /**
+     * Show the submit water report dialog
+     */
     public void showSubmitDialog() {
         waterTypeBox.setItems(typeOfWatersList);
         waterTypeBox.getSelectionModel().select(TypeOfWater.BOTTLED);
@@ -247,6 +250,9 @@ public class WaterAvailabilityController implements Initializable
         dialogSubmit.setScene(scene);
     }
 
+    /**
+     * Action when user click submit button
+     */
     public void submitReportPressed() {
         if (latField.getText().equals("") || longField.getText()
                 .equals("")) {

@@ -1,14 +1,17 @@
 package fxapp;
 
 
-import controller.*;
-
-import model.AccountType;
-import model.SourceReport;
-import model.User;
-
-import model.Facade;
-
+import controller.LoginScreenController;
+import controller.MainPurityReportController;
+import controller.MainReportController;
+import controller.MainScreenController;
+import controller.RegistrationScreenController;
+import controller.SubmitPurityReportController;
+import controller.SubmitReportController;
+import controller.ViewPurityReportController;
+import controller.ViewReportController;
+import controller.WaterAvailabilityController;
+import controller.WelcomeScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,6 +19,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.AccountType;
+import model.Facade;
+import model.PurityReport;
+import model.SourceReport;
+import model.User;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -349,7 +357,7 @@ public class MainFXApplication extends Application {
     /**
      * Show the the view report screen
      */
-    public void showViewPurityReportScreen(SourceReport listedReport) {
+    public void showViewPurityReportScreen(PurityReport listedReport) {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
@@ -364,8 +372,10 @@ public class MainFXApplication extends Application {
             controller.setReporterName(listedReport.getReporter().getName());
             controller.setLatitude(listedReport.getLocation().getLatitude());
             controller.setLongitudes(listedReport.getLocation().getLongitude());
-            controller.setWaterCondition(listedReport.getConditionOfWater());
-            controller.setReportNumber(listedReport.getSourceReportNumber());
+            controller.setOverallCondition(listedReport.getOverallCondition());
+            controller.setReportNumber(listedReport.getPurityReportNumber());
+            controller.setVirusPPM(listedReport.getVirusPPM());
+            controller.setContaminantPPM(listedReport.getContaminantPPM());
             controller.setTimestamp(listedReport.getCreated());
 
             controller.setMainApp(mainFX);
@@ -385,8 +395,8 @@ public class MainFXApplication extends Application {
             FXMLLoader loader = new FXMLLoader();
             BorderPane submitReport = loader.load(
                     new FileInputStream(
-                            "src/main/java/view/SubmitPurityReportScreen" +
-                                    ".fxml"));
+                            "src/main/java/view/SubmitPurityReportScreen"
+                                    + ".fxml"));
 
             rootLayout.setCenter(submitReport);
             // Give the controller access to the main app.

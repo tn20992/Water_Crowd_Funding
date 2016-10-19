@@ -7,7 +7,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import model.*;
+import model.Facade;
+import model.Location;
+import model.OverallCondition;
+import model.User;
 
 /**
  * Controller for submit report screen
@@ -68,8 +71,8 @@ public class SubmitPurityReportController {
     @FXML
     public void submitSubmitReportPressed() {
         if (latitudeField.getText().equals("") || longtitudeField.getText()
-                .equals("") || virusPPMField.getText().equals("") ||
-                contaminantPPMField.getText().equals("")) {
+                .equals("") || virusPPMField.getText().equals("")
+                || contaminantPPMField.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setContentText(
@@ -85,14 +88,15 @@ public class SubmitPurityReportController {
                         .getText());
 
                 overallCondition = waterConditionBox.getValue();
-
+                facade.createPurityReport(user.getUsername(), location,
+                        overallCondition, virusPPM, contaminantPPM);
                 mainApplication.showMainPurityReportScreen();
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERROR");
                 alert.setContentText(
-                        "You cannot include letters in any field!!!\nPlease " +
-                                "check it and try again!");
+                        "You cannot include letters in any field!!!\nPlease "
+                                + "check it and try again!");
                 alert.showAndWait();
             }
         }

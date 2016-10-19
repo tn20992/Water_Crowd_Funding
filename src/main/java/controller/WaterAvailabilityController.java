@@ -15,19 +15,36 @@ import com.lynden.gmapsfx.javascript.event.UIEventType;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.text.DecimalFormat;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.geometry.Insets;
+import model.ConditionOfWater;
+import model.Facade;
+import model.Location;
+import model.SourceReport;
+import model.TypeOfWater;
 import netscape.javascript.JSObject;
 
 import fxapp.MainFXApplication;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import model.Facade;
-import model.SourceReport;
 
 /**
  * Controller for map screen
@@ -39,9 +56,27 @@ public class WaterAvailabilityController implements Initializable
     private MainFXApplication mainApplication;
     private Stage mainStage;
 
+    private Facade facade = Facade.getFacade();
+
     private GoogleMapView mapView;
 
     private GoogleMap map;
+
+    private Stage dialogSubmit = new Stage();
+
+    private TextField latField = new TextField();
+
+    private TextField longField = new TextField();
+
+    private ComboBox<TypeOfWater> waterTypeBox = new ComboBox<>();
+
+    private ComboBox<ConditionOfWater> waterConditionBox = new ComboBox<>();
+
+    private ObservableList<TypeOfWater> typeOfWatersList = FXCollections
+            .observableArrayList(TypeOfWater.values());
+
+    private ObservableList<ConditionOfWater> condOfWatersList = FXCollections
+            .observableArrayList(ConditionOfWater.values());
 
     /**
      * Make a new constructor
@@ -134,18 +169,118 @@ public class WaterAvailabilityController implements Initializable
             map.addMarker(marker);
         }
         map.addUIEventHandler(UIEventType.click, (JSObject obj) -> {
-            LatLong ll = new LatLong((JSObject) obj.getMember("latLng"));
+                LatLong ll = new LatLong((JSObject) obj.getMember("latLng"));
+                latField.setText("" + ll.getLatitude());
+                longField.setText("" + ll.getLongitude());
+                showSubmitDialog();
+                dialogSubmit.showAndWait();
+            });
+    }
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Location Information");
-            alert.setHeaderText(null);
-            alert.setContentText("Latitude: " + ll.getLatitude() + "\n" +
-                    "Longtitude: " + ll.getLongitude());
+    public void showSubmitDialog() {
+        waterTypeBox.setItems(typeOfWatersList);
+        waterTypeBox.getSelectionModel().select(TypeOfWater.BOTTLED);
+        waterTypeBox.setPrefWidth(170);
 
-            alert.showAndWait();
+        waterConditionBox.setItems(condOfWatersList);
+        waterConditionBox.getSelectionModel().select(ConditionOfWater.WASTE);
+        waterConditionBox.setPrefWidth(170);
 
+        HBox hbox = new HBox();
+        hbox.setPadding(new Insets(20, 20, 20, 20));
+        hbox.setSpacing(10);
+        hbox.setStyle("-fx-background-color: #336699;");
 
+        Button btnSubmit = new Button("Submit");
+        btnSubmit.setPrefSize(115, 20);
+        btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                submitReportPressed();
+            }
         });
+
+        Button btnCancel = new Button("Cancel");
+        btnCancel.setPrefSize(115, 20);
+        btnCancel.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialogSubmit.close();
+            }
+        });
+
+        hbox.getChildren().addAll(btnSubmit, btnCancel);
+
+        VBox vBox = new VBox();
+
+        AnchorPane frame = new AnchorPane();
+        frame.setLayoutX(20);
+        frame.setLayoutY(20);
+        frame.setPrefHeight(200);
+        frame.setPrefWidth(300);
+        frame.setStyle("-fx-background-color: #FFFFFF;");
+        GridPane grid = new GridPane();
+        Label lat = new Label("Latitude: ");
+        Label log = new Label("Longtitude: ");
+        Label wType = new Label("Water Type : ");
+        Label wCondition = new Label("Water Condition : ");
+        GridPane.setConstraints(lat, 1, 1);
+        GridPane.setConstraints(latField, 2, 1);
+        GridPane.setConstraints(log, 1, 2);
+        GridPane.setConstraints(longField, 2, 2);
+        GridPane.setConstraints(wType, 1, 3);
+        GridPane.setConstraints(waterTypeBox, 2, 3);
+        GridPane.setConstraints(wCondition, 1, 4);
+        GridPane.setConstraints(waterConditionBox, 2, 4);
+        grid.getChildren().addAll(lat, latField, log, longField, wType,
+                waterTypeBox, wCondition, waterConditionBox);
+
+        vBox.getChildren().addAll(grid, hbox);
+
+        frame.getChildren().addAll(vBox);
+        Scene scene = new Scene(frame);
+
+        dialogSubmit = new Stage();
+        dialogSubmit.setTitle("Submit Water Report");
+        dialogSubmit.initModality(Modality.WINDOW_MODAL);
+        dialogSubmit.initOwner(mainStage);
+        dialogSubmit.setScene(scene);
+    }
+
+    public void submitReportPressed() {
+        if (latField.getText().equals("") || longField.getText()
+                .equals("")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText(
+                    "Longitude or Latitude cannot be empty!!!");
+            alert.showAndWait();
+        } else {
+            try {
+                DecimalFormat df = new DecimalFormat("#.###");
+                double longitude = Double.parseDouble(df.format(Double
+                        .parseDouble(longField.getText())));
+
+                double latitude = Double.parseDouble(df.format(Double
+                        .parseDouble(latField.getText())));
+
+                Location location = new Location(longitude, latitude);
+
+                TypeOfWater waterType = waterTypeBox.getValue();
+                ConditionOfWater waterCondition = waterConditionBox.getValue();
+                facade.createSourceReport(mainApplication.getUser()
+                        .getUsername(), location, waterType, waterCondition);
+
+                dialogSubmit.close();
+                mapInitialized();
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setContentText(
+                        "Longitude or Latitude cannot include letters!!!");
+                alert.showAndWait();
+            }
+        }
     }
 
     @Override

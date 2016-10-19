@@ -3,9 +3,7 @@ package controller;
 import fxapp.MainFXApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import model.ConditionOfWater;
-import model.TypeOfWater;
-
+import model.OverallCondition;
 import java.sql.Timestamp;
 
 
@@ -74,7 +72,7 @@ public class ViewPurityReportController {
         contaminantPPM.setText("" + contaminant);
     }
 
-    public void setWaterCondition(ConditionOfWater condition) {
+    public void setOverallCondition(OverallCondition condition) {
         waterCondition.setText("" + condition);
     }
 }

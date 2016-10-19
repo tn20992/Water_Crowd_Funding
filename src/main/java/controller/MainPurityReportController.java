@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import model.Facade;
-import model.SourceReport;
+import model.PurityReport;
 
 /**
  * Controller for main purity report screen
@@ -18,12 +18,12 @@ public class MainPurityReportController {
     private MainFXApplication mainApplication;
 
     @FXML
-    private ListView<SourceReport> listViewPurityReport;
+    private ListView<PurityReport> listViewPurityReport;
 
     private Facade facade = Facade.getFacade();
 
-    private ObservableList<SourceReport> reportList = FXCollections
-            .observableArrayList(facade.getSourceReports());
+    private ObservableList<PurityReport> reportList = FXCollections
+            .observableArrayList(facade.getPurityReports());
 
     @FXML
     private void initialize() {
@@ -50,7 +50,7 @@ public class MainPurityReportController {
 
     @FXML
     public void mainPurityReportViewPressed() {
-        SourceReport sourceReport
+        PurityReport sourceReport
                 = listViewPurityReport.getSelectionModel().getSelectedItem();
         if (sourceReport == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

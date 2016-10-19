@@ -729,17 +729,17 @@ public class Facade {
         try {
 
             Statement statement             = connection.createStatement();
-            String query                    = "SELECT sr.purity_report, "
+            String query                    = "SELECT pr.purity_report, "
                                                    + "e.username, "
-                                                   + "sr.created, "
-                                                   + "sr.longitude, "
-                                                   + "sr.latitude, "
-                                                   + "sr.overall_condition, "
-                                                   + "sr.virus_ppm, "
-                                                   + "sr.contaminant_ppm "
-                                             + " FROM tb_source_report sr "
+                                                   + "pr.created, "
+                                                   + "pr.longitude, "
+                                                   + "pr.latitude, "
+                                                   + "pr.overall_condition, "
+                                                   + "pr.virus_ppm, "
+                                                   + "pr.contaminant_ppm "
+                                             + " FROM tb_purity_report pr "
                                         + "INNER JOIN tb_entity e "
-                                                + "ON sr.reporter = e.entity";
+                                                + "ON pr.reporter = e.entity";
             ResultSet statementResults      = statement.executeQuery(query);
             ArrayList<PurityReport> results = new ArrayList<PurityReport>();
 
@@ -787,16 +787,16 @@ public class Facade {
 
             String query = "SELECT pr.purity_report, "
                                 + "e.username, "
-                                + "sr.created, "
-                                + "sr.longitude, "
-                                + "sr.latitude, "
-                                + "sr.overall_condition, "
-                                + "sr.virus_ppm, "
-                                + "sr.contaminant_ppm "
-                          + " FROM tb_source_report sr "
+                                + "pr.created, "
+                                + "pr.longitude, "
+                                + "pr.latitude, "
+                                + "pr.overall_condition, "
+                                + "pr.virus_ppm, "
+                                + "pr.contaminant_ppm "
+                          + " FROM tb_purity_report pr "
                      + "INNER JOIN tb_entity e "
-                             + "ON sr.reporter = e.entity "
-                          + "WHERE sr.source_report = ?";
+                             + "ON pr.reporter = e.entity "
+                          + "WHERE pr.source_report = ?";
             PreparedStatement preparedStatement
                 = connection.prepareStatement(query);
             preparedStatement.setInt(1, purityReportNumber);
@@ -854,7 +854,7 @@ public class Facade {
      * @param contaminantPPM the condition of the water of this SourceReport
      */
     public void createPurityReport(String username, Location location,
-        OverallConditionn overallCondition, double virusPPM,
+        OverallCondition overallCondition, double virusPPM,
             double contaminantPPM) {
         try {
 
@@ -883,12 +883,12 @@ public class Facade {
 
             query             = "INSERT INTO tb_purity_report "
                 + "(reporter, longitude, latitude, overall_condition, "
-                    + "virusPPM, contaminantPPM) VALUES (?, ?, ?, ?, ?, ?)";
+                    + "virus_ppm, contaminant_ppm) VALUES (?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, userID);
             preparedStatement.setDouble(2, location.getLongitude());
             preparedStatement.setDouble(3, location.getLatitude());
-            preparedStatement.setInt(4, oerallCondition.ordinal());
+            preparedStatement.setInt(4, overallCondition.ordinal());
             preparedStatement.setDouble(5, virusPPM);
             preparedStatement.setDouble(6, contaminantPPM);
             preparedStatement.executeUpdate();
@@ -931,16 +931,16 @@ public class Facade {
         OverallCondition overallCondition;
         switch (overallConditionInt) {
         case 0:
-            overallConditionInt = ConditionOfWater.SAFE;
+            overallCondition = OverallCondition.SAFE;
             break;
         case 1:
-            overallConditionInt = ConditionOfWater.TREATABLE;
+            overallCondition = OverallCondition.TREATABLE;
             break;
         case 2:
-            overallConditionInt = ConditionOfWater.UNSAFE;
+            overallCondition = OverallCondition.UNSAFE;
             break;
         default:
-            overallConditionInt = ConditionOfWater.UNSAFE;
+            overallCondition = OverallCondition.UNSAFE;
             break;
         }
 

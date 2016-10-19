@@ -66,9 +66,13 @@ public class ViewPurityReportController {
         latitude.setText("" + lat);
     }
 
-    public void setVirusPPM() {}
+    public void setVirusPPM(double virus) {
+        virusPPM.setText("" + virus);
+    }
 
-    public void setContaminantPPM() {}
+    public void setContaminantPPM(double contaminant) {
+        contaminantPPM.setText("" + contaminant);
+    }
 
     public void setWaterCondition(ConditionOfWater condition) {
         waterCondition.setText("" + condition);

@@ -7,11 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import model.ConditionOfWater;
-import model.Facade;
-import model.Location;
-import model.TypeOfWater;
-import model.User;
+import model.*;
 
 /**
  * Controller for submit report screen
@@ -27,24 +23,32 @@ public class SubmitPurityReportController {
     private TextField latitudeField;
 
     @FXML
-    private ComboBox<ConditionOfWater> waterConditionBox;
+    private TextField virusPPMField;
 
-    private ObservableList<ConditionOfWater> condOfWatersList = FXCollections
-            .observableArrayList(ConditionOfWater.values());
+    @FXML
+    private TextField contaminantPPMField;
+
+    @FXML
+    private ComboBox<OverallCondition> waterConditionBox;
+
+    private ObservableList<OverallCondition> condOfWatersList = FXCollections
+            .observableArrayList(OverallCondition.values());
 
     private Facade facade = Facade.getFacade();
     private User user;
 
     private double longitude;
     private double latitude;
-    private ConditionOfWater waterCondition;
+    private double virusPPM;
+    private double contaminantPPM;
+    private OverallCondition overallCondition;
 
 
     @FXML
     private void initialize() {
 
         waterConditionBox.setItems(condOfWatersList);
-        waterConditionBox.getSelectionModel().select(ConditionOfWater.POTABLE);
+        waterConditionBox.getSelectionModel().select(OverallCondition.SAFE);
     }
 
     /**
@@ -64,26 +68,31 @@ public class SubmitPurityReportController {
     @FXML
     public void submitSubmitReportPressed() {
         if (latitudeField.getText().equals("") || longtitudeField.getText()
-                .equals("")) {
+                .equals("") || virusPPMField.getText().equals("") ||
+                contaminantPPMField.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setContentText(
-                    "Longitude or Latitude cannot be empty!!!");
+                    "You cannot leave any field empty!!!");
             alert.showAndWait();
         } else {
             try {
                 longitude = Double.parseDouble(longtitudeField.getText());
                 latitude = Double.parseDouble(latitudeField.getText());
                 Location location = new Location(longitude, latitude);
+                virusPPM = Double.parseDouble(virusPPMField.getText());
+                contaminantPPM = Double.parseDouble(contaminantPPMField
+                        .getText());
 
-                waterCondition = waterConditionBox.getValue();
+                overallCondition = waterConditionBox.getValue();
 
                 mainApplication.showMainPurityReportScreen();
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERROR");
                 alert.setContentText(
-                        "Longitude or Latitude cannot include letters!!!");
+                        "You cannot include letters in any field!!!\nPlease " +
+                                "check it and try again!");
                 alert.showAndWait();
             }
         }

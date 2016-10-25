@@ -718,4 +718,240 @@ public class Facade {
             conditionOfWater
         );
     }
+
+
+    /**
+     * Returns a list of all the PurityReports in the database
+     * @return ArrayList<PurityReport> a list of all the PurityReports
+     * in the database
+     */
+    public ArrayList<PurityReport> getPurityReports() {
+        try {
+
+            Statement statement             = connection.createStatement();
+            String query                    = "SELECT pr.purity_report, "
+                                                   + "e.username, "
+                                                   + "pr.created, "
+                                                   + "pr.longitude, "
+                                                   + "pr.latitude, "
+                                                   + "pr.overall_condition, "
+                                                   + "pr.virus_ppm, "
+                                                   + "pr.contaminant_ppm "
+                                             + " FROM tb_purity_report pr "
+                                        + "INNER JOIN tb_entity e "
+                                                + "ON pr.reporter = e.entity";
+            ResultSet statementResults      = statement.executeQuery(query);
+            ArrayList<PurityReport> results = new ArrayList<PurityReport>();
+
+            while (statementResults.next()) {
+
+                PurityReport purityReport = makePurityReportObject(
+                    statementResults.getInt(1),
+                    statementResults.getString(2),
+                    statementResults.getTimestamp(3),
+                    statementResults.getDouble(4),
+                    statementResults.getDouble(5),
+                    statementResults.getInt(6),
+                    statementResults.getDouble(7),
+                    statementResults.getDouble(8)
+                );
+
+                results.add(purityReport);
+
+            }
+
+            return results;
+
+        } catch (SQLException e) {
+
+            System.out.println("Could not connect to the database: "
+                + e.getMessage());
+            System.exit(0);
+
+        }
+
+        // this is needed for compilation
+        // execution should never reach this line
+        return null;
+    }
+
+
+    /**
+     * returns the Purity Report that has the given report number
+     * @param purityReportNumber the reportNumber of the Purity Report to be
+     * returned
+     * @return PurityReport the purity report with the given reportNumber
+     */
+    public PurityReport getPurityReportByReportNumber(int purityReportNumber) {
+        try {
+
+            String query = "SELECT pr.purity_report, "
+                                + "e.username, "
+                                + "pr.created, "
+                                + "pr.longitude, "
+                                + "pr.latitude, "
+                                + "pr.overall_condition, "
+                                + "pr.virus_ppm, "
+                                + "pr.contaminant_ppm "
+                          + " FROM tb_purity_report pr "
+                     + "INNER JOIN tb_entity e "
+                             + "ON pr.reporter = e.entity "
+                          + "WHERE pr.source_report = ?";
+            PreparedStatement preparedStatement
+                = connection.prepareStatement(query);
+            preparedStatement.setInt(1, purityReportNumber);
+
+            ResultSet statementResults = preparedStatement.executeQuery();
+            ArrayList<PurityReport> results    = new ArrayList<PurityReport>();
+
+            while (statementResults.next()) {
+
+                PurityReport purityReport = makePurityReportObject(
+                    statementResults.getInt(1),
+                    statementResults.getString(2),
+                    statementResults.getTimestamp(3),
+                    statementResults.getDouble(4),
+                    statementResults.getDouble(5),
+                    statementResults.getInt(6),
+                    statementResults.getDouble(7),
+                    statementResults.getDouble(8)
+                );
+                results.add(purityReport);
+
+            }
+
+            // going to assume that there is only 1 PurityReport
+            // in the results set since the report_number
+            // column in the database is unique
+            if (results.size() > 0) {
+                return results.get(0);
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Could not connect to the database: "
+                + e.getMessage());
+            System.exit(0);
+
+        }
+
+        // this is needed for compilation
+        // execution should never reach this line
+        return null;
+    }
+
+
+    /**
+     * uses the paramter data to create a PurityReport in the database
+     * @param username the username of the User that submitted
+     * this SourceReport
+     * @param location the Location of the water source of this
+     * SourceReport
+     * @param overallCondition the OverallCondition (enum) of this SourceReport
+     * @param virusPPM the type of the water of this SourceReport
+     * @param contaminantPPM the condition of the water of this SourceReport
+     */
+    public void createPurityReport(String username, Location location,
+        OverallCondition overallCondition, double virusPPM,
+            double contaminantPPM) {
+        try {
+
+            // TODO this could be abstracted into its own helper method
+            String query
+                = "SELECT entity FROM tb_entity WHERE username = ?";
+            PreparedStatement preparedStatement
+                = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            ResultSet statementResults = preparedStatement.executeQuery();
+
+            int userID = -1; /* this should cause an error if this every
+                is the actual value passed to the database */
+            while (statementResults.next()) {
+
+                // this loop should only ever happen once since
+                // username on tb_entity has a unique constraint
+                userID = statementResults.getInt(1);
+
+            }
+
+            if (userID == -1) {
+                throw new SQLException("Username " + username
+                    + " was not found in the database.");
+            }
+
+            query             = "INSERT INTO tb_purity_report "
+                + "(reporter, longitude, latitude, overall_condition, "
+                    + "virus_ppm, contaminant_ppm) VALUES (?, ?, ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, userID);
+            preparedStatement.setDouble(2, location.getLongitude());
+            preparedStatement.setDouble(3, location.getLatitude());
+            preparedStatement.setInt(4, overallCondition.ordinal());
+            preparedStatement.setDouble(5, virusPPM);
+            preparedStatement.setDouble(6, contaminantPPM);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+
+            System.out.println("Could not connect to the database: "
+                + e.getMessage());
+            System.exit(0);
+
+        }
+    }
+
+
+    /**
+     * returns a PurityReport object with the given data
+     * @param sourceReportNumber the report number of the PurityReport
+     * to be created
+     * @param reporterUsername the username of the report of the PurityReport
+     * to be created
+     * @param created the created time of the PurityReport
+     * to be created
+     * @param longitude the longitude of the PurityReport
+     * to be created
+     * @param latitude the latitude of the PurityReport
+     * to be created
+     * @param overallConditionInt the int of the OverallCondition (enum)
+     * of the PurityReport to be created
+     * @param virusPPM the virusPPM of the PurityReport
+     * to be created
+     * @param contaminantPPM the contaminantPPM of the PurityReport
+     * to be created
+     * @return PurityReport a PurityReport object with all the parameter data
+     */
+    private PurityReport makePurityReportObject(int sourceReportNumber,
+        String reporterUsername, Timestamp created, double longitude,
+            double latitude, int overallConditionInt, double virusPPM,
+                double contaminantPPM) {
+
+        OverallCondition overallCondition;
+        switch (overallConditionInt) {
+        case 0:
+            overallCondition = OverallCondition.SAFE;
+            break;
+        case 1:
+            overallCondition = OverallCondition.TREATABLE;
+            break;
+        case 2:
+            overallCondition = OverallCondition.UNSAFE;
+            break;
+        default:
+            overallCondition = OverallCondition.UNSAFE;
+            break;
+        }
+
+        return new PurityReport(
+            sourceReportNumber,
+            getUserByUsername(reporterUsername),
+            created,
+            new Location(longitude, latitude),
+            overallCondition,
+            virusPPM,
+            contaminantPPM
+        );
+    }
 }

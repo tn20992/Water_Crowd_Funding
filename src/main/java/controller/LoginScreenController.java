@@ -85,7 +85,6 @@ public class LoginScreenController {
     @FXML
     private void cancelButtonLogPressed() {
         dialogStage.close();
-
     }
 
 }

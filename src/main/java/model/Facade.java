@@ -967,14 +967,14 @@ public class Facade {
     public ArrayList<Point> getHistoryByLocation(Location location, int year) {
         try {
 
-            Statement statement             = connection.createStatement();
             String date                     = year + "-01-01 00:00:00";
             String query = "SELECT pr.created, "
                                 + "pr.virus_ppm, "
                                 + "pr.contaminant_ppm "
+                           + "FROM tb_purity_report pr "
                           + "WHERE pr.longitude = ? "
                             + "AND pr.latitude = ? "
-                            + "AND pr.created > ?::timestamp"
+                            + "AND pr.created > ?::timestamp "
                             + "AND pr.created "
                             + "< ?::timestamp + '1 year'::interval";
             PreparedStatement preparedStatement
@@ -983,7 +983,7 @@ public class Facade {
             preparedStatement.setDouble(2, location.getLatitude());
             preparedStatement.setString(3, date);
             preparedStatement.setString(4, date);
-            ResultSet statementResults = statement.executeQuery(query);
+            ResultSet statementResults = preparedStatement.executeQuery();
             ArrayList<Point> results = new ArrayList<Point>();
 
             while (statementResults.next()) {

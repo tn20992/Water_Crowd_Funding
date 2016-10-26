@@ -8,7 +8,7 @@ public class Point {
     private double virusPPM;
     private double contaminantPPM;
 
-    public Point (Timestamp time, double virusPPM, double contaminantPPM) {
+    public Point(Timestamp time, double virusPPM, double contaminantPPM) {
         this.time = time;
         this.virusPPM = virusPPM;
         this.contaminantPPM = contaminantPPM;

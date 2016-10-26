@@ -749,8 +749,8 @@ public class Facade {
                     statementResults.getInt(1),
                     statementResults.getString(2),
                     statementResults.getTimestamp(3),
-                    statementResults.getDouble(4),
-                    statementResults.getDouble(5),
+                    new Location(statementResults.getDouble(4),
+                        statementResults.getDouble(5)),
                     statementResults.getInt(6),
                     statementResults.getDouble(7),
                     statementResults.getDouble(8)
@@ -810,8 +810,8 @@ public class Facade {
                     statementResults.getInt(1),
                     statementResults.getString(2),
                     statementResults.getTimestamp(3),
-                    statementResults.getDouble(4),
-                    statementResults.getDouble(5),
+                    new Location(statementResults.getDouble(4),
+                        statementResults.getDouble(5)),
                     statementResults.getInt(6),
                     statementResults.getDouble(7),
                     statementResults.getDouble(8)
@@ -924,9 +924,11 @@ public class Facade {
      * @return PurityReport a PurityReport object with all the parameter data
      */
     private PurityReport makePurityReportObject(int sourceReportNumber,
-        String reporterUsername, Timestamp created, double longitude,
-            double latitude, int overallConditionInt, double virusPPM,
+        String reporterUsername, Timestamp created, Location location,
+            int overallConditionInt, double virusPPM,
                 double contaminantPPM) {
+        double longitude = location.getLongitude();
+        double latitude  = location.getLatitude();
 
         OverallCondition overallCondition;
         switch (overallConditionInt) {
@@ -953,5 +955,75 @@ public class Facade {
             virusPPM,
             contaminantPPM
         );
+    }
+
+    /**
+     * returns a list of Points with data for the given location in
+     * the given year
+     * @param the location for the Points to relate to
+     * @param year the year for the Points to be within
+     * @return ArrayList<Point>
+     */
+    public ArrayList<Point> getHistoryByLocation(Location location, int year) {
+        try {
+
+            String date                     = year + "-01-01 00:00:00";
+            String query = "SELECT pr.created, "
+                                + "pr.virus_ppm, "
+                                + "pr.contaminant_ppm "
+                           + "FROM tb_purity_report pr "
+                          + "WHERE pr.longitude = ? "
+                            + "AND pr.latitude = ? "
+                            + "AND pr.created > ?::timestamp "
+                            + "AND pr.created "
+                            + "< ?::timestamp + '1 year'::interval";
+            PreparedStatement preparedStatement
+                = connection.prepareStatement(query);
+            preparedStatement.setDouble(1, location.getLongitude());
+            preparedStatement.setDouble(2, location.getLatitude());
+            preparedStatement.setString(3, date);
+            preparedStatement.setString(4, date);
+            ResultSet statementResults = preparedStatement.executeQuery();
+            ArrayList<Point> results = new ArrayList<Point>();
+
+            while (statementResults.next()) {
+
+                Point point = makePointObject(
+                    statementResults.getTimestamp(1),
+                    statementResults.getDouble(2),
+                    statementResults.getDouble(3)
+                );
+
+                results.add(point);
+
+            }
+
+            return results;
+
+        } catch (SQLException e) {
+
+            System.out.println("Could not connect to the database: "
+                + e.getMessage());
+            System.exit(0);
+
+        }
+
+        // this is needed for compilation
+        // execution should never reach this line
+        return null;
+    }
+
+    /**
+     * returns a Point object with all the parameter data
+     * @param time the time for the Point object to be created
+     * @param virusPPM the virusPPM for the Point
+     * object to be created
+     * @param contaminantPPM the contaminantPPM for
+     * the Point object to be created
+     * @return Point the created Point object
+     */
+    private Point makePointObject(Timestamp time,
+        double virusPPM, double contaminantPPM) {
+        return new Point(time, virusPPM, contaminantPPM);
     }
 }

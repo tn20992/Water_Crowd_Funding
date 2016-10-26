@@ -219,4 +219,9 @@ public class MainScreenController {
     private void viewPurityReportsPressed() {
         mainApplication.showMainPurityReportScreen();
     }
+
+    @FXML
+    private void btnHistPressed() {
+        mainApplication.showHistoricalReportScreen();
+    }
 }

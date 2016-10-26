@@ -355,7 +355,7 @@ public class MainFXApplication extends Application {
     }
 
     /**
-     * Show the the view report screen
+     * Show the the view purity report screen
      */
     public void showViewPurityReportScreen(PurityReport listedReport) {
         try {
@@ -401,6 +401,29 @@ public class MainFXApplication extends Application {
             rootLayout.setCenter(submitReport);
             // Give the controller access to the main app.
             SubmitPurityReportController controller = loader.getController();
+            controller.setMainApp(mainFX);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Show the the historical report screen
+     */
+    public void showHistoricalReportScreen() {
+        try {
+            // Load root layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            BorderPane hist = loader.load(
+                    new FileInputStream(
+                            "src/main/java/view/HistoricalScreen"
+                                    + ".fxml"));
+
+            rootLayout.setCenter(hist);
+            // Give the controller access to the main app.
+            QualityHistoryController controller = loader.getController();
             controller.setMainApp(mainFX);
 
 

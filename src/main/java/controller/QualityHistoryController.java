@@ -28,10 +28,10 @@ public class QualityHistoryController {
     private Boolean contaminant = false;
 
     @FXML
-    private TextField longitudeField;
+    private TextField longField;
 
     @FXML
-    private TextField latitudeField;
+    private TextField latField;
 
     @FXML
     private ComboBox<String> virusOrContaminant;
@@ -41,14 +41,24 @@ public class QualityHistoryController {
 
     private String[] virusOrContaminantList = {"VirusPPM","ContaminantPPM"};
 
+    @FXML
     private void initialize() {
         virusOrContaminant.setItems(FXCollections
                 .observableArrayList(virusOrContaminantList));
 
     }
 
-    public void submitQualityHistory() {
-        if (latitudeField.getText().equals("") || longitudeField.getText()
+    /**
+     * allow for calling back to the main application code if necessary
+     * @param main   the reference to the FX Application instance
+     * */
+    public void setMainApp(MainFXApplication main) {
+        mainApplication = main;
+    }
+
+    @FXML
+    public void btnViewPressed() {
+        if (latField.getText().equals("") || longField.getText()
                 .equals("") || yearField.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
@@ -57,8 +67,8 @@ public class QualityHistoryController {
             alert.showAndWait();
         } else {
             try {
-                longitude = Double.parseDouble(longitudeField.getText());
-                latitude = Double.parseDouble(latitudeField.getText());
+                longitude = Double.parseDouble(longField.getText());
+                latitude = Double.parseDouble(latField.getText());
                 Location location = new Location(longitude, latitude);
                 year = Double.parseDouble(yearField.getText());
 
@@ -68,7 +78,8 @@ public class QualityHistoryController {
                     contaminant = true;
                 }
 
-                ArrayList<Point> pointList = facade.getHistoryByLocation(location, year);
+                ArrayList<Point> pointList = facade.getHistoryByLocation
+                        (location, (int) year);
 
                 mainApplication.showMainReportScreen();
 
@@ -80,5 +91,10 @@ public class QualityHistoryController {
                 alert.showAndWait();
             }
         }
+    }
+
+    @FXML
+    private void btnBackPressed() {
+        mainApplication.initRootLayout(mainApplication.getMainScreen());
     }
 }

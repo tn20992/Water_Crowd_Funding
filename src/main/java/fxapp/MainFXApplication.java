@@ -1,17 +1,7 @@
 package fxapp;
 
 
-import controller.LoginScreenController;
-import controller.MainPurityReportController;
-import controller.MainReportController;
-import controller.MainScreenController;
-import controller.RegistrationScreenController;
-import controller.SubmitPurityReportController;
-import controller.SubmitReportController;
-import controller.ViewPurityReportController;
-import controller.ViewReportController;
-import controller.WaterAvailabilityController;
-import controller.WelcomeScreenController;
+import controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -423,8 +413,8 @@ public class MainFXApplication extends Application {
 
             rootLayout.setCenter(hist);
             // Give the controller access to the main app.
-            // QualityHistoryController controller = loader.getController();
-            // controller.setMainApp(mainFX);
+            QualityHistoryController controller = loader.getController();
+            controller.setMainApp(mainFX);
 
 
         } catch (IOException e) {

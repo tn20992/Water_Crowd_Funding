@@ -423,8 +423,8 @@ public class MainFXApplication extends Application {
 
             rootLayout.setCenter(hist);
             // Give the controller access to the main app.
-            QualityHistoryController controller = loader.getController();
-            controller.setMainApp(mainFX);
+            // QualityHistoryController controller = loader.getController();
+            // controller.setMainApp(mainFX);
 
 
         } catch (IOException e) {

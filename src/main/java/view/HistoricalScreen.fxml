@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.ScatterChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <ScatterChart fx:id="chartHistorical" prefWidth="500.0" BorderPane.alignment="CENTER">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+         <BorderPane.margin>
+            <Insets bottom="50.0" left="15.0" right="50.0" top="15.0" />
+         </BorderPane.margin>
+      </ScatterChart>
+   </center>
+   <right>
+      <VBox prefHeight="373.0" prefWidth="213.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+         </BorderPane.margin>
+         <children>
+            <Label text="Latitude" />
+            <TextField fx:id="latField" />
+            <Label text="Longtitude">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="longField" />
+            <Label text="Virus/Contaminant PPM">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+            <ComboBox fx:id="vcComboBox" prefWidth="150.0" />
+            <Label text="Year">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="yearField" />
+         </children>
+      </VBox>
+   </right>
+   <top>
+      <Label text="Historical Report" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets top="20.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <bottom>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <buttons>
+            <Button mnemonicParsing="false" onAction="#btnBackPressed" text="Back" />
+          <Button mnemonicParsing="false" onAction="#btnViewPressed" text="View" />
+        </buttons>
+         <BorderPane.margin>
+            <Insets bottom="15.0" right="20.0" />
+         </BorderPane.margin>
+      </ButtonBar>
+   </bottom>
+</BorderPane>

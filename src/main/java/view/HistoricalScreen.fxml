@@ -10,7 +10,7 @@
    <center>
       <ScatterChart fx:id="chartHistorical" prefWidth="500.0" BorderPane.alignment="CENTER">
         <xAxis>
-          <CategoryAxis fx:id="xAxis" side="BOTTOM" />
+          <NumberAxis fx:id="xAxis" side="BOTTOM" />
         </xAxis>
         <yAxis>
           <NumberAxis fx:id="yAxis" side="LEFT" />

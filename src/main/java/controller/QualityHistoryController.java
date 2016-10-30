@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -13,7 +14,10 @@ import model.Location;
 import model.Point;
 import model.User;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -45,7 +49,7 @@ public class QualityHistoryController {
     private ScatterChart chartHistorical;
 
     @FXML
-    private CategoryAxis xAxis;
+    private NumberAxis xAxis;
 
     @FXML
     private NumberAxis yAxis;
@@ -68,11 +72,28 @@ public class QualityHistoryController {
     }
 
     @FXML
-    public void initGraph(Location location, Integer year, String vOrC) {
+    public void initGraph(Location location, Integer year, String vOrC, ArrayList<Point> points) {
         chartHistorical.setTitle("Historical Chart of " + vOrC + " in " + String.valueOf(year));
         xAxis.setLabel("Months");
-        xAxis.setCategories(FXCollections.observableArrayList("Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Nov, Dec"));
+//        xAxis.setCategories(FXCollections.observableArrayList("Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Nov, Dec"));
+        xAxis.setLowerBound(1);
+        xAxis.setUpperBound(12);
+        xAxis.setTickUnit(1);
         yAxis.setLabel(vOrC);
+        XYChart.Series series1 = new XYChart.Series();
+        series1.setName(vOrC);
+
+        for(Point i:points) {
+            Timestamp ts = i.getTime();
+            int month = Integer.parseInt(ts.toString().substring(5,7));
+
+            if (vOrC.equals("VirusPPM")) {
+                series1.getData().add(new XYChart.Data(month, i.getVirusPPM()));
+            } else {
+                series1.getData().add(new XYChart.Data(month, i.getContaminantPPM()));
+            }
+        }
+        chartHistorical.getData().addAll(series1);
     }
 
     @FXML
@@ -97,8 +118,8 @@ public class QualityHistoryController {
                     vOrC = "ContaminantPPM";
                 }
 
-                initGraph(location, year, vOrC);
                 ArrayList<Point> pointList = facade.getHistoryByLocation(location, (int) year);
+                initGraph(location, year, vOrC, pointList);
 
 
             } catch (NumberFormatException e) {

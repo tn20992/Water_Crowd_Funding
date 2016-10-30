@@ -2,6 +2,9 @@ package controller;
 import fxapp.MainFXApplication;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.ScatterChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -23,9 +26,8 @@ public class QualityHistoryController {
     private User user;
     private double longitude;
     private double latitude;
-    private double year;
-    private Boolean virus = false;
-    private Boolean contaminant = false;
+    private int year;
+    private String vOrC = "";
 
     @FXML
     private TextField longField;
@@ -39,13 +41,22 @@ public class QualityHistoryController {
     @FXML
     private TextField yearField;
 
+    @FXML
+    private ScatterChart chartHistorical;
+
+    @FXML
+    private CategoryAxis xAxis;
+
+    @FXML
+    private NumberAxis yAxis;
+
     private String[] virusOrContaminantList = {"VirusPPM","ContaminantPPM"};
 
     @FXML
     private void initialize() {
         virusOrContaminant.setItems(FXCollections
                 .observableArrayList(virusOrContaminantList));
-
+        virusOrContaminant.getSelectionModel().select("VirusPPM");
     }
 
     /**
@@ -54,6 +65,14 @@ public class QualityHistoryController {
      * */
     public void setMainApp(MainFXApplication main) {
         mainApplication = main;
+    }
+
+    @FXML
+    public void initGraph(Location location, Integer year, String vOrC) {
+        chartHistorical.setTitle("Historical Chart of " + vOrC + " in " + String.valueOf(year));
+        xAxis.setLabel("Months");
+        xAxis.setCategories(FXCollections.observableArrayList("Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Nov, Dec"));
+        yAxis.setLabel(vOrC);
     }
 
     @FXML
@@ -70,18 +89,17 @@ public class QualityHistoryController {
                 longitude = Double.parseDouble(longField.getText());
                 latitude = Double.parseDouble(latField.getText());
                 Location location = new Location(longitude, latitude);
-                year = Double.parseDouble(yearField.getText());
+                year = Integer.parseInt(yearField.getText());
 
                 if(virusOrContaminant.getValue().equals("VirusPPM")) {
-                    virus = true;
+                    vOrC = "VirusPPM";
                 } else {
-                    contaminant = true;
+                    vOrC = "ContaminantPPM";
                 }
 
-                ArrayList<Point> pointList = facade.getHistoryByLocation
-                        (location, (int) year);
+                initGraph(location, year, vOrC);
+                ArrayList<Point> pointList = facade.getHistoryByLocation(location, (int) year);
 
-                mainApplication.showMainReportScreen();
 
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

@@ -134,6 +134,11 @@
                         <Insets bottom="30.0" left="70.0" />
                      </GridPane.margin>
                   </Button>
+                  <Button mnemonicParsing="false" onAction="#btnHistPressed" prefHeight="30.0" prefWidth="100.0" text="Historical" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="30.0" left="-60.0" />
+                     </GridPane.margin>
+                  </Button>
                </children>
             </GridPane>
          </bottom>

@@ -1,17 +1,7 @@
 package fxapp;
 
 
-import controller.LoginScreenController;
-import controller.MainPurityReportController;
-import controller.MainReportController;
-import controller.MainScreenController;
-import controller.RegistrationScreenController;
-import controller.SubmitPurityReportController;
-import controller.SubmitReportController;
-import controller.ViewPurityReportController;
-import controller.ViewReportController;
-import controller.WaterAvailabilityController;
-import controller.WelcomeScreenController;
+import controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -355,7 +345,7 @@ public class MainFXApplication extends Application {
     }
 
     /**
-     * Show the the view report screen
+     * Show the the view purity report screen
      */
     public void showViewPurityReportScreen(PurityReport listedReport) {
         try {
@@ -401,6 +391,29 @@ public class MainFXApplication extends Application {
             rootLayout.setCenter(submitReport);
             // Give the controller access to the main app.
             SubmitPurityReportController controller = loader.getController();
+            controller.setMainApp(mainFX);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Show the the historical report screen
+     */
+    public void showHistoricalReportScreen() {
+        try {
+            // Load root layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            BorderPane hist = loader.load(
+                    new FileInputStream(
+                            "src/main/java/view/HistoricalScreen"
+                                    + ".fxml"));
+
+            rootLayout.setCenter(hist);
+            // Give the controller access to the main app.
+            QualityHistoryController controller = loader.getController();
             controller.setMainApp(mainFX);
 
 

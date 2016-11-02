@@ -1,6 +1,7 @@
 package controller;
 import fxapp.MainFXApplication;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -73,6 +74,7 @@ public class QualityHistoryController {
 
     @FXML
     public void initGraph(Location location, Integer year, String vOrC, ArrayList<Point> points) {
+        chartHistorical.getData().clear();
         chartHistorical.setTitle("Historical Chart of " + vOrC + " in " + String.valueOf(year));
         xAxis.setLabel("Months");
 //        xAxis.setCategories(FXCollections.observableArrayList("Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Nov, Dec"));

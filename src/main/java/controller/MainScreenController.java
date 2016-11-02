@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import model.AccountType;
 import model.Facade;
 import model.User;
 
@@ -53,6 +54,9 @@ public class MainScreenController {
     @FXML
     private Button btnPurity;
 
+    @FXML
+    private Button btnHist;
+
     /**
      * allow for calling back to the main application code if necessary
      * @param main   the reference to the FX Application instance
@@ -63,6 +67,15 @@ public class MainScreenController {
 
     public void setVisiblePurityButton(boolean b) {
         btnPurity.setVisible(b);
+    }
+
+    public void setVisibleBtnHistorical() {
+        if (mainApplication.getUser().getAccountType().equals(AccountType
+                .MANAGER)) {
+            btnHist.setVisible(true);
+        } else {
+            btnHist.setVisible(false);
+        }
     }
 
     /**

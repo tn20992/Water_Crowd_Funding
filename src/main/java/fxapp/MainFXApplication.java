@@ -145,7 +145,6 @@ public class MainFXApplication extends Application {
             LoginScreenController controller = loader.getController();
 
             controller.setDialogStage(dialogStage);
-            controller.setRootLayout(rootLayout);
             controller.setMainApp(mainFX);
 
             // Show the dialog and wait until the user closes it

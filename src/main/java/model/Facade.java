@@ -911,10 +911,7 @@ public class Facade {
      * to be created
      * @param created the created time of the PurityReport
      * to be created
-     * @param longitude the longitude of the PurityReport
-     * to be created
-     * @param latitude the latitude of the PurityReport
-     * to be created
+     * @param location the location of the PurityReport
      * @param overallConditionInt the int of the OverallCondition (enum)
      * of the PurityReport to be created
      * @param virusPPM the virusPPM of the PurityReport
@@ -960,7 +957,7 @@ public class Facade {
     /**
      * returns a list of Points with data for the given location in
      * the given year
-     * @param the location for the Points to relate to
+     * @param location location for the Points to relate to
      * @param year the year for the Points to be within
      * @return ArrayList<Point>
      */

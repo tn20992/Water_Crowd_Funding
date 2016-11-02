@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Created by Bharath on 10/18/16.
+ * Overall condition
  */
 public enum OverallCondition {
     SAFE          ("Safe"),

@@ -1,9 +1,7 @@
 package controller;
 import fxapp.MainFXApplication;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
@@ -17,8 +15,6 @@ import model.User;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 
 /**
@@ -73,9 +69,12 @@ public class QualityHistoryController {
     }
 
     @FXML
-    public void initGraph(Location location, Integer year, String vOrC, ArrayList<Point> points) {
+    @SuppressWarnings("unchecked")
+    public void initGraph(Location location, Integer year, String vOrC,
+                          ArrayList<Point> points) {
         chartHistorical.getData().clear();
-        chartHistorical.setTitle("Historical Chart of " + vOrC + " in " + String.valueOf(year));
+        chartHistorical.setTitle("Historical Chart of " + vOrC + " in "
+                + String.valueOf(year));
         xAxis.setLabel("Months");
         xAxis.setLowerBound(1);
         xAxis.setUpperBound(12);
@@ -91,7 +90,8 @@ public class QualityHistoryController {
             if (vOrC.equals("VirusPPM")) {
                 series1.getData().add(new XYChart.Data(month, i.getVirusPPM()));
             } else {
-                series1.getData().add(new XYChart.Data(month, i.getContaminantPPM()));
+                series1.getData().add(new XYChart.Data(month
+                        , i.getContaminantPPM()));
             }
         }
         chartHistorical.getData().addAll(series1);
@@ -119,7 +119,8 @@ public class QualityHistoryController {
                     vOrC = "ContaminantPPM";
                 }
 
-                ArrayList<Point> pointList = facade.getHistoryByLocation(location, (int) year);
+                ArrayList<Point> pointList = facade.getHistoryByLocation(
+                        location, year);
                 initGraph(location, year, vOrC, pointList);
 
 
@@ -127,7 +128,8 @@ public class QualityHistoryController {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERROR");
                 alert.setContentText(
-                        "Longitude or Latitude or Year cannot include letters!!!");
+                        "Longitude or Latitude "
+                                + "or Year cannot include letters!!!");
                 alert.showAndWait();
             }
         }

@@ -75,6 +75,8 @@ public class MainFXApplication extends Application {
                 controller.setVisiblePurityButton(true);
             }
 
+            controller.setVisibleBtnHistorical();
+
             setViewProfile(controller);
 
 

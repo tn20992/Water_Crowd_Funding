@@ -1,6 +1,7 @@
 package controller;
 import fxapp.MainFXApplication;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
@@ -11,7 +12,6 @@ import javafx.scene.control.TextField;
 import model.Facade;
 import model.Location;
 import model.Point;
-import model.User;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -71,11 +71,10 @@ public class QualityHistoryController {
     @SuppressWarnings("unchecked")
     public void initGraph(Location location, Integer year, String vOrC
             , ArrayList<Point> points) {
+        chartHistorical.getData().clear();
         chartHistorical.setTitle("Historical Chart of " + vOrC + " in "
                 + String.valueOf(year));
         xAxis.setLabel("Months");
-//        xAxis.setCategories(FXCollections.observableArrayList("Jan, Feb, Mar,
-//                  + " Apr, May, Jun, Jul, Aug, Sep, Nov, Dec"));
         xAxis.setLowerBound(1);
         xAxis.setUpperBound(12);
         xAxis.setTickUnit(1);

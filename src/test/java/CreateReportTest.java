@@ -48,8 +48,6 @@ public class CreateReportTest {
                 , ConditionOfWater.WASTE);
         assertEquals("Number of reports should be " + (size + 3), size + 3,
                 facade.getSourceReports().size());
-
-        //
     }
 
     @Test
@@ -76,8 +74,7 @@ public class CreateReportTest {
             facade.getSourceReports().get(size);
         } catch (IndexOutOfBoundsException e) {
             fail("Should not get IndexOutOfBoundsException, report " +
-                    size +
-                    " should in the list");
+                    size + " should in the list");
         }
     }
 }

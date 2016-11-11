@@ -18,12 +18,19 @@ import static org.junit.Assert.fail;
 public class CreateReportTest {
     private Facade facade;
 
+    /**
+     * Setup test
+     * @throws Exception exception
+     */
     @Before
     public void setUp() throws Exception {
         Facade.initialize();
         facade = Facade.getFacade();
     }
 
+    /**
+     * Test the size of list when create a new report
+     */
     @Test
     public void testSizeCreateNewReport() {
         int size = facade.getSourceReports().size();
@@ -34,6 +41,9 @@ public class CreateReportTest {
                 facade.getSourceReports().size());
     }
 
+    /**
+     * Test the size of list when create multiple reports
+     */
     @Test
     public void testSizeCreateMultiReport() {
         int size = facade.getSourceReports().size();
@@ -50,8 +60,11 @@ public class CreateReportTest {
                 facade.getSourceReports().size());
     }
 
+    /**
+     * Test the report which does not exist
+     */
     @Test
-    public void testFindNoExitReportByNumber() {
+    public void testFindNoExistReportByNumber() {
         int size = facade.getSourceReports().size();
         assertNull("Report " + (size + 1) + " should not be existed", facade
                 .getSourceReportByReportNumber(size + 1));
@@ -64,6 +77,9 @@ public class CreateReportTest {
 
     }
 
+    /**
+     * Test Exception
+     */
     @Test
     public void testExceptionCreateNewReport() {
         int size = facade.getSourceReports().size();

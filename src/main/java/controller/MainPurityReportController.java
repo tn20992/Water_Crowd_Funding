@@ -38,16 +38,25 @@ public class MainPurityReportController {
         mainApplication = main;
     }
 
+    /**
+     * Cancel press
+     */
     @FXML
     public void mainPurityReportCancelPressed() {
         mainApplication.initRootLayout(mainApplication.getMainScreen());
     }
 
+    /**
+     * Submit press
+     */
     @FXML
     public void mainPurityReportSubmitPressed() {
         mainApplication.showSubmitPurityReportScreen();
     }
 
+    /**
+     * View press
+     */
     @FXML
     public void mainPurityReportViewPressed() {
         PurityReport sourceReport

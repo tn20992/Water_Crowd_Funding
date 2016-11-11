@@ -68,6 +68,13 @@ public class QualityHistoryController {
         mainApplication = main;
     }
 
+    /**
+     * Setup the graph
+     * @param location location
+     * @param year year
+     * @param vOrC vOrC
+     * @param points points
+     */
     @FXML
     @SuppressWarnings("unchecked")
     public void initGraph(Location location, Integer year, String vOrC,
@@ -97,6 +104,9 @@ public class QualityHistoryController {
         chartHistorical.getData().addAll(series1);
     }
 
+    /**
+     * View Press
+     */
     @FXML
     public void btnViewPressed() {
         if (latField.getText().equals("") || longField.getText()
@@ -135,6 +145,9 @@ public class QualityHistoryController {
         }
     }
 
+    /**
+     * Back button press
+     */
     @FXML
     private void btnBackPressed() {
         mainApplication.initRootLayout(mainApplication.getMainScreen());

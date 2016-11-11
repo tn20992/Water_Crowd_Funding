@@ -65,10 +65,17 @@ public class MainScreenController {
         mainApplication = main;
     }
 
+    /**
+     * Set visible button for view purity
+     * @param b check it true or false
+     */
     public void setVisiblePurityButton(boolean b) {
         btnPurity.setVisible(b);
     }
 
+    /**
+     * Set visible button for historical
+     */
     public void setVisibleBtnHistorical() {
         if (mainApplication.getUser().getAccountType().equals(AccountType
                 .MANAGER)) {
@@ -218,21 +225,33 @@ public class MainScreenController {
         }
     }
 
+    /**
+     * View map press
+     */
     @FXML
     public void viewMapPressed() {
         mainApplication.showWaterAvailabilityScreen();
     }
 
+    /**
+     * View report press
+     */
     @FXML
     private void viewReportPressed() {
         mainApplication.showMainReportScreen();
     }
 
+    /**
+     * View Purity report press
+     */
     @FXML
     private void viewPurityReportsPressed() {
         mainApplication.showMainPurityReportScreen();
     }
 
+    /**
+     * View Historical press
+     */
     @FXML
     private void btnHistPressed() {
         mainApplication.showHistoricalReportScreen();

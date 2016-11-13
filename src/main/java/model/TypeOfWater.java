@@ -14,10 +14,19 @@ public enum TypeOfWater {
 
     private final String value;
 
+    /*
+     * Creates a new type of water
+     * @param value for the type of water
+     */
     TypeOfWater(String value) {
         this.value = value;
     }
 
+    /**
+     *
+     * @return the description of the condition of water
+     */
+    @Override
     public String toString() {
         return value;
     }

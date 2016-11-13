@@ -39,47 +39,113 @@ public class PurityReport {
     }
 
     /**
-     * Getters + Setters for report fields
+     * gets the purity report number
+     * @return the purity report number
      */
     public int getPurityReportNumber() {
         return purityReportNumber;
     }
+
+    /**
+     * gets the reporter
+     * @return the reporter
+     */
     public User getReporter() {
         return reporter;
     }
+
+    /**
+     * gets the time created
+     * @return the time created
+     */
     public Timestamp getCreated() {
         return created;
     }
+
+    /**
+     * gets the location
+     * @return the location
+     */
     public Location getLocation() {
         return location;
     }
+
+    /**
+     * gets the overall condition
+     * @return the overall condition
+     */
     public OverallCondition getOverallCondition() {
         return overallCondition;
     }
+
+    /**
+     * gets the virusPPM
+     * @return the virusPPM
+     */
     public double getVirusPPM() {
         return virusPPM;
     }
+
+    /**
+     * gets the contaminantPPM
+     * @return the contaminantPPM
+     */
     public double getContaminantPPM() {
         return contaminantPPM;
     }
+
+    /**
+     * sets the purity report number
+     * @param purityReportNumber the purity report number
+     */
     public void setPurityReportNumber(int purityReportNumber) {
         this.purityReportNumber = purityReportNumber;
     }
+
+    /**
+     * sets the reporter
+     * @param reporter the reporter
+     */
     public void setReporter(User reporter) {
         this.reporter = reporter;
     }
+
+    /**
+     * sets the time created
+     * @param created the time created
+     */
     public void setCreated(Timestamp created) {
         this.created = created;
     }
+
+    /**
+     * sets the location
+     * @param location the location
+     */
     public void setLocation(Location location) {
         this.location = location;
     }
+
+    /**
+     * sets the overall condition
+     * @param overallCondition the overall condition
+     */
     public void setOverallCondition(OverallCondition overallCondition) {
         this.overallCondition = overallCondition;
     }
+
+    /**
+     * sets the virusPPM
+     * @param virusPPM the virusPPM
+     */
     public void setVirusPPM(double virusPPM) {
         this.virusPPM = virusPPM;
     }
+
+    /**
+     * sets the contaminantPPM
+     * @param contaminantPPM the contaminantPPM
+     */
     public void setContaminantPPM(double contaminantPPM) {
         this.contaminantPPM = contaminantPPM;
     }

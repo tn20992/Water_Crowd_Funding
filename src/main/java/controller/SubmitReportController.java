@@ -66,11 +66,17 @@ public class SubmitReportController {
         user = mainApplication.getUser();
     }
 
+    /**
+     * back button press
+     */
     @FXML
     public void backSubmitReportPressed() {
         mainApplication.showMainReportScreen();
     }
 
+    /**
+     * Submit button press
+     */
     @FXML
     public void submitSubmitReportPressed() {
         if (latitudeField.getText().equals("") || longtitudeField.getText()

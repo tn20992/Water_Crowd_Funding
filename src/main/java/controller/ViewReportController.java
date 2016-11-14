@@ -39,35 +39,66 @@ public class ViewReportController {
         mainApplication = main;
     }
 
+    /**
+     * Back button press
+     */
     @FXML
     public void backViewReportPressed() {
         mainApplication.showMainReportScreen();
     }
 
+    /**
+     * Set report number
+     * @param number nunmber
+     */
     public void setReportNumber(int number) {
         reportNumber.setText("" + number);
     }
 
+    /**
+     * Set report name
+     * @param name name
+     */
     public void setReporterName(String name) {
         reporterName.setText(name);
     }
 
+    /**
+     * Set timestamp
+     * @param stamp timesatmp
+     */
     public void setTimestamp(Timestamp stamp) {
         timestamp.setText("" + stamp);
     }
 
+    /**
+     * Set longitude
+     * @param longP longitude
+     */
     public void setLongitudes(double longP) {
         longtitude.setText("" + longP);
     }
 
+    /**
+     * Set latitude
+     * @param lat latitude
+     */
     public void setLatitude(double lat) {
         latitude.setText("" + lat);
     }
 
+    /**
+     * Set water type
+     * @param type type
+     */
     public void setWaterType(TypeOfWater type) {
         waterType.setText("" + type);
     }
 
+    /**
+     * Set water caondition
+     * @param condition condition
+     */
     public void setWaterCondition(ConditionOfWater condition) {
         waterCondition.setText("" + condition);
     }

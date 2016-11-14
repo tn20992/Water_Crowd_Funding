@@ -37,16 +37,25 @@ public class MainReportController {
         mainApplication = main;
     }
 
+    /**
+     * Cancel press
+     */
     @FXML
     public void mainReportCancelPressed() {
         mainApplication.initRootLayout(mainApplication.getMainScreen());
     }
 
+    /**
+     * Submit press
+     */
     @FXML
     public void mainReportSubmitPressed() {
         mainApplication.showSubmitReportScreen();
     }
 
+    /**
+     * View press
+     */
     @FXML
     public void mainReportViewPressed() {
         SourceReport sourceReport

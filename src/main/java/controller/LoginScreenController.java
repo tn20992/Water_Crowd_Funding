@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Facade;
 import model.exceptions.NonUniqueUsernameException;
@@ -22,8 +21,6 @@ public class LoginScreenController {
     private MainFXApplication mainApplication;
 
     private Stage dialogStage;
-
-    private BorderPane rootLayout;
 
     @FXML
     private TextField userIdFieldLog;
@@ -48,14 +45,6 @@ public class LoginScreenController {
         this.dialogStage = dialogStage;
     }
 
-    /**
-     * Sets the rootLayout of MainScreen.
-     *
-     * @param rootLayout the BorderPane of the MainScreen
-     */
-    public void setRootLayout(BorderPane rootLayout) {
-        this.rootLayout = rootLayout;
-    }
 
     /**
      * Login Button in Login Screen

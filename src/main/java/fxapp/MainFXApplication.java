@@ -18,6 +18,10 @@ import model.User;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+/**
+ * Class that run the application
+ * @author team the storm
+ */
 public class MainFXApplication extends Application {
 
     /**
@@ -99,7 +103,7 @@ public class MainFXApplication extends Application {
      * precondition - the main stage is already initialized and
      * showing (initRootLayout has been called)
      * preconditions - the view is initialized and displayed
-     *
+     * @param mainScreen the main stage
      *
      */
     public void showWelcomeScreen(Stage mainScreen) {
@@ -127,6 +131,9 @@ public class MainFXApplication extends Application {
 
     }
 
+    /**
+     * Show Login Screen
+     */
     public void showLoginScreen() {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
@@ -145,7 +152,6 @@ public class MainFXApplication extends Application {
             LoginScreenController controller = loader.getController();
 
             controller.setDialogStage(dialogStage);
-            controller.setRootLayout(rootLayout);
             controller.setMainApp(mainFX);
 
             // Show the dialog and wait until the user closes it
@@ -157,6 +163,9 @@ public class MainFXApplication extends Application {
         }
     }
 
+    /**
+     * Show Registration Screen
+     */
     public void showRegistrationScreen() {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
@@ -256,6 +265,7 @@ public class MainFXApplication extends Application {
 
     /**
      * Show the the view report screen
+     * @param listedReport the list of all reports
      */
     public void showViewReportScreen(SourceReport listedReport) {
         try {
@@ -348,6 +358,7 @@ public class MainFXApplication extends Application {
 
     /**
      * Show the the view purity report screen
+     * @param listedReport the list of all purity reports
      */
     public void showViewPurityReportScreen(PurityReport listedReport) {
         try {
@@ -426,6 +437,7 @@ public class MainFXApplication extends Application {
 
     /**
      * Get root BorderPane
+     * @return the root layout
      */
     public BorderPane getRootLayout() {
         return rootLayout;

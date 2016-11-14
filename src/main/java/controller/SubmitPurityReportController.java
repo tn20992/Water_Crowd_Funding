@@ -63,11 +63,17 @@ public class SubmitPurityReportController {
         user = mainApplication.getUser();
     }
 
+    /**
+     * Back button press
+     */
     @FXML
     public void backSubmitReportPressed() {
         mainApplication.showMainPurityReportScreen();
     }
 
+    /**
+     * Submit button press
+     */
     @FXML
     public void submitSubmitReportPressed() {
         if (latitudeField.getText().equals("") || longtitudeField.getText()

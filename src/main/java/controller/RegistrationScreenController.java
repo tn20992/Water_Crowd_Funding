@@ -73,6 +73,9 @@ public class RegistrationScreenController {
         this.dialogStage = dialogStage;
     }
 
+    /**
+     * Setup info
+     */
     public void setInfo() {
         pass = passFieldReg.getText();
         userId = userIdFieldReg.getText();
@@ -114,6 +117,11 @@ public class RegistrationScreenController {
             }
         }
     }
+
+    /**
+     * Show error message
+     * @param msg message
+     */
     private void alert(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("ERROR");

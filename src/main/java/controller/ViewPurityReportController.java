@@ -39,39 +39,74 @@ public class ViewPurityReportController {
         mainApplication = main;
     }
 
+    /**
+     * Back button press
+     */
     @FXML
     public void backViewReportPressed() {
         mainApplication.showMainPurityReportScreen();
     }
 
+    /**
+     * Set report number
+     * @param number number
+     */
     public void setReportNumber(int number) {
         reportNumber.setText("" + number);
     }
 
+    /**
+     * Set report name
+     * @param name name
+     */
     public void setReporterName(String name) {
         reporterName.setText(name);
     }
 
+    /**
+     * Set timestamp
+     * @param stamp timestamp
+     */
     public void setTimestamp(Timestamp stamp) {
         timestamp.setText("" + stamp);
     }
 
+    /**
+     * Set longitude
+     * @param longP longitude
+     */
     public void setLongitudes(double longP) {
         longtitude.setText("" + longP);
     }
 
+    /**
+     * Set latitude
+     * @param lat latitude
+     */
     public void setLatitude(double lat) {
         latitude.setText("" + lat);
     }
 
+    /**
+     * Set VirusPPM
+     * @param virus virusPPM
+     */
     public void setVirusPPM(double virus) {
         virusPPM.setText("" + virus);
     }
 
+    /**
+     * Set contaminant
+     * @param contaminant contaminant
+     */
     public void setContaminantPPM(double contaminant) {
         contaminantPPM.setText("" + contaminant);
     }
 
+    /**
+     * Set Condition
+     * @param condition overal condition
+     */
     public void setOverallCondition(OverallCondition condition) {
         waterCondition.setText("" + condition);
     }

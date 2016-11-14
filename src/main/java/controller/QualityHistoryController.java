@@ -23,7 +23,6 @@ public class QualityHistoryController {
 
     private MainFXApplication mainApplication;
     private Facade facade = Facade.getFacade();
-    private User user;
     private double longitude;
     private double latitude;
     private int year;

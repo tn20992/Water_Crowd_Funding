@@ -12,10 +12,19 @@ public enum AccountType {
 
     private final String value;
 
+    /*
+     * Creates a new account type
+     * @param value for the account type
+     */
     AccountType(String value) {
         this.value = value;
     }
 
+    /**
+     *
+     * @return the account type name
+     */
+    @Override
     public String toString() {
         return value;
     }

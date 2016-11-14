@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import model.Facade;
 import model.Location;
 import model.Point;
-import model.User;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -77,8 +76,8 @@ public class QualityHistoryController {
      */
     @FXML
     @SuppressWarnings("unchecked")
-    public void initGraph(Location location, Integer year, String vOrC,
-                          ArrayList<Point> points) {
+    public void initGraph(Location location, Integer year, String vOrC
+            , ArrayList<Point> points) {
         chartHistorical.getData().clear();
         chartHistorical.setTitle("Historical Chart of " + vOrC + " in "
                 + String.valueOf(year));

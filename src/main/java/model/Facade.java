@@ -727,7 +727,6 @@ public class Facade {
      */
     public ArrayList<PurityReport> getPurityReports() {
         try {
-
             Statement statement             = connection.createStatement();
             String query                    = "SELECT pr.purity_report, "
                                                    + "e.username, "
@@ -796,7 +795,7 @@ public class Facade {
                           + " FROM tb_purity_report pr "
                      + "INNER JOIN tb_entity e "
                              + "ON pr.reporter = e.entity "
-                          + "WHERE pr.source_report = ?";
+                          + "WHERE pr.purity_report = ?";
             PreparedStatement preparedStatement
                 = connection.prepareStatement(query);
             preparedStatement.setInt(1, purityReportNumber);

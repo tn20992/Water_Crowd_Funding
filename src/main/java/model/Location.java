@@ -69,4 +69,9 @@ public class Location {
         return this.longitude == loc.longitude && this.latitude == loc.latitude;
     }
 
+    @Override
+    public int hashCode() {
+        return 1;
+    }
+
 }

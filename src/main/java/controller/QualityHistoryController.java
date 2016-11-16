@@ -49,7 +49,7 @@ public class QualityHistoryController {
     @FXML
     private NumberAxis yAxis;
 
-    private String[] virusOrContaminantList = {"VirusPPM","ContaminantPPM"};
+    private String[] virusOrContaminantList = {"VirusPPM", "ContaminantPPM"};
 
     @FXML
     private void initialize() {
@@ -88,9 +88,9 @@ public class QualityHistoryController {
         XYChart.Series series1 = new XYChart.Series();
         series1.setName(vOrC);
 
-        for(Point i:points) {
+        for (Point i:points) {
             Timestamp ts = i.getTime();
-            int month = Integer.parseInt(ts.toString().substring(5,7));
+            int month = Integer.parseInt(ts.toString().substring(5, 7));
 
             if (vOrC.equals("VirusPPM")) {
                 series1.getData().add(new XYChart.Data(month, i.getVirusPPM()));
@@ -121,7 +121,7 @@ public class QualityHistoryController {
                 Location location = new Location(longitude, latitude);
                 year = Integer.parseInt(yearField.getText());
 
-                if(virusOrContaminant.getValue().equals("VirusPPM")) {
+                if (virusOrContaminant.getValue().equals("VirusPPM")) {
                     vOrC = "VirusPPM";
                 } else {
                     vOrC = "ContaminantPPM";

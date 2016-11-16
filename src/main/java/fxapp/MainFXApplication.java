@@ -1,7 +1,18 @@
 package fxapp;
 
 
-import controller.*;
+import controller.MainPurityReportController;
+import controller.SubmitReportController;
+import controller.MainReportController;
+import controller.WelcomeScreenController;
+import controller.RegistrationScreenController;
+import controller.MainScreenController;
+import controller.ViewReportController;
+import controller.WaterAvailabilityController;
+import controller.ViewPurityReportController;
+import controller.SubmitPurityReportController;
+import controller.QualityHistoryController;
+import controller.LoginScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
